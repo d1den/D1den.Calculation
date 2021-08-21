@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MathLibraryProject</name>
+    </assembly>
+    <members>
+        <member name="T:d1den.MathLibrary.Point3D">
+            <summary>
+            Точка в 3-д пространстве
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Point3D.X">
+            <summary>
+            X-координата точки
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Point3D.Y">
+            <summary>
+            Y-координата точки
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Point3D.Z">
+            <summary>
+            Z-координата точки
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Создание точки по координатам
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.#ctor(System.Double[])">
+            <summary>
+            Создание точки по массиву её координат
+            </summary>
+            <param name="pointArray">Массив координат точки</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.ToArray">
+            <summary>
+            Преобразовать точку к массиву координат
+            </summary>
+            <returns>Массив координат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.GetDistance(d1den.MathLibrary.Point3D)">
+            <summary>
+            Получить расстрояние до другой точки
+            </summary>
+            <param name="point">Вторая точка</param>
+            <returns>Расстояние</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.ToString">
+            <summary>
+            Получить строковое представление точки
+            </summary>
+            <returns>Строка точки</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Implicit(System.Double[])~d1den.MathLibrary.Point3D">
+            <summary>
+            Преобразовать массив координат к точке
+            </summary>
+            <param name="pointArray">Массив координат</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Explicit(d1den.MathLibrary.Point3D)~System.Double[]">
+            <summary>
+            Преобразовать точку к массиву координат
+            </summary>
+            <param name="point">Точка</param>
+        </member>
+    </members>
+</doc>
