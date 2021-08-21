@@ -11,9 +11,14 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Point3D point1 = new[] { 1.23, 0, 123 };
-            double[] pointArray = (double[]) point1;
-
+            Matrix matrix1 = new Matrix();
+            Matrix matrix2 = new Matrix(new double[,] { { 1, 2, 3.45 }, { 234, 324, -232.23 } });
+            Console.WriteLine(matrix2);
+            Matrix matrix3 = new Matrix(3, -Math.PI);
+            Matrix matrix4 = new Matrix(2, 4);
+            Matrix matrix5 = Matrix.GetZerosMatrix(4);
+            Matrix matrix6 = Matrix.GetOnesMatrix(2);
+            Matrix matrix7 = Matrix.GetUnitMatrix(3);
         }
     }
 }

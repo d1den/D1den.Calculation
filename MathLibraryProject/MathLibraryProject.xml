@@ -4,6 +4,22 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
+        <member name="M:d1den.MathLibrary.Matrix.GetEuclideanNorm">
+            <summary>
+            Вычисление евклидовой нормы матрицы
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.SetAllValues(System.Double)">
+            <summary>
+            Установить все значения матрицы
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.ProcessFunctionOverData(System.Action{System.Int32,System.Int32})">
+            <summary>
+            Применить действие ко всем элементам матрицы
+            </summary>
+            <param name="function"></param>
+        </member>
         <member name="T:d1den.MathLibrary.Point3D">
             <summary>
             Точка в 3-д пространстве
