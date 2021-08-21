@@ -11,4 +11,8 @@
     <RepositoryType>public</RepositoryType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\GitRepositories\MathLibrary\MathLibraryProject\MathLibraryProject.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>

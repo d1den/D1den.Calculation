@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace d1den.MathLibrary
 {
@@ -9,6 +7,7 @@ namespace d1den.MathLibrary
     /// </summary>
     public readonly struct Point3D
     {
+        #region Поля и свойства
         private readonly double _x, _y, _z;
         /// <summary>
         /// X-координата точки
@@ -22,6 +21,8 @@ namespace d1den.MathLibrary
         /// Z-координата точки
         /// </summary>
         public double Z { get { return _z; } }
+        #endregion
+
         /// <summary>
         /// Создание точки по координатам
         /// </summary>
@@ -39,7 +40,7 @@ namespace d1den.MathLibrary
         {
             if (pointArray.Length != 3)
             {
-                var ex = new ArgumentException("Array length != 3");
+                var ex = new ArgumentException("Array can not convert to Point3D! Array length != 3");
                 ex.Data.Add("ArrayLength", pointArray.Length);
                 throw ex;
             }
@@ -48,15 +49,14 @@ namespace d1den.MathLibrary
             _z = pointArray[2];
         }
 
+        #region Методы
         /// <summary>
-        /// Получить расстрояние между двумя точками
+        /// Преобразовать точку к массиву координат
         /// </summary>
-        /// <param name="point1">Первая точка</param>
-        /// <param name="point2">Вторая точка</param>
-        /// <returns>Расстояние</returns>
-        public static double GetDistance(Point3D point1, Point3D point2)
+        /// <returns>Массив координат</returns>
+        public double[] ToArray()
         {
-            return Math.Sqrt(Math.Pow(point2.X - point1.X, 2.0) + Math.Pow(point2.Y - point1.Y, 2.0) + Math.Pow(point2.Z - point1.Z, 2.0));
+            return new double[] { _x, _y, _z };
         }
         /// <summary>
         /// Получить расстрояние до другой точки
@@ -65,7 +65,7 @@ namespace d1den.MathLibrary
         /// <returns>Расстояние</returns>
         public double GetDistance(Point3D point)
         {
-            return GetDistance(this, point);
+            return Math.Sqrt(Math.Pow(point.X - X, 2.0) + Math.Pow(point.Y - Y, 2.0) + Math.Pow(point.Z - Z, 2.0));
         }
         /// <summary>
         /// Получить строковое представление точки
@@ -75,5 +75,25 @@ namespace d1den.MathLibrary
         {
             return string.Format("{0:F3}; {1:F3}; {2:F3}", _x, _y, _z);
         }
+        #endregion
+
+        #region Операторы
+        /// <summary>
+        /// Преобразовать массив координат к точке
+        /// </summary>
+        /// <param name="pointArray">Массив координат</param>
+        public static implicit operator Point3D(double[] pointArray)
+        {
+            return new Point3D(pointArray);
+        }
+        /// <summary>
+        /// Преобразовать точку к массиву координат
+        /// </summary>
+        /// <param name="point">Точка</param>
+        public static explicit operator double[](Point3D point)
+        {
+            return point.ToArray();
+        }
+        #endregion
     }
 }
