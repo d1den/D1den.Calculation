@@ -4,6 +4,85 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
+        <member name="T:d1den.MathLibrary.Matrix">
+            <summary>
+            Матрицы любой размерности
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.MatrixData">
+            <summary>
+            Массив значений матрицы
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.RowCount">
+            <summary>
+            Количество строк
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.ColumnCount">
+            <summary>
+            Количество столбцов
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Получить значение матрицы по строке и столбцу
+            </summary>
+            <param name="row">Индекс строки</param>
+            <param name="column">Индекс столбца</param>
+            <returns>Значение матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Объект матрицы
+            </summary>
+            <param name="rowCount">Число строк</param>
+            <param name="columnCount">Число столбцов</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Double[0:,0:])">
+            <summary>
+            Объект матрицы
+            </summary>
+            <param name="matrixData">Двумерный массив данных матрицы</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32,System.Double)">
+            <summary>
+            Объект квадратной матрицы
+            </summary>
+            <param name="dimension">Размерность квадратной матрицы</param>
+            <param name="diagonalValue">Значение по главной диагонали</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetZerosMatrix(System.Int32)">
+            <summary>
+            Квадратная матрица нулей
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetUnitMatrix(System.Int32)">
+            <summary>
+            Единичная матрица (E)
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetOnesMatrix(System.Int32)">
+            <summary>
+            Квадратная матрица единиц
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Negative">
+            <summary>
+            Домножение матрицы на единицу
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Transpose">
+            <summary>
+            Транспонирование матрицы
+            </summary>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.Add(System.Double)">
             <summary>
             Сложение матрицы и числа
@@ -16,7 +95,7 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Subtract(System.Double)">
             <summary>
-            Вычитание числа из матрицы
+            Разность матрицы и числа
             </summary>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Subtract(d1den.MathLibrary.Matrix)">
@@ -26,7 +105,7 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Multiply(System.Double)">
             <summary>
-            Произведение числа и матрицы
+            Произведение матрицы и числаы
             </summary>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Divide(System.Double)">
@@ -39,9 +118,28 @@
             Произведение матриц
             </summary>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetDeterminant">
+            <summary>
+            Получить определитель матрицы
+            </summary>
+            <returns>Определитель</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
+            <summary>
+            Вычисление матрицы минора
+            </summary>
+            <param name="rowIndex">Индекс строки минора</param>
+            <param name="columnIndex">Индекс столбца минора</param>
+            <returns>Матрица минора</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.GetEuclideanNorm">
             <summary>
             Вычисление евклидовой нормы
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.ToString">
+            <summary>
+            Преобразование матрицы к строке
             </summary>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.SetAllValues(System.Double)">

@@ -34,14 +34,30 @@ namespace d1den.MathLibrary
         #endregion
 
         #region Конструкторы и методы создания объектов
+        /// <summary>
+        /// Объект матрицы
+        /// </summary>
+        /// <param name="rowCount">Число строк</param>
+        /// <param name="columnCount">Число столбцов</param>
         public Matrix(int rowCount, int columnCount)
         {
             _matrixData = new double[rowCount, columnCount];
         }
+
+        /// <summary>
+        /// Объект матрицы
+        /// </summary>
+        /// <param name="matrixData">Двумерный массив данных матрицы</param>
         public Matrix(double[,] matrixData)
         {
             _matrixData = matrixData;
         }
+
+        /// <summary>
+        /// Объект квадратной матрицы
+        /// </summary>
+        /// <param name="dimension">Размерность квадратной матрицы</param>
+        /// <param name="diagonalValue">Значение по главной диагонали</param>
         public Matrix(int dimension, double diagonalValue)
         {
             _matrixData = new double[dimension, dimension];
@@ -50,14 +66,32 @@ namespace d1den.MathLibrary
                 _matrixData[i, i] = diagonalValue;
             }
         }
+
+        /// <summary>
+        /// Квадратная матрица нулей
+        /// </summary>
+        /// <param name="dimension">Размерность</param>
+        /// <returns>Объект матрицы</returns>
         public static Matrix GetZerosMatrix(int dimension)
         {
             return new Matrix(dimension, dimension);
         }
+
+        /// <summary>
+        /// Единичная матрица (E)
+        /// </summary>
+        /// <param name="dimension">Размерность</param>
+        /// <returns>Объект матрицы</returns>
         public static Matrix GetUnitMatrix(int dimension)
         {
             return new Matrix(dimension, 1.0);
         }
+
+        /// <summary>
+        /// Квадратная матрица единиц
+        /// </summary>
+        /// <param name="dimension">Размерность</param>
+        /// <returns>Объект матрицы</returns>
         public static Matrix GetOnesMatrix(int dimension)
         {
             return new Matrix(dimension, dimension).SetAllValues(1.0);
@@ -196,7 +230,63 @@ namespace d1den.MathLibrary
             });
             return new Matrix(result);
         }
-
+        /// <summary>
+        /// Получить определитель матрицы
+        /// </summary>
+        /// <returns>Определитель</returns>
+        public double GetDeterminant()
+        {
+            if (RowCount != ColumnCount)
+            {
+                var ex = new ArgumentException("Matrix isn`t square");
+                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                    this.RowCount, this.ColumnCount));
+                throw ex;
+            }
+            else if (_matrixData.Length == 1)
+            {
+                return _matrixData[0, 0];
+            }
+            else
+            {
+                double determinant = 0;
+                for (int i = 0; i < RowCount; i++)
+                {
+                    determinant += Math.Pow(-1.0, i + 0) * _matrixData[i, 0] * this.GetMinorMatrix(i, 0).GetDeterminant();
+                }
+                return determinant;
+            }
+        }
+        /// <summary>
+        /// Вычисление матрицы минора
+        /// </summary>
+        /// <param name="rowIndex">Индекс строки минора</param>
+        /// <param name="columnIndex">Индекс столбца минора</param>
+        /// <returns>Матрица минора</returns>
+        public Matrix GetMinorMatrix(int rowIndex, int columnIndex)
+        {
+            if ((RowCount != ColumnCount) || _matrixData.Length == 1)
+            {
+                var ex = new ArgumentException("This minor does not exist");
+                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                    this.RowCount, this.ColumnCount));
+                throw ex;
+            }
+            double[,] newMatrix = new double[RowCount - 1, ColumnCount - 1];
+            for (int i = 0, iNew = 0; i < RowCount; i++)
+            {
+                if (i == rowIndex)
+                    continue;
+                for (int j = 0, jNew = 0; j < ColumnCount; j++)
+                {
+                    if (j == columnIndex)
+                        continue;
+                    newMatrix[iNew, jNew++] = _matrixData[i, j];
+                }
+                iNew++;
+            }
+            return new Matrix(newMatrix);
+        }
         /// <summary>
         /// Вычисление евклидовой нормы
         /// </summary>

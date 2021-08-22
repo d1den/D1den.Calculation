@@ -9,16 +9,57 @@ namespace TestApplication
 {
     class Program
     {
+        static double GetDeterminant(double[,] matrix)
+        {
+            if(matrix.GetLength(0) != matrix.GetLength(1))
+            {
+                throw new ArgumentException("Matrix isn`t squred");
+            }
+            else if(matrix.Length == 1)
+            {
+                return matrix[0, 0];
+            }
+            else
+            {
+                double determinant = 0; 
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    determinant += Math.Pow(-1.0, i + 0) * matrix[i, 0] * GetDeterminant(GetMinor(matrix, i, 0));
+                }
+                return determinant;
+            }
+        }
+        static double[,] GetMinor(double[,] matrix, int row, int column)
+        {
+            if ((matrix.GetLength(0) != matrix.GetLength(1)) || matrix.Length == 1)
+            {
+                throw new ArgumentException("Matrix isn`t squred");
+            }
+            double[,] newMatrix = new double[matrix.GetLength(0) - 1, matrix.GetLength(1) - 1];
+            for (int i = 0, iNew = 0; i < matrix.GetLength(0); i++)
+            {
+                if(i == row)
+                    continue;
+                for (int j = 0, jNew = 0; j<matrix.GetLength(1); j++)
+                {
+                    if(j == column)
+                        continue;
+                    newMatrix[iNew, jNew++] = matrix[i, j];
+                }
+                iNew++;
+            }
+            return newMatrix;
+        }
         static void Main(string[] args)
         {
-            Matrix matrix1 = new Matrix();
-            Matrix matrix2 = new Matrix(new double[,] { { 1, 2, 3.45 }, { 234, 324, -232.23 } });
-            Console.WriteLine(matrix2);
-            Matrix matrix3 = new Matrix(3, -Math.PI);
-            Matrix matrix4 = new Matrix(2, 4);
-            Matrix matrix5 = Matrix.GetZerosMatrix(4);
-            Matrix matrix6 = Matrix.GetOnesMatrix(2);
-            Matrix matrix7 = Matrix.GetUnitMatrix(3);
+            Matrix matrix = new Matrix( new double[,]
+                {
+                    { 4, 5, 7 },
+                    { 4, 8, -5 },
+                    { 12, 4, 7 }
+                }
+                );
+            Console.WriteLine(matrix.GetDeterminant());
         }
     }
 }
