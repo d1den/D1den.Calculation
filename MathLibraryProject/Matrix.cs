@@ -4,13 +4,31 @@ using System.Text;
 
 namespace d1den.MathLibrary
 {
+    /// <summary>
+    /// Матрицы любой размерности
+    /// </summary>
     public readonly struct Matrix
     {
         #region Поля и свойства
         private readonly double[,] _matrixData;
+        /// <summary>
+        /// Массив значений матрицы
+        /// </summary>
         public double[,] MatrixData { get { return _matrixData; } }
+        /// <summary>
+        /// Количество строк
+        /// </summary>
         public int RowCount { get { return _matrixData.GetLength(0); } }
+        /// <summary>
+        /// Количество столбцов
+        /// </summary>
         public int ColumnCount { get { return _matrixData.GetLength(1); } }
+        /// <summary>
+        /// Получить значение матрицы по строке и столбцу
+        /// </summary>
+        /// <param name="row">Индекс строки</param>
+        /// <param name="column">Индекс столбца</param>
+        /// <returns>Значение матрицы</returns>
         public double this[int row, int column]
         { get { return _matrixData[row, column]; } }
         #endregion
@@ -47,12 +65,19 @@ namespace d1den.MathLibrary
         #endregion
 
         #region Методы матричных операций
+        /// <summary>
+        /// Домножение матрицы на единицу
+        /// </summary>
         public Matrix Negative()
         {
             var matrixArray = _matrixData;
             ProcessFunctionOverData((i, j) => matrixArray[i, j] = -matrixArray[i, j]);
             return new Matrix(matrixArray);
         }
+
+        /// <summary>
+        /// Транспонирование матрицы
+        /// </summary>
         public Matrix Transpose()
         {
             var transposeMatrix = new double[ColumnCount, RowCount];
@@ -60,6 +85,7 @@ namespace d1den.MathLibrary
             ProcessFunctionOverData((i, j) => transposeMatrix[i, j] = thisMatrix[j, i]);
             return new Matrix(transposeMatrix);
         }
+
         /// <summary>
         /// Сложение матрицы и числа
         /// </summary>
@@ -93,7 +119,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Вычитание числа из матрицы
+        /// Разность матрицы и числа
         /// </summary>
         public Matrix Subtract(double value)
         {
@@ -125,7 +151,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Произведение числа и матрицы
+        /// Произведение матрицы и числаы
         /// </summary>
         public Matrix Multiply(double value)
         {
@@ -170,9 +196,7 @@ namespace d1den.MathLibrary
             });
             return new Matrix(result);
         }
-        #endregion
 
-        #region Методы
         /// <summary>
         /// Вычисление евклидовой нормы
         /// </summary>
@@ -189,6 +213,13 @@ namespace d1den.MathLibrary
             norm = Math.Sqrt(norm);
             return norm;
         }
+
+        #endregion
+
+        #region Методы
+        /// <summary>
+        /// Преобразование матрицы к строке
+        /// </summary>
         public override string ToString()
         {
             string matrixInString = "";
@@ -202,6 +233,7 @@ namespace d1den.MathLibrary
             }
             return matrixInString;
         }
+
         /// <summary>
         /// Установить все значения матрицы
         /// </summary>
