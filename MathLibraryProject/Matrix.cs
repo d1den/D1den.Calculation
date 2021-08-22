@@ -77,21 +77,19 @@ namespace d1den.MathLibrary
         /// </summary>
         public Matrix Add(Matrix matrix2)
         {
-            if (this.ColumnCount != matrix2.ColumnCount && this.RowCount != matrix2.RowCount)
+            if (RowCount != matrix2.RowCount &&
+                ColumnCount != matrix2.ColumnCount)
             {
-                var ex = new ArgumentException("Matrixes can not be add, because dimensions aren`t same.");
-                ex.Data.Add("Matrixes dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})", this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount);
+                var ex = new ArgumentException("Matrices can not be add, because dimensions aren`t same.");
+                ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
+                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
                 throw ex;
             }
-            var result = new Matrix(this.RowCount, this.ColumnCount);
-            for (int i = 0; i < RowCount; i++)
-            {
-                for (int j = 0; j < ColumnCount; j++)
-                {
-                    result[i, j] = this[i, j] + matrix2[i, j];
-                }
-            }
-            return result;
+            var result = new double[this.RowCount, this.ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) =>
+                result[i, j] = thisMatrix[i, j] + matrix2[i,j]);
+            return new Matrix(result);
         }
 
         /// <summary>
@@ -99,10 +97,11 @@ namespace d1den.MathLibrary
         /// </summary>
         public Matrix Subtract(double value)
         {
-            var result = new Matrix(this.RowCount, this.ColumnCount);
-            result.ProcessFunctionOverData((i, j) =>
-                result[i, j] = this[i, j] - value);
-            return result;
+            var result = new double[RowCount, ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) =>
+                result[i, j] = thisMatrix[i, j] - value);
+            return new Matrix(result);
         }
 
         /// <summary>
@@ -110,19 +109,19 @@ namespace d1den.MathLibrary
         /// </summary>
         public Matrix Subtract(Matrix matrix2)
         {
-            if (this.ColumnCount != matrix2.ColumnCount && this.RowCount != matrix2.RowCount)
+            if (RowCount != matrix2.RowCount &&
+                ColumnCount != matrix2.ColumnCount)
             {
-                throw new ArgumentException("Matrixes can not be subtract, because dimension aren`t same.");
+                var ex = new ArgumentException("Matrices cannot be multiplied because the dimensions do not fit.");
+                ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
+                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
+                throw ex;
             }
-            var result = new Matrix(this.RowCount, this.ColumnCount);
-            for (int i = 0; i < RowCount; i++)
-            {
-                for (int j = 0; j < ColumnCount; j++)
-                {
-                    result[i, j] = this[i, j] - matrix2[i, j];
-                }
-            }
-            return result;
+            var result = new double[this.RowCount, this.ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) =>
+                result[i, j] = thisMatrix[i, j] - matrix2[i, j]);
+            return new Matrix(result);
         }
 
         /// <summary>
@@ -130,10 +129,11 @@ namespace d1den.MathLibrary
         /// </summary>
         public Matrix Multiply(double value)
         {
-            var result = new Matrix(this.RowCount, this.ColumnCount);
-            result.ProcessFunctionOverData((i, j) =>
-                result[i, j] = this[i, j] * value);
-            return result;
+            var result = new double[RowCount, ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) =>
+                result[i, j] = thisMatrix[i, j] * value);
+            return new Matrix(result);
         }
 
         /// <summary>
@@ -141,10 +141,11 @@ namespace d1den.MathLibrary
         /// </summary>
         public Matrix Divide(double value)
         {
-            var result = new Matrix(this.RowCount, this.ColumnCount);
-            result.ProcessFunctionOverData((i, j) =>
-                result[i, j] = this[i, j] / value);
-            return result;
+            var result = new double[RowCount, ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) =>
+                result[i, j] = thisMatrix[i, j] / value);
+            return new Matrix(result);
         }
 
         /// <summary>
@@ -154,16 +155,20 @@ namespace d1den.MathLibrary
         {
             if (this.ColumnCount != matrix2.RowCount)
             {
-                throw new ArgumentException("Matrixes can not be multiplied");
+                var ex = new ArgumentException("Matrixes can not be multiplied, because dimensions aren`t same.");
+                ex.Data.Add("Matrixes dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
+                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
+                throw ex;
             }
-            var result = new Matrix(this.RowCount, matrix2.ColumnCount);
-            result.ProcessFunctionOverData((i, j) => {
-                for (var k = 0; k < this.ColumnCount; k++)
+            var result = new double[this.RowCount, this.ColumnCount];
+            var thisMatrix = _matrixData;
+            ProcessFunctionOverData((i, j) => {
+                for (var k = 0; k < thisMatrix.GetLength(1); k++)
                 {
-                    result[i, j] += this[i, k] * matrix2[k, j];
+                    result[i, j] += thisMatrix[i, k] * matrix2[k, j];
                 }
             });
-            return result;
+            return new Matrix(result);
         }
         #endregion
 

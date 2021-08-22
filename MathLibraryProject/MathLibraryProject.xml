@@ -4,9 +4,44 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
+        <member name="M:d1den.MathLibrary.Matrix.Add(System.Double)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Add(d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение двух матриц
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Subtract(System.Double)">
+            <summary>
+            Вычитание числа из матрицы
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Subtract(d1den.MathLibrary.Matrix)">
+            <summary>
+            Разность матриц
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Multiply(System.Double)">
+            <summary>
+            Произведение числа и матрицы
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Divide(System.Double)">
+            <summary>
+            Деление матрицы на число
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Multiply(d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матриц
+            </summary>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.GetEuclideanNorm">
             <summary>
-            Вычисление евклидовой нормы матрицы
+            Вычисление евклидовой нормы
             </summary>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.SetAllValues(System.Double)">
