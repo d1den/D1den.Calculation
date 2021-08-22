@@ -6,7 +6,7 @@
     <members>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
-            Матрицы любой размерности
+            Матрица желаемой размерности
             </summary>
         </member>
         <member name="P:d1den.MathLibrary.Matrix.MatrixData">

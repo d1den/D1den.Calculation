@@ -5,7 +5,7 @@ using System.Text;
 namespace d1den.MathLibrary
 {
     /// <summary>
-    /// Матрицы любой размерности
+    /// Матрица желаемой размерности
     /// </summary>
     public readonly struct Matrix
     {
@@ -287,6 +287,31 @@ namespace d1den.MathLibrary
             }
             return new Matrix(newMatrix);
         }
+
+        /// <summary>
+        /// Вычисление обратной матрицы
+        /// </summary>
+        /// <returns>Обратная матрица</returns>
+        public Matrix Invert()
+        {
+            if (RowCount != ColumnCount)
+            {
+                var ex = new ArgumentException("Matrix isn`t square");
+                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                    this.RowCount, this.ColumnCount));
+                throw ex;
+            }
+            var algebraiсСomplements = new double[RowCount, ColumnCount];
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    algebraiсСomplements[i, j] = Math.Pow(-1.0, i + j) * this.GetMinorMatrix(i, j).GetDeterminant();
+                }
+            }
+            return new Matrix(algebraiсСomplements).Transpose().Divide(this.GetDeterminant());
+        }
+
         /// <summary>
         /// Вычисление евклидовой нормы
         /// </summary>
@@ -303,7 +328,6 @@ namespace d1den.MathLibrary
             norm = Math.Sqrt(norm);
             return norm;
         }
-
         #endregion
 
         #region Методы
