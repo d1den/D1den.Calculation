@@ -4,6 +4,43 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
+        <member name="T:d1den.MathLibrary.AdvancedMath">
+            <summary>
+            Дополнительные математические функции
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Выравнивание значения по диапазону
+            </summary>
+            <param name="value">Значение</param>
+            <param name="minValue">Минимально допустимое значение</param>
+            <param name="maxValue">Максимально допустимое значение</param>
+            <returns>Значение, соответсвующее диапазону</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Выравнивание значения по диапазону
+            </summary>
+            <param name="value">Значение</param>
+            <param name="minValue">Минимально допустимое значение</param>
+            <param name="maxValue">Максимально допустимое значение</param>
+            <returns>Значение, соответсвующее диапазону</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.DegreeToRadian(System.Double)">
+            <summary>
+            Преобразование градусов к радианам
+            </summary>
+            <param name="degreeAngle">Угол в градусах</param>
+            <returns>Радианы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.RadianToDegree(System.Double)">
+            <summary>
+            Преобразование радиан к градусам
+            </summary>
+            <param name="radianAngle">Угол в радианах</param>
+            <returns>Градусы</returns>
+        </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
             Матрица желаемой размерности
@@ -131,6 +168,12 @@
             <param name="rowIndex">Индекс строки минора</param>
             <param name="columnIndex">Индекс столбца минора</param>
             <returns>Матрица минора</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Invert">
+            <summary>
+            Вычисление обратной матрицы
+            </summary>
+            <returns>Обратная матрица</returns>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.GetEuclideanNorm">
             <summary>

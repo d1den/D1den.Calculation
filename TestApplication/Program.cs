@@ -11,8 +11,18 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(string.Format("{0} degres = {1} radians", 45, AdvancedMath.DegreeToRadian(45)));
-            Console.WriteLine(string.Format("{0} radians = {1} degres", Math.PI / 2.0, AdvancedMath.RadianToDegree(Math.PI / 2.0)));
+            Matrix matrix1 = new[,] { 
+                { 1, 2 }, 
+                { 3, 4 } };
+            Matrix matrix2 = new[,]
+            {
+                {1.23, 5.65 },
+                {-0.234, 3.45 }
+            };
+            int[,] matrix1ToIntArray = (int[,])matrix1;
+            double[,] matrix1ToDoubleArray = (double[,])matrix1;
+            int[,] matrix2ToIntArray = (int[,])matrix2;
+            double[,] matrix2ToDoubleArray = (double[,])matrix2;
         }
     }
 }

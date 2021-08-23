@@ -11,18 +11,41 @@ namespace d1den.MathLibrary
     {
         #region Поля и свойства
         private readonly double[,] _matrixData;
+
         /// <summary>
         /// Массив значений матрицы
         /// </summary>
         public double[,] MatrixData { get { return _matrixData; } }
+
+        /// <summary>
+        /// Массив приведённых к Int32 значений матрицы
+        /// </summary>
+        public int[,] Int32MatrixData
+        {
+            get
+            {
+                int[,] matrixArray = new int[RowCount, ColumnCount];
+                for (int i = 0; i < RowCount; i++)
+                {
+                    for (int j = 0; j < ColumnCount; j++)
+                    {
+                        matrixArray[i, j] = (int)Math.Round(_matrixData[i, j]);
+                    }
+                }
+                return matrixArray;
+            }
+        }
+
         /// <summary>
         /// Количество строк
         /// </summary>
         public int RowCount { get { return _matrixData.GetLength(0); } }
+
         /// <summary>
         /// Количество столбцов
         /// </summary>
         public int ColumnCount { get { return _matrixData.GetLength(1); } }
+
         /// <summary>
         /// Получить значение матрицы по строке и столбцу
         /// </summary>
@@ -47,10 +70,26 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Объект матрицы
         /// </summary>
-        /// <param name="matrixData">Двумерный массив данных матрицы</param>
+        /// <param name="matrixData">Двумерный double массив данных матрицы</param>
         public Matrix(double[,] matrixData)
         {
             _matrixData = matrixData;
+        }
+
+        /// <summary>
+        /// Объект матрицы
+        /// </summary>
+        /// <param name="matrixData">Двумерный int массив данных матрицы</param>
+        public Matrix(int[,] matrixData)
+        {
+            _matrixData = new double[matrixData.GetLength(0), matrixData.GetLength(1)];
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    _matrixData[i, j] = matrixData[i, j];
+                }
+            }
         }
 
         /// <summary>
@@ -82,7 +121,7 @@ namespace d1den.MathLibrary
         /// </summary>
         /// <param name="dimension">Размерность</param>
         /// <returns>Объект матрицы</returns>
-        public static Matrix GetUnitMatrix(int dimension)
+        public static Matrix GetEyeMatrix(int dimension)
         {
             return new Matrix(dimension, 1.0);
         }
@@ -102,32 +141,36 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Домножение матрицы на единицу
         /// </summary>
+        /// <returns>Матрица</returns>
         public Matrix Negative()
         {
             var matrixArray = _matrixData;
-            ProcessFunctionOverData((i, j) => matrixArray[i, j] = -matrixArray[i, j]);
+            ProcessActionOverData((i, j) => matrixArray[i, j] = -matrixArray[i, j]);
             return new Matrix(matrixArray);
         }
 
         /// <summary>
         /// Транспонирование матрицы
         /// </summary>
+        /// <returns>Матрица</returns>
         public Matrix Transpose()
         {
             var transposeMatrix = new double[ColumnCount, RowCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) => transposeMatrix[i, j] = thisMatrix[j, i]);
+            ProcessActionOverData((i, j) => transposeMatrix[i, j] = thisMatrix[j, i]);
             return new Matrix(transposeMatrix);
         }
 
         /// <summary>
         /// Сложение матрицы и числа
         /// </summary>
+        /// <param name="value">Число, складываемое с матрицей</param>
+        /// <returns>Матрица</returns>
         public Matrix Add(double value)
         {
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] + value);
             return new Matrix(result);
         }
@@ -135,6 +178,9 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Сложение двух матриц
         /// </summary>
+        /// <param name="matrix2">Матрица, складываемая с матрицей</param>
+        /// <exception cref="ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
+        /// <returns>Матрица</returns>
         public Matrix Add(Matrix matrix2)
         {
             if (RowCount != matrix2.RowCount &&
@@ -147,7 +193,7 @@ namespace d1den.MathLibrary
             }
             var result = new double[this.RowCount, this.ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] + matrix2[i,j]);
             return new Matrix(result);
         }
@@ -155,11 +201,13 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Разность матрицы и числа
         /// </summary>
+        /// <param name="value">Число, вычитаемое из матрицы</param>
+        /// <returns>Матрица</returns>
         public Matrix Subtract(double value)
         {
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] - value);
             return new Matrix(result);
         }
@@ -167,6 +215,9 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Разность матриц
         /// </summary>
+        /// <param name="matrix2">Матрица, вычитаемая из матрицы</param>
+        /// <exception cref="ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
+        /// <returns>Матрица</returns>
         public Matrix Subtract(Matrix matrix2)
         {
             if (RowCount != matrix2.RowCount &&
@@ -179,19 +230,21 @@ namespace d1den.MathLibrary
             }
             var result = new double[this.RowCount, this.ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] - matrix2[i, j]);
             return new Matrix(result);
         }
 
         /// <summary>
-        /// Произведение матрицы и числаы
+        /// Произведение матрицы и числа
         /// </summary>
+        /// <param name="value">Множитель матрицы</param>
+        /// <returns>Матрица</returns>
         public Matrix Multiply(double value)
         {
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] * value);
             return new Matrix(result);
         }
@@ -199,11 +252,14 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Деление матрицы на число
         /// </summary>
+        /// <param name="value">Делитель матрицы</param>
+        /// <exception cref="DivideByZeroException">При делителе = 0</exception>
+        /// <returns>Матрица</returns>
         public Matrix Divide(double value)
         {
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) =>
+            ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] / value);
             return new Matrix(result);
         }
@@ -211,6 +267,9 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Произведение матриц
         /// </summary>
+        /// <param name="matrix2">Матрица, умножаемая на исходную</param>
+        /// <exception cref="ArgumentException">При неравнестве стобцов первой матрицы и строк второй</exception>
+        /// <returns>Матрица</returns>
         public Matrix Multiply(Matrix matrix2)
         {
             if (this.ColumnCount != matrix2.RowCount)
@@ -222,7 +281,7 @@ namespace d1den.MathLibrary
             }
             var result = new double[this.RowCount, this.ColumnCount];
             var thisMatrix = _matrixData;
-            ProcessFunctionOverData((i, j) => {
+            ProcessActionOverData((i, j) => {
                 for (var k = 0; k < thisMatrix.GetLength(1); k++)
                 {
                     result[i, j] += thisMatrix[i, k] * matrix2[k, j];
@@ -234,6 +293,7 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Получить определитель матрицы
         /// </summary>
+        /// <exception cref="ArgumentException">Если матрица не квадратная</exception>
         /// <returns>Определитель</returns>
         public double GetDeterminant()
         {
@@ -260,10 +320,11 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Вычисление матрицы минора
+        /// Получить матрицу минора данной матрицы
         /// </summary>
         /// <param name="rowIndex">Индекс строки минора</param>
         /// <param name="columnIndex">Индекс столбца минора</param>
+        /// <exception cref="ArgumentException">Если матрица не квадратная, или состоит из 1-го элемента</exception>
         /// <returns>Матрица минора</returns>
         public Matrix GetMinorMatrix(int rowIndex, int columnIndex)
         {
@@ -293,6 +354,7 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Вычисление обратной матрицы
         /// </summary>
+        /// <exception cref="ArgumentException">Если матрица не квадратная</exception>
         /// <returns>Обратная матрица</returns>
         public Matrix Invert()
         {
@@ -304,6 +366,8 @@ namespace d1den.MathLibrary
                 throw ex;
             }
             var algebraiсСomplements = new double[RowCount, ColumnCount];
+            //if (_matrixData.Length == 1)
+            //    return this;
             for (int i = 0; i < RowCount; i++)
             {
                 for (int j = 0; j < ColumnCount; j++)
@@ -315,7 +379,8 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Вычисление евклидовой нормы
+        /// Вычисление Eвклидовой нормы
+        /// <returns>Евклидовая норма</returns>
         /// </summary>
         public double GetEuclideanNorm()
         {
@@ -336,6 +401,7 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Преобразование матрицы к строке
         /// </summary>
+        /// <returns>Строка матрицы</returns>
         public override string ToString()
         {
             string matrixInString = "";
@@ -353,26 +419,66 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Установить все значения матрицы
         /// </summary>
+        /// <param name="value">Значение</param>
+        /// <returns>Матрица</returns>
         public Matrix SetAllValues(double value)
         {
             var matrixArray = _matrixData;
-            ProcessFunctionOverData((i, j) => matrixArray[i, j] = value);
+            ProcessActionOverData((i, j) => matrixArray[i, j] = value);
             return new Matrix(matrixArray);
         }
 
         /// <summary>
         /// Применить действие ко всем элементам матрицы
         /// </summary>
-        /// <param name="function"></param>
-        private void ProcessFunctionOverData(Action<int, int> function)
+        /// <param name="action"></param>
+        private void ProcessActionOverData(Action<int, int> action)
         {
             for (var i = 0; i < RowCount; i++)
             {
                 for (var j = 0; j < ColumnCount; j++)
                 {
-                    function(i, j);
+                    action(i, j);
                 }
             }
+        }
+        #endregion
+
+        #region Операторы
+        /// <summary>
+        /// Преобразовать двумерный массив в матрице
+        /// </summary>
+        /// <param name="matrixArray">Двумерный массив double</param>
+        public static implicit operator Matrix(double[,] matrixArray)
+        {
+            return new Matrix(matrixArray);
+        }
+
+        /// <summary>
+        /// Преобразовать двумерный массив в матрице
+        /// </summary>
+        /// <param name="matrixArray">Двумерный массив int</param>
+        public static implicit operator Matrix(int[,] matrixArray)
+        {
+            return new Matrix(matrixArray);
+        }
+
+        /// <summary>
+        /// Преобразовать матрицу к двумерному массиву double
+        /// </summary>
+        /// <param name="matrix">Матрица</param>
+        public static explicit operator double[,](Matrix matrix)
+        {
+            return matrix.MatrixData;
+        }
+
+        /// <summary>
+        /// Преобразовать матрицу к двумерному массиву int
+        /// </summary>
+        /// <param name="matrix">Матрица</param>
+        public static explicit operator int[,](Matrix matrix)
+        {
+            return matrix.Int32MatrixData;
         }
         #endregion
     }
