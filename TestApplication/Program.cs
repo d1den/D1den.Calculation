@@ -11,14 +11,8 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Matrix matrix = new Matrix( new double[,]
-                {
-                    {2, 5, 7 },
-                    {6,3,4 },
-                    {5,-2,-3 }
-                }
-                );
-            Console.WriteLine(matrix.Invert());
+            Console.WriteLine(string.Format("{0} degres = {1} radians", 45, AdvancedMath.DegreeToRadian(45)));
+            Console.WriteLine(string.Format("{0} radians = {1} degres", Math.PI / 2.0, AdvancedMath.RadianToDegree(Math.PI / 2.0)));
         }
     }
 }
