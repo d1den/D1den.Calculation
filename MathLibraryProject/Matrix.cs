@@ -230,6 +230,7 @@ namespace d1den.MathLibrary
             });
             return new Matrix(result);
         }
+
         /// <summary>
         /// Получить определитель матрицы
         /// </summary>
@@ -257,6 +258,7 @@ namespace d1den.MathLibrary
                 return determinant;
             }
         }
+
         /// <summary>
         /// Вычисление матрицы минора
         /// </summary>
