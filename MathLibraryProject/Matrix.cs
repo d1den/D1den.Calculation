@@ -7,7 +7,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Матрица желаемой размерности
     /// </summary>
-    public readonly struct Matrix
+    public readonly struct Matrix : IEquatable<Matrix>
     {
         #region Поля и свойства
         private readonly double[,] _matrixData;
@@ -442,6 +442,39 @@ namespace d1den.MathLibrary
                 }
             }
         }
+        
+        /// <summary>
+        /// Метод сравнениния массивов по значениям
+        /// </summary>
+        /// <param name="obj">Упакованная матрица</param>
+        /// <returns>Результат сравнения</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is Matrix)
+                return Equals((Matrix)obj);
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Метод сравнениния массивов по значениям
+        /// </summary>
+        /// <param name="other">Матрица</param>
+        /// <returns>Результат сравнения</returns>
+        public bool Equals(Matrix other)
+        {
+            if (RowCount != other.RowCount || ColumnCount != other.ColumnCount)
+                return false;
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    if (this[i, j] != other[i, j])
+                        return false;
+                }
+            }
+            return true;
+        }
         #endregion
 
         #region Операторы
@@ -507,6 +540,127 @@ namespace d1den.MathLibrary
         public static explicit operator int[,](Matrix matrix)
         {
             return matrix.Int32MatrixData;
+        }
+
+        /// <summary>
+        /// Сложение матрицы и числа
+        /// </summary>
+        /// <param name="value">Число, складываемое с матрицей</param>
+        /// <param name="matrix">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator +(double value, Matrix matrix)
+        {
+            return matrix.Add(value);
+        }
+
+        /// <summary>
+        /// Сложение матрицы и числа
+        /// </summary>
+        /// <param name="value">Число, складываемое с матрицей</param>
+        /// <param name="matrix">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator +(Matrix matrix, double value)
+        {
+            return matrix.Add(value);
+        }
+
+        /// <summary>
+        /// Сложение матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица</param>
+        /// <param name="matrix2">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator +(Matrix matrix1, Matrix matrix2)
+        {
+            return matrix1.Add(matrix2);
+        }
+
+        /// <summary>
+        /// Разность матрицы и числа
+        /// </summary>
+        /// <param name="value">Число, вычитаемое из матрицы</param>
+        /// <param name="matrix">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator -(Matrix matrix, double value)
+        {
+            return matrix.Subtract(value);
+        }
+
+        /// <summary>
+        /// Разность матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица</param>
+        /// <param name="matrix2">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator -(Matrix matrix1, Matrix matrix2)
+        {
+            return matrix1.Subtract(matrix2);
+        }
+
+        /// <summary>
+        /// Произведение матрицы и числа
+        /// </summary>
+        /// <param name="value">Множитель</param>
+        /// <param name="matrix">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator *(Matrix matrix, double value)
+        {
+            return matrix.Multiply(value);
+        }
+
+        /// <summary>
+        /// Произведение матрицы и числа
+        /// </summary>
+        /// <param name="value">Множитель</param>
+        /// <param name="matrix">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator *(double value, Matrix matrix)
+        {
+            return matrix.Multiply(value);
+        }
+
+        /// <summary>
+        /// Произведение матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица</param>
+        /// <param name="matrix2">Матрица</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator *(Matrix matrix1, Matrix matrix2)
+        {
+            return matrix1.Multiply(matrix2);
+        }
+
+        /// <summary>
+        /// Деление матрицы на число
+        /// </summary>
+        /// <param name="matrix">Матрица</param>
+        /// <param name="value">Делитель</param>
+        /// <returns>Матрица</returns>
+        public static Matrix operator /(Matrix matrix, double value)
+        {
+            return matrix.Divide(value);
+        }
+
+        /// <summary>
+        /// Оператор проверки на равенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator ==(Matrix matrix1, Matrix matrix2)
+        {
+            return matrix1.Equals(matrix2);
+        }
+
+        /// <summary>
+        /// Оператор проверки на неравенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator !=(Matrix matrix1, Matrix matrix2)
+        {
+            return !matrix1.Equals(matrix2);
         }
         #endregion
     }

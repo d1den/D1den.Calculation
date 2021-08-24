@@ -234,6 +234,20 @@
             </summary>
             <param name="action"></param>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.Equals(System.Object)">
+            <summary>
+            Метод сравнениния массивов по значениям
+            </summary>
+            <param name="obj">Упакованная матрица</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Equals(d1den.MathLibrary.Matrix)">
+            <summary>
+            Метод сравнениния массивов по значениям
+            </summary>
+            <param name="other">Матрица</param>
+            <returns>Результат сравнения</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
             Преобразовать двумерный массив в матрице
@@ -269,6 +283,94 @@
             Преобразовать матрицу к двумерному массиву int
             </summary>
             <param name="matrix">Матрица</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(System.Double,d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+            <param name="value">Число, складываемое с матрицей</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+            <param name="value">Число, складываемое с матрицей</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Subtraction(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Разность матрицы и числа
+            </summary>
+            <param name="value">Число, вычитаемое из матрицы</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Subtraction(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Разность матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Произведение матрицы и числа
+            </summary>
+            <param name="value">Множитель</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(System.Double,d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матрицы и числа
+            </summary>
+            <param name="value">Множитель</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Division(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Деление матрицы на число
+            </summary>
+            <param name="matrix">Матрица</param>
+            <param name="value">Делитель</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Equality(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на равенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Inequality(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на неравенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
         </member>
         <member name="T:d1den.MathLibrary.Point3D">
             <summary>
