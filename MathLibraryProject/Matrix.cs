@@ -464,6 +464,34 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
+        /// Преобразовать одномерный массив в матрице
+        /// </summary>
+        /// <param name="matrixArray">Одномерный массив double</param>
+        public static implicit operator Matrix(double[] matrixArray)
+        {
+            var doubleMatrixArray = new double[1, matrixArray.Length];
+            for (int i = 0; i < matrixArray.Length; i++)
+            {
+                doubleMatrixArray[0, i] = matrixArray[i];
+            }
+            return new Matrix(doubleMatrixArray);
+        }
+
+        /// <summary>
+        /// Преобразовать одномерный массив в матрице
+        /// </summary>
+        /// <param name="matrixArray">Одномерный массив int</param>
+        public static implicit operator Matrix(int[] matrixArray)
+        {
+            var intMatrixArray = new double[1, matrixArray.Length];
+            for (int i = 0; i < matrixArray.Length; i++)
+            {
+                intMatrixArray[0, i] = matrixArray[i];
+            }
+            return new Matrix(intMatrixArray);
+        }
+
+        /// <summary>
         /// Преобразовать матрицу к двумерному массиву double
         /// </summary>
         /// <param name="matrix">Матрица</param>
