@@ -73,7 +73,7 @@ namespace d1den.MathLibrary
         /// <returns>Строка точки</returns>
         public override string ToString()
         {
-            return string.Format("{0:F3}; {1:F3}; {2:F3}", _x, _y, _z);
+            return string.Format("{0:F2}; {1:F2}; {2:F2}", _x, _y, _z);
         }
         #endregion
 

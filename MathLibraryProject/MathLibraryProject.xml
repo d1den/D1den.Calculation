@@ -4,6 +4,374 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
+        <member name="T:d1den.MathLibrary.AdvancedMath">
+            <summary>
+            Дополнительные математические функции
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Выравнивание значения по диапазону
+            </summary>
+            <param name="value">Значение</param>
+            <param name="minValue">Минимально допустимое значение</param>
+            <param name="maxValue">Максимально допустимое значение</param>
+            <returns>Значение, соответсвующее диапазону</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Выравнивание значения по диапазону
+            </summary>
+            <param name="value">Значение</param>
+            <param name="minValue">Минимально допустимое значение</param>
+            <param name="maxValue">Максимально допустимое значение</param>
+            <returns>Значение, соответсвующее диапазону</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.DegreeToRadian(System.Double)">
+            <summary>
+            Преобразование градусов к радианам
+            </summary>
+            <param name="degreeAngle">Угол в градусах</param>
+            <returns>Радианы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.AdvancedMath.RadianToDegree(System.Double)">
+            <summary>
+            Преобразование радиан к градусам
+            </summary>
+            <param name="radianAngle">Угол в радианах</param>
+            <returns>Градусы</returns>
+        </member>
+        <member name="T:d1den.MathLibrary.Matrix">
+            <summary>
+            Матрица желаемой размерности
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.MatrixData">
+            <summary>
+            Массив значений матрицы
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.Int32MatrixData">
+            <summary>
+            Массив приведённых к Int32 значений матрицы
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.RowCount">
+            <summary>
+            Количество строк
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.ColumnCount">
+            <summary>
+            Количество столбцов
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Получить значение матрицы по строке и столбцу
+            </summary>
+            <param name="row">Индекс строки</param>
+            <param name="column">Индекс столбца</param>
+            <returns>Значение матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Объект матрицы
+            </summary>
+            <param name="rowCount">Число строк</param>
+            <param name="columnCount">Число столбцов</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Double[0:,0:])">
+            <summary>
+            Объект матрицы
+            </summary>
+            <param name="matrixData">Двумерный double массив данных матрицы</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32[0:,0:])">
+            <summary>
+            Объект матрицы
+            </summary>
+            <param name="matrixData">Двумерный int массив данных матрицы</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32,System.Double)">
+            <summary>
+            Объект квадратной матрицы
+            </summary>
+            <param name="dimension">Размерность квадратной матрицы</param>
+            <param name="diagonalValue">Значение по главной диагонали</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetZerosMatrix(System.Int32)">
+            <summary>
+            Квадратная матрица нулей
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetEyeMatrix(System.Int32)">
+            <summary>
+            Единичная матрица (E)
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetOnesMatrix(System.Int32)">
+            <summary>
+            Квадратная матрица единиц
+            </summary>
+            <param name="dimension">Размерность</param>
+            <returns>Объект матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Negative">
+            <summary>
+            Домножение матрицы на единицу
+            </summary>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Transpose">
+            <summary>
+            Транспонирование матрицы
+            </summary>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Add(System.Double)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+            <param name="value">Число, складываемое с матрицей</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Add(d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение двух матриц
+            </summary>
+            <param name="matrix2">Матрица, складываемая с матрицей</param>
+            <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Subtract(System.Double)">
+            <summary>
+            Разность матрицы и числа
+            </summary>
+            <param name="value">Число, вычитаемое из матрицы</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Subtract(d1den.MathLibrary.Matrix)">
+            <summary>
+            Разность матриц
+            </summary>
+            <param name="matrix2">Матрица, вычитаемая из матрицы</param>
+            <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Multiply(System.Double)">
+            <summary>
+            Произведение матрицы и числа
+            </summary>
+            <param name="value">Множитель матрицы</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Divide(System.Double)">
+            <summary>
+            Деление матрицы на число
+            </summary>
+            <param name="value">Делитель матрицы</param>
+            <exception cref="T:System.DivideByZeroException">При делителе = 0</exception>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Multiply(d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матриц
+            </summary>
+            <param name="matrix2">Матрица, умножаемая на исходную</param>
+            <exception cref="T:System.ArgumentException">При неравнестве стобцов первой матрицы и строк второй</exception>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetDeterminant">
+            <summary>
+            Получить определитель матрицы
+            </summary>
+            <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
+            <returns>Определитель</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
+            <summary>
+            Получить матрицу минора данной матрицы
+            </summary>
+            <param name="rowIndex">Индекс строки минора</param>
+            <param name="columnIndex">Индекс столбца минора</param>
+            <exception cref="T:System.ArgumentException">Если матрица не квадратная, или состоит из 1-го элемента</exception>
+            <returns>Матрица минора</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Invert">
+            <summary>
+            Вычисление обратной матрицы
+            </summary>
+            <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
+            <returns>Обратная матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetEuclideanNorm">
+            <summary>
+            Вычисление Eвклидовой нормы
+            <returns>Евклидовая норма</returns>
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.ToString">
+            <summary>
+            Преобразование матрицы к строке
+            </summary>
+            <returns>Строка матрицы</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.SetAllValues(System.Double)">
+            <summary>
+            Установить все значения матрицы
+            </summary>
+            <param name="value">Значение</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.ProcessActionOverData(System.Action{System.Int32,System.Int32})">
+            <summary>
+            Применить действие ко всем элементам матрицы
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Equals(System.Object)">
+            <summary>
+            Метод сравнениния массивов по значениям
+            </summary>
+            <param name="obj">Упакованная матрица</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.Equals(d1den.MathLibrary.Matrix)">
+            <summary>
+            Метод сравнениния массивов по значениям
+            </summary>
+            <param name="other">Матрица</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
+            <summary>
+            Преобразовать двумерный массив в матрице
+            </summary>
+            <param name="matrixArray">Двумерный массив double</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[0:,0:])~d1den.MathLibrary.Matrix">
+            <summary>
+            Преобразовать двумерный массив в матрице
+            </summary>
+            <param name="matrixArray">Двумерный массив int</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[])~d1den.MathLibrary.Matrix">
+            <summary>
+            Преобразовать одномерный массив в матрице
+            </summary>
+            <param name="matrixArray">Одномерный массив double</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[])~d1den.MathLibrary.Matrix">
+            <summary>
+            Преобразовать одномерный массив в матрице
+            </summary>
+            <param name="matrixArray">Одномерный массив int</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Explicit(d1den.MathLibrary.Matrix)~System.Double[0:,0:]">
+            <summary>
+            Преобразовать матрицу к двумерному массиву double
+            </summary>
+            <param name="matrix">Матрица</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Explicit(d1den.MathLibrary.Matrix)~System.Int32[0:,0:]">
+            <summary>
+            Преобразовать матрицу к двумерному массиву int
+            </summary>
+            <param name="matrix">Матрица</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(System.Double,d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+            <param name="value">Число, складываемое с матрицей</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Сложение матрицы и числа
+            </summary>
+            <param name="value">Число, складываемое с матрицей</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Addition(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Сложение матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Subtraction(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Разность матрицы и числа
+            </summary>
+            <param name="value">Число, вычитаемое из матрицы</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Subtraction(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Разность матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Произведение матрицы и числа
+            </summary>
+            <param name="value">Множитель</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(System.Double,d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матрицы и числа
+            </summary>
+            <param name="value">Множитель</param>
+            <param name="matrix">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Multiply(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Произведение матриц
+            </summary>
+            <param name="matrix1">Матрица</param>
+            <param name="matrix2">Матрица</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Division(d1den.MathLibrary.Matrix,System.Double)">
+            <summary>
+            Деление матрицы на число
+            </summary>
+            <param name="matrix">Матрица</param>
+            <param name="value">Делитель</param>
+            <returns>Матрица</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Equality(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на равенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Inequality(d1den.MathLibrary.Matrix,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на неравенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
         <member name="T:d1den.MathLibrary.Point3D">
             <summary>
             Точка в 3-д пространстве
