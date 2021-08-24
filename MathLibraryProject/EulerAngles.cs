@@ -78,5 +78,10 @@ namespace d1den.MathLibrary
         {
             _angleUnits = angleUnits;
         }
+
+        public double[] ToArray()
+        {
+            return new double[] { _alpha, _betta, _gamma };
+        }
     }
 }
