@@ -21,7 +21,7 @@ namespace d1den.MathLibrary
     }
 
     /// <summary>
-    /// Углый Эйлера 
+    /// Углы Эйлера 
     /// </summary>
     [Serializable]
     public readonly struct EulerAngles
@@ -46,9 +46,17 @@ namespace d1den.MathLibrary
         /// </summary>
         public double Gamma { get { return _gamma; } }
 
+        /// <summary>
+        /// Единицы измерения углов
+        /// </summary>
         public AngleUnits AngleUnits { get { return _angleUnits; } }
 
-
+        /// <summary>
+        /// Объект углов Эйлера, измеряемыми в ГРАДУСАХ
+        /// </summary>
+        /// <param name="alpha">Угол прецессии</param>
+        /// <param name="betta">Угол нутации</param>
+        /// <param name="gamma">Угол собственного вращения</param>
         public EulerAngles(double alpha, double betta, double gamma)
         {
             _alpha = alpha;
@@ -57,13 +65,23 @@ namespace d1den.MathLibrary
             _angleUnits = AngleUnits.Degrees;
         }
 
-
+        /// <summary>
+        /// Объект углов Эйлера с настройкой единиц измерения углов
+        /// </summary>
+        /// <param name="alpha">Угол прецессии</param>
+        /// <param name="betta">Угол нутации</param>
+        /// <param name="gamma">Угол собственного вращения</param>
+        /// <param name="angleUnits">Единицы измерения угла</param>
         public EulerAngles(double alpha, double betta, double gamma, AngleUnits angleUnits) : this(alpha, betta, gamma)
         { 
             _angleUnits = angleUnits;
         }
 
-
+        /// <summary>
+        /// Объект углов Эйлера из массива значений углов в ГРАДУСАХ
+        /// </summary>
+        /// <param name="eulerAnglesArray">Массив значений углов</param>
+        /// <exception cref="ArgumentException">Если длина массива значений != 3</exception>
         public EulerAngles(double[] eulerAnglesArray)
         {
             if (eulerAnglesArray.Length != 3)
@@ -78,16 +96,31 @@ namespace d1den.MathLibrary
             _angleUnits = AngleUnits.Degrees;
         }
 
+        /// <summary>
+        /// Объект углов Эйлера из массива значений углов
+        /// </summary>
+        /// <param name="eulerAnglesArray">Массив значений углов</param>
+        /// <param name="angleUnits">Единицы измерения угла</param>
         public EulerAngles(double[] eulerAnglesArray, AngleUnits angleUnits) : this(eulerAnglesArray)
         {
             _angleUnits = angleUnits;
         }
 
+        /// <summary>
+        /// Поместить углы Эйлера в массив
+        /// </summary>
+        /// <returns>Массив углов Эйлера</returns>
         public double[] ToArray()
         {
             return new double[] { _alpha, _betta, _gamma };
         }
 
+        /// <summary>
+        /// Преобразовать матрицу поворота в углы Эйлера вращением ZXZ
+        /// </summary>
+        /// <param name="rotationMatrix">Матрица поворота 3x3</param>
+        /// <exception cref="ArgumentException">Если матрица поворота имеет неверные размеры</exception>
+        /// <returns>Углы Эйлера в радианах</returns>
         public static EulerAngles GetEulersZXZFromRotation(Matrix rotationMatrix)
         {
             if (rotationMatrix.RowCount != 3 && rotationMatrix.ColumnCount != 3)
@@ -120,8 +153,12 @@ namespace d1den.MathLibrary
             }
         }
 
-
-
+        /// <summary>
+        /// Преобразовать матрицу поворота в углы Эйлера вращением XYZ
+        /// </summary>
+        /// <param name="rotationMatrix">Матрица поворота 3x3</param>
+        /// <exception cref="ArgumentException">Если матрица поворота имеет неверные размеры</exception>
+        /// <returns>Углы Эйлера в радианах</returns>
         public static EulerAngles GetEulersXYZFromRotation(Matrix rotationMatrix)
         {
             if (rotationMatrix.RowCount != 3 && rotationMatrix.ColumnCount != 3)
@@ -154,6 +191,10 @@ namespace d1den.MathLibrary
             }
         }
 
+        /// <summary>
+        /// Преобразовать углы Эйлера вращения ZXZ к матрице поворота
+        /// </summary>
+        /// <returns>Матрица поворота 3x3</returns>
         public Matrix GetRotationFromZXZ()
         {
             EulerAngles eulers = this;
@@ -178,8 +219,10 @@ namespace d1den.MathLibrary
             });
         }
 
-
-
+        /// <summary>
+        /// Преобразовать углы Эйлера вращения XYZ к матрице поворота
+        /// </summary>
+        /// <returns>Матрица поворота 3x3</returns>
         public Matrix GetRotationFromXYZ()
         {
             EulerAngles eulers = this;
@@ -204,6 +247,10 @@ namespace d1den.MathLibrary
             });
         }
 
+        /// <summary>
+        /// Преобразовать значения углов в радианы
+        /// </summary>
+        /// <returns>Углы Эйлера в радианах</returns>
         public EulerAngles ConvertToRadians()
         {
             if (_angleUnits == AngleUnits.Degrees)
@@ -215,7 +262,10 @@ namespace d1den.MathLibrary
                 return this;
         }
 
-
+        /// <summary>
+        /// Преобразовать углы Эйлера в градусы
+        /// </summary>
+        /// <returns>Углы Эйлера в градусах</returns>
         public EulerAngles ConvertToDegrees()
         {
             if (_angleUnits == AngleUnits.Radians)
@@ -226,11 +276,20 @@ namespace d1den.MathLibrary
                 return this;
         }
 
+        /// <summary>
+        /// Преобразовать объект к строке
+        /// </summary>
+        /// <returns>Строка углов Эйлера</returns>
         public override string ToString()
         {
             return string.Format("A={0:F2}, B={1:F2}, G={2:F2}", _alpha, _betta, _gamma);
         }
 
+        /// <summary>
+        /// Преобразовать объект к строке в заданных единицах измерения
+        /// </summary>
+        /// <param name="angleUnits">Единицы измерения углов</param>
+        /// <returns>Строка углов Эйлера</returns>
         public string ToString(AngleUnits angleUnits)
         {
             if (angleUnits == _angleUnits)
