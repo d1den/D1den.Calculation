@@ -444,7 +444,7 @@ namespace d1den.MathLibrary
         }
         
         /// <summary>
-        /// Метод сравнениния массивов по значениям
+        /// Метод сравнениния матриц по значениям
         /// </summary>
         /// <param name="obj">Упакованная матрица</param>
         /// <returns>Результат сравнения</returns>
@@ -457,7 +457,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Метод сравнениния массивов по значениям
+        /// Метод сравнениния матриц по значениям
         /// </summary>
         /// <param name="other">Матрица</param>
         /// <returns>Результат сравнения</returns>

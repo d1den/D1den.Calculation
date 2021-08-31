@@ -41,6 +41,41 @@
             <param name="radianAngle">Угол в радианах</param>
             <returns>Градусы</returns>
         </member>
+        <member name="T:d1den.MathLibrary.AngleUnits">
+            <summary>
+            Единицы измерения углов
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.AngleUnits.Radians">
+            <summary>
+            Радианы
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.AngleUnits.Degrees">
+            <summary>
+            Градусы
+            </summary>
+        </member>
+        <member name="T:d1den.MathLibrary.EulerAngles">
+            <summary>
+            Углый Эйлера 
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Alpha">
+            <summary>
+            Угол прецессии
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Betta">
+            <summary>
+            Угол нутации
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Gamma">
+            <summary>
+            Угол собственного вращения
+            </summary>
+        </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
             Матрица желаемой размерности
@@ -236,14 +271,14 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Equals(System.Object)">
             <summary>
-            Метод сравнениния массивов по значениям
+            Метод сравнениния матриц по значениям
             </summary>
             <param name="obj">Упакованная матрица</param>
             <returns>Результат сравнения</returns>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Equals(d1den.MathLibrary.Matrix)">
             <summary>
-            Метод сравнениния массивов по значениям
+            Метод сравнениния матриц по значениям
             </summary>
             <param name="other">Матрица</param>
             <returns>Результат сравнения</returns>
@@ -422,6 +457,26 @@
             </summary>
             <returns>Строка точки</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Point3D.Equals(System.Object)">
+            <summary>
+            Сравнение точек в виде объектов
+            </summary>
+            <param name="obj">Упакованный объект точки</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.Equals(d1den.MathLibrary.Point3D)">
+            <summary>
+            Сравнение точек
+            </summary>
+            <param name="other">Точка для сравнения</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Point3D.op_Implicit(System.Double[])~d1den.MathLibrary.Point3D">
             <summary>
             Преобразовать массив координат к точке
@@ -433,6 +488,22 @@
             Преобразовать точку к массиву координат
             </summary>
             <param name="point">Точка</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Equality(d1den.MathLibrary.Point3D,d1den.MathLibrary.Point3D)">
+            <summary>
+            Проверка на равенство точек
+            </summary>
+            <param name="point1">Точка 1</param>
+            <param name="point2">Точка 2</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Inequality(d1den.MathLibrary.Point3D,d1den.MathLibrary.Point3D)">
+            <summary>
+            Проверка на неравенство точек
+            </summary>
+            <param name="point1">Точка 1</param>
+            <param name="point2">Точка 2</param>
+            <returns>Результат сравнения</returns>
         </member>
     </members>
 </doc>
