@@ -21,6 +21,26 @@ namespace d1den.MathLibrary
     }
 
     /// <summary>
+    /// Порядок осей поворота
+    /// </summary>
+    [Serializable]
+    public enum RotationAxisOrder
+    {
+        /// <summary>
+        /// Поворот по осям XYZ. Углы Тейта-Брайна
+        /// </summary>
+        XYZ = 0,
+        /// <summary>
+        /// Поворот по осям ZXZ
+        /// </summary>
+        ZXZ = 1,
+        /// <summary>
+        /// Поворот по осям ZYZ
+        /// </summary>
+        ZYZ = 2
+    }
+
+    /// <summary>
     /// Углы Эйлера 
     /// </summary>
     [Serializable]
@@ -30,6 +50,7 @@ namespace d1den.MathLibrary
         private readonly double _betta;
         private readonly double _gamma;
         private readonly AngleUnits _angleUnits;
+        private readonly RotationAxisOrder _rotationAxisOrder;
 
         /// <summary>
         /// Угол прецессии
@@ -50,6 +71,11 @@ namespace d1den.MathLibrary
         /// Единицы измерения углов
         /// </summary>
         public AngleUnits AngleUnits { get { return _angleUnits; } }
+        
+        /// <summary>
+        /// Порядок осей поворота данных углов
+        /// </summary>
+        public RotationAxisOrder RotationAxisOrder { get { return _rotationAxisOrder; } }
 
         /// <summary>
         /// Объект углов Эйлера, измеряемыми в ГРАДУСАХ
@@ -63,6 +89,7 @@ namespace d1den.MathLibrary
             _betta = betta;
             _gamma = gamma;
             _angleUnits = AngleUnits.Degrees;
+            _rotationAxisOrder = RotationAxisOrder.XYZ;
         }
 
         /// <summary>
@@ -72,9 +99,10 @@ namespace d1den.MathLibrary
         /// <param name="betta">Угол нутации</param>
         /// <param name="gamma">Угол собственного вращения</param>
         /// <param name="angleUnits">Единицы измерения угла</param>
-        public EulerAngles(double alpha, double betta, double gamma, AngleUnits angleUnits) : this(alpha, betta, gamma)
+        public EulerAngles(double alpha, double betta, double gamma, AngleUnits angleUnits, RotationAxisOrder rotationAxisOrder) : this(alpha, betta, gamma)
         { 
             _angleUnits = angleUnits;
+            _rotationAxisOrder = rotationAxisOrder;
         }
 
         /// <summary>
@@ -94,6 +122,7 @@ namespace d1den.MathLibrary
             _betta = eulerAnglesArray[1];
             _gamma = eulerAnglesArray[2];
             _angleUnits = AngleUnits.Degrees;
+            _rotationAxisOrder = RotationAxisOrder.XYZ;
         }
 
         /// <summary>
@@ -101,9 +130,10 @@ namespace d1den.MathLibrary
         /// </summary>
         /// <param name="eulerAnglesArray">Массив значений углов</param>
         /// <param name="angleUnits">Единицы измерения угла</param>
-        public EulerAngles(double[] eulerAnglesArray, AngleUnits angleUnits) : this(eulerAnglesArray)
+        public EulerAngles(double[] eulerAnglesArray, AngleUnits angleUnits, RotationAxisOrder rotationAxisOrder) : this(eulerAnglesArray)
         {
             _angleUnits = angleUnits;
+            _rotationAxisOrder = rotationAxisOrder;
         }
 
         /// <summary>
@@ -116,12 +146,22 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать матрицу поворота в углы Эйлера вращением ZXZ
+        /// Преобразовать матрицу поворота в углы Эйлера
         /// </summary>
         /// <param name="rotationMatrix">Матрица поворота 3x3</param>
+        /// <param name="rotationAxisOrder">Порядок осей поворота. Определяет тип углов Эйлера</param>
         /// <exception cref="ArgumentException">Если матрица поворота имеет неверные размеры</exception>
         /// <returns>Углы Эйлера в радианах</returns>
-        public static EulerAngles GetEulersZXZFromRotation(Matrix rotationMatrix)
+        public static EulerAngles GetEulersFromRotation(Matrix rotationMatrix, RotationAxisOrder rotationAxisOrder)
+        {
+            switch (rotationAxisOrder)
+            {
+                case RotationAxisOrder.XYZ: return GetEulersXYZ(rotationMatrix);
+                case RotationAxisOrder.ZXZ: return GetEulersZXZ(rotationMatrix);
+                default: return GetEulersXYZ(rotationMatrix);
+            }
+        }
+        private static EulerAngles GetEulersZXZ(Matrix rotationMatrix)
         {
             if (rotationMatrix.RowCount != 3 && rotationMatrix.ColumnCount != 3)
             {
@@ -135,31 +175,24 @@ namespace d1den.MathLibrary
                 double betta = 0;
                 double gamma = 0;
                 double alpha = Math.Atan2(rotationMatrix[1, 0], rotationMatrix[0, 0]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.ZXZ);
             }
             else if(rotationMatrix[2, 2] == -1.0)
             {
                 double betta = Math.PI;
                 double gamma = 0;
                 double alpha = Math.Atan2(rotationMatrix[1, 0], rotationMatrix[0, 0]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.ZXZ);
             }
             else
             {
                 double betta = Math.Atan2(Math.Sqrt(1.0 - Math.Pow(rotationMatrix[2, 2], 2.0)), rotationMatrix[2, 2]);
                 double gamma = Math.Atan2(rotationMatrix[2, 0], rotationMatrix[2, 1]);
                 double alpha = Math.Atan2(rotationMatrix[0, 2], -rotationMatrix[1, 2]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.ZXZ);
             }
         }
-
-        /// <summary>
-        /// Преобразовать матрицу поворота в углы Эйлера вращением XYZ
-        /// </summary>
-        /// <param name="rotationMatrix">Матрица поворота 3x3</param>
-        /// <exception cref="ArgumentException">Если матрица поворота имеет неверные размеры</exception>
-        /// <returns>Углы Эйлера в радианах</returns>
-        public static EulerAngles GetEulersXYZFromRotation(Matrix rotationMatrix)
+        private static EulerAngles GetEulersXYZ(Matrix rotationMatrix)
         {
             if (rotationMatrix.RowCount != 3 && rotationMatrix.ColumnCount != 3)
             {
@@ -173,29 +206,40 @@ namespace d1den.MathLibrary
                 double betta = Math.PI / 2.0;
                 double gamma = 0;
                 double alpha = Math.Atan2(rotationMatrix[1, 0], rotationMatrix[1, 1]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.XYZ);
             }
             else if (rotationMatrix[0, 2] == -1.0)
             {
                 double betta = -Math.PI / 2.0;
                 double gamma = 0;
                 double alpha = Math.Atan2(-rotationMatrix[1, 0], rotationMatrix[1, 1]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.XYZ);
             }
             else
             {
                 double betta = Math.Atan2(rotationMatrix[0, 2], Math.Sqrt(1.0 - Math.Pow(rotationMatrix[0, 2], 2.0)));
                 double alpha = Math.Atan2(-rotationMatrix[1, 2], rotationMatrix[2, 2]);
                 double gamma = Math.Atan2(-rotationMatrix[0, 1], rotationMatrix[0, 0]);
-                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians);
+                return new EulerAngles(alpha, betta, gamma, AngleUnits.Radians, RotationAxisOrder.XYZ);
             }
         }
 
+
         /// <summary>
-        /// Преобразовать углы Эйлера вращения ZXZ к матрице поворота
+        /// Преобразовать углы Эйлера к матрице поворота
         /// </summary>
         /// <returns>Матрица поворота 3x3</returns>
-        public Matrix GetRotationFromZXZ()
+        public Matrix GetRotationMatrix()
+        {
+            switch (_rotationAxisOrder)
+            {
+                case RotationAxisOrder.XYZ: return GetRotationFromXYZ();
+                case RotationAxisOrder.ZXZ: return GetRotationFromZXZ();
+                default: return GetRotationFromXYZ();
+            }
+        }
+
+        private Matrix GetRotationFromZXZ()
         {
             EulerAngles eulers = this;
             if (_angleUnits == AngleUnits.Degrees)
@@ -219,11 +263,7 @@ namespace d1den.MathLibrary
             });
         }
 
-        /// <summary>
-        /// Преобразовать углы Эйлера вращения XYZ к матрице поворота
-        /// </summary>
-        /// <returns>Матрица поворота 3x3</returns>
-        public Matrix GetRotationFromXYZ()
+        private Matrix GetRotationFromXYZ()
         {
             EulerAngles eulers = this;
             if (_angleUnits == AngleUnits.Degrees)
@@ -257,7 +297,8 @@ namespace d1den.MathLibrary
                 return new EulerAngles(AdvancedMath.DegreeToRadian(_alpha),
                     AdvancedMath.DegreeToRadian(_betta),
                     AdvancedMath.DegreeToRadian(_gamma),
-                    AngleUnits.Radians);
+                    AngleUnits.Radians,
+                    _rotationAxisOrder);
             else
                 return this;
         }
@@ -271,7 +312,9 @@ namespace d1den.MathLibrary
             if (_angleUnits == AngleUnits.Radians)
                 return new EulerAngles(AdvancedMath.RadianToDegree(_alpha),
                     AdvancedMath.RadianToDegree(_betta),
-                    AdvancedMath.RadianToDegree(_gamma));
+                    AdvancedMath.RadianToDegree(_gamma),
+                    AngleUnits.Degrees,
+                    _rotationAxisOrder);
             else
                 return this;
         }
@@ -282,7 +325,7 @@ namespace d1den.MathLibrary
         /// <returns>Строка углов Эйлера</returns>
         public override string ToString()
         {
-            return string.Format("A={0:F2}, B={1:F2}, G={2:F2}", _alpha, _betta, _gamma);
+            return string.Format("{0}:{1:F2}; {2:F2}; {3:F2}", _rotationAxisOrder, _alpha, _betta, _gamma);
         }
 
         /// <summary>

@@ -11,13 +11,16 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
+
             Matrix r = new[,]
             {
                 {-0.6829, -0.0085, 0.7305 },
                 {0.4174, -0.8252, 0.3806 },
                 {0.5996, 0.5648, 0.5870 }
             };
-            var eulers = EulerAngles.GetEulersXYZFromRotation(r).ConvertToDegrees();
+            var eulers = EulerAngles.GetEulersFromRotation(r, RotationAxisOrder.XYZ);
+            var newR = eulers.GetRotationMatrix();
+            var newEulers = EulerAngles.GetEulersFromRotation(newR, RotationAxisOrder.XYZ);
         }
     }
 }

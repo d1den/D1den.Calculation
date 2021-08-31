@@ -56,9 +56,29 @@
             Градусы
             </summary>
         </member>
+        <member name="T:d1den.MathLibrary.RotationAxisOrder">
+            <summary>
+            Порядок осей поворота
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.XYZ">
+            <summary>
+            Поворот по осям XYZ. Углы Тейта-Брайна
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.ZXZ">
+            <summary>
+            Поворот по осям ZXZ
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.ZYZ">
+            <summary>
+            Поворот по осям ZYZ
+            </summary>
+        </member>
         <member name="T:d1den.MathLibrary.EulerAngles">
             <summary>
-            Углый Эйлера 
+            Углы Эйлера 
             </summary>
         </member>
         <member name="P:d1den.MathLibrary.EulerAngles.Alpha">
@@ -75,6 +95,93 @@
             <summary>
             Угол собственного вращения
             </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.AngleUnits">
+            <summary>
+            Единицы измерения углов
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.RotationAxisOrder">
+            <summary>
+            Порядок осей поворота данных углов
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Объект углов Эйлера, измеряемыми в ГРАДУСАХ
+            </summary>
+            <param name="alpha">Угол прецессии</param>
+            <param name="betta">Угол нутации</param>
+            <param name="gamma">Угол собственного вращения</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double,System.Double,System.Double,d1den.MathLibrary.AngleUnits,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Объект углов Эйлера с настройкой единиц измерения углов
+            </summary>
+            <param name="alpha">Угол прецессии</param>
+            <param name="betta">Угол нутации</param>
+            <param name="gamma">Угол собственного вращения</param>
+            <param name="angleUnits">Единицы измерения угла</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double[])">
+            <summary>
+            Объект углов Эйлера из массива значений углов в ГРАДУСАХ
+            </summary>
+            <param name="eulerAnglesArray">Массив значений углов</param>
+            <exception cref="T:System.ArgumentException">Если длина массива значений != 3</exception>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double[],d1den.MathLibrary.AngleUnits,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Объект углов Эйлера из массива значений углов
+            </summary>
+            <param name="eulerAnglesArray">Массив значений углов</param>
+            <param name="angleUnits">Единицы измерения угла</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToArray">
+            <summary>
+            Поместить углы Эйлера в массив
+            </summary>
+            <returns>Массив углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetEulersFromRotation(d1den.MathLibrary.Matrix,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Преобразовать матрицу поворота в углы Эйлера
+            </summary>
+            <param name="rotationMatrix">Матрица поворота 3x3</param>
+            <param name="rotationAxisOrder">Порядок осей поворота. Определяет тип углов Эйлера</param>
+            <exception cref="T:System.ArgumentException">Если матрица поворота имеет неверные размеры</exception>
+            <returns>Углы Эйлера в радианах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetRotationMatrix">
+            <summary>
+            Преобразовать углы Эйлера к матрице поворота
+            </summary>
+            <returns>Матрица поворота 3x3</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ConvertToRadians">
+            <summary>
+            Преобразовать значения углов в радианы
+            </summary>
+            <returns>Углы Эйлера в радианах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ConvertToDegrees">
+            <summary>
+            Преобразовать углы Эйлера в градусы
+            </summary>
+            <returns>Углы Эйлера в градусах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToString">
+            <summary>
+            Преобразовать объект к строке
+            </summary>
+            <returns>Строка углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToString(d1den.MathLibrary.AngleUnits)">
+            <summary>
+            Преобразовать объект к строке в заданных единицах измерения
+            </summary>
+            <param name="angleUnits">Единицы измерения углов</param>
+            <returns>Строка углов Эйлера</returns>
         </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
