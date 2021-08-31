@@ -5,6 +5,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Точка в 3-д пространстве
     /// </summary>
+    [Serializable]
     public readonly struct Point3D : IEquatable<Point3D>
     {
         #region Поля и свойства

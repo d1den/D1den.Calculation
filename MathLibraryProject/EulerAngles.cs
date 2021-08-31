@@ -7,6 +7,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Единицы измерения углов
     /// </summary>
+    [Serializable]
     public enum AngleUnits
     {
         /// <summary>
@@ -22,6 +23,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Углый Эйлера 
     /// </summary>
+    [Serializable]
     public readonly struct EulerAngles
     {
         private readonly double _alpha;

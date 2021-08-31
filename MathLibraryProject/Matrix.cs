@@ -7,6 +7,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Матрица желаемой размерности
     /// </summary>
+    [Serializable]
     public readonly struct Matrix : IEquatable<Matrix>
     {
         #region Поля и свойства
