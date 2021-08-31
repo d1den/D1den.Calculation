@@ -283,6 +283,12 @@
             <param name="other">Матрица</param>
             <returns>Результат сравнения</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
             Преобразовать двумерный массив в матрице

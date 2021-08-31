@@ -116,7 +116,7 @@ namespace d1den.MathLibrary
             double result = _x * 1000.0 + _y * 100 + _z * 10;
             if (result > int.MaxValue)
                 result /= 1.0E+9;
-            else if(result < 0.0)
+            else if (result > -1.0 && result < 1.0)
                 result *= 1.0E+9;
             return (int)Math.Round(result);
         }

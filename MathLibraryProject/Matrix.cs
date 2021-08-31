@@ -450,8 +450,10 @@ namespace d1den.MathLibrary
         /// <returns>Результат сравнения</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Matrix)
-                return Equals((Matrix)obj);
+            if (obj == null)
+                return false;
+            else if (obj is Matrix matrix2)
+                return Equals(matrix2);
             else
                 return false;
         }
@@ -474,6 +476,29 @@ namespace d1den.MathLibrary
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Алгоритм создания хэш-кода
+        /// </summary>
+        /// <returns>Хэш-код</returns>
+        public override int GetHashCode()
+        {
+            int countElements = _matrixData.Length;
+            double result = 0;
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    result += _matrixData[i, j] * Math.Pow(10.0, countElements--);
+                }
+            }
+            result /= Math.Pow(10.0, _matrixData.Length);
+            if (result > int.MaxValue)
+                result /= 1.0E+9;
+            else if(result > -1.0 && result < 1.0)
+                result *= 1.0E+9;
+            return (int)Math.Round(result);
         }
         #endregion
 
