@@ -7,6 +7,9 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Матрица желаемой размерности
     /// </summary>
+    /// <remarks>
+    /// Матрица произвольного размера, над которой можно производить различные математические операции. 
+    /// НЕ использовать пустой конструктор.</remarks>
     [Serializable]
     public readonly struct Matrix : IEquatable<Matrix>
     {
@@ -94,7 +97,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Объект квадратной матрицы
+        /// Объект квадратной матрицы со значением по диагонали
         /// </summary>
         /// <param name="dimension">Размерность квадратной матрицы</param>
         /// <param name="diagonalValue">Значение по главной диагонали</param>
@@ -301,7 +304,7 @@ namespace d1den.MathLibrary
             if (RowCount != ColumnCount)
             {
                 var ex = new ArgumentException("Matrix isn`t square");
-                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
                     this.RowCount, this.ColumnCount));
                 throw ex;
             }
@@ -332,7 +335,7 @@ namespace d1den.MathLibrary
             if ((RowCount != ColumnCount) || _matrixData.Length == 1)
             {
                 var ex = new ArgumentException("This minor does not exist");
-                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
                     this.RowCount, this.ColumnCount));
                 throw ex;
             }
@@ -362,13 +365,13 @@ namespace d1den.MathLibrary
             if (RowCount != ColumnCount)
             {
                 var ex = new ArgumentException("Matrix isn`t square");
-                ex.Data.Add("Matrixe size", string.Format("Matrix: ({0},{1})",
+                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
                     this.RowCount, this.ColumnCount));
                 throw ex;
             }
             var algebraiсСomplements = new double[RowCount, ColumnCount];
-            //if (_matrixData.Length == 1)
-            //    return this;
+            if (_matrixData.Length == 1)
+                return this / GetDeterminant();
             for (int i = 0; i < RowCount; i++)
             {
                 for (int j = 0; j < ColumnCount; j++)
