@@ -60,6 +60,11 @@
             <summary>
             Порядок осей поворота
             </summary>
+            <remarks>Тип углов Эйлера напрямую зависит от порядка осей поворота,
+            так как итоговая матрица поворота получается
+            за счёт последовательного перемножения матриц поворота вокруг каждой оси.
+            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            </remarks>
         </member>
         <member name="F:d1den.MathLibrary.RotationAxisOrder.XYZ">
             <summary>
@@ -80,6 +85,13 @@
             <summary>
             Углы Эйлера 
             </summary>
+            <remarks>
+            Определяет для использования углы Эйлера, которые можно задавать как в ручную, 
+            так и из матрицы поворота твёрдого тела.
+            Углы Эйлера описывают ориентацию твёрдого тела в пространстве наиболее понятным человеку образом, так как 
+            имеют всего три угла. 
+            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            </remarks>
         </member>
         <member name="P:d1den.MathLibrary.EulerAngles.Alpha">
             <summary>
@@ -103,12 +115,12 @@
         </member>
         <member name="P:d1den.MathLibrary.EulerAngles.RotationAxisOrder">
             <summary>
-            Порядок осей поворота данных углов
+            Порядок осей поворота
             </summary>
         </member>
         <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
             <summary>
-            Объект углов Эйлера, измеряемыми в ГРАДУСАХ
+            Объект углов Эйлера в ГРАДУСАХ
             </summary>
             <param name="alpha">Угол прецессии</param>
             <param name="betta">Угол нутации</param>
@@ -122,6 +134,7 @@
             <param name="betta">Угол нутации</param>
             <param name="gamma">Угол собственного вращения</param>
             <param name="angleUnits">Единицы измерения угла</param>
+            <param name="rotationAxisOrder">Порядок осей поворота</param>
         </member>
         <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double[])">
             <summary>
@@ -136,6 +149,7 @@
             </summary>
             <param name="eulerAnglesArray">Массив значений углов</param>
             <param name="angleUnits">Единицы измерения угла</param>
+            <param name="rotationAxisOrder">Порядок осей поворота</param>
         </member>
         <member name="M:d1den.MathLibrary.EulerAngles.ToArray">
             <summary>
@@ -182,6 +196,26 @@
             </summary>
             <param name="angleUnits">Единицы измерения углов</param>
             <returns>Строка углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.Equals(System.Object)">
+            <summary>
+            Сравнение углов Эйлера в упаковке
+            </summary>
+            <param name="obj">Сравниваемый объект</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.Equals(d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Сравнение углов Эйлера
+            </summary>
+            <param name="other">Другой объект углов Эйлера</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
         </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
