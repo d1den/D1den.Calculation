@@ -11,8 +11,13 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            EulerAngles euler1 = new EulerAngles(123, -45.23, 123);
-            double[] angles = (double[])euler1;
+            Matrix matrix1 = new[,]
+            {
+                {1, 2 },
+                {3, 4 }
+            };
+            double[,] array = matrix1.MatrixData;
+            array[0, 0] = 5;
         }
     }
 }

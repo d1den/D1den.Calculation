@@ -19,7 +19,7 @@ namespace d1den.MathLibrary
         /// <summary>
         /// Массив значений матрицы
         /// </summary>
-        public double[,] MatrixData { get { return _matrixData; } }
+        public double[,] MatrixData { get { return (double[,])_matrixData.Clone(); } }
 
         /// <summary>
         /// Массив приведённых к Int32 значений матрицы
