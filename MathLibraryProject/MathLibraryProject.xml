@@ -41,6 +41,204 @@
             <param name="radianAngle">Угол в радианах</param>
             <returns>Градусы</returns>
         </member>
+        <member name="T:d1den.MathLibrary.AngleUnits">
+            <summary>
+            Единицы измерения углов
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.AngleUnits.Radians">
+            <summary>
+            Радианы
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.AngleUnits.Degrees">
+            <summary>
+            Градусы
+            </summary>
+        </member>
+        <member name="T:d1den.MathLibrary.RotationAxisOrder">
+            <summary>
+            Порядок осей поворота
+            </summary>
+            <remarks>Тип углов Эйлера напрямую зависит от порядка осей поворота,
+            так как итоговая матрица поворота получается
+            за счёт последовательного перемножения матриц поворота вокруг каждой оси.
+            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            </remarks>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.XYZ">
+            <summary>
+            Поворот по осям XYZ. Углы Тейта-Брайна
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.ZXZ">
+            <summary>
+            Поворот по осям ZXZ
+            </summary>
+        </member>
+        <member name="F:d1den.MathLibrary.RotationAxisOrder.ZYZ">
+            <summary>
+            Поворот по осям ZYZ
+            </summary>
+        </member>
+        <member name="T:d1den.MathLibrary.EulerAngles">
+            <summary>
+            Углы Эйлера 
+            </summary>
+            <remarks>
+            Определяет для использования углы Эйлера, которые можно задавать как в ручную, 
+            так и из матрицы поворота твёрдого тела.
+            Углы Эйлера описывают ориентацию твёрдого тела в пространстве наиболее понятным человеку образом, так как 
+            имеют всего три угла. 
+            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            </remarks>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Alpha">
+            <summary>
+            Угол прецессии
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Betta">
+            <summary>
+            Угол нутации
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.Gamma">
+            <summary>
+            Угол собственного вращения
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.AngleUnits">
+            <summary>
+            Единицы измерения углов
+            </summary>
+        </member>
+        <member name="P:d1den.MathLibrary.EulerAngles.RotationAxisOrder">
+            <summary>
+            Порядок осей поворота
+            </summary>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Объект углов Эйлера в ГРАДУСАХ
+            </summary>
+            <param name="alpha">Угол прецессии</param>
+            <param name="betta">Угол нутации</param>
+            <param name="gamma">Угол собственного вращения</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double,System.Double,System.Double,d1den.MathLibrary.AngleUnits,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Объект углов Эйлера с настройкой единиц измерения углов
+            </summary>
+            <param name="alpha">Угол прецессии</param>
+            <param name="betta">Угол нутации</param>
+            <param name="gamma">Угол собственного вращения</param>
+            <param name="angleUnits">Единицы измерения угла</param>
+            <param name="rotationAxisOrder">Порядок осей поворота</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double[])">
+            <summary>
+            Объект углов Эйлера из массива значений углов в ГРАДУСАХ
+            </summary>
+            <param name="eulerAnglesArray">Массив значений углов</param>
+            <exception cref="T:System.ArgumentException">Если длина массива значений != 3</exception>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.#ctor(System.Double[],d1den.MathLibrary.AngleUnits,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Объект углов Эйлера из массива значений углов
+            </summary>
+            <param name="eulerAnglesArray">Массив значений углов</param>
+            <param name="angleUnits">Единицы измерения угла</param>
+            <param name="rotationAxisOrder">Порядок осей поворота</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToArray">
+            <summary>
+            Поместить углы Эйлера в массив
+            </summary>
+            <returns>Массив углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetEulersFromRotation(d1den.MathLibrary.Matrix,d1den.MathLibrary.RotationAxisOrder)">
+            <summary>
+            Преобразовать матрицу поворота в углы Эйлера
+            </summary>
+            <param name="rotationMatrix">Матрица поворота 3x3</param>
+            <param name="rotationAxisOrder">Порядок осей поворота. Определяет тип углов Эйлера</param>
+            <exception cref="T:System.ArgumentException">Если матрица поворота имеет неверные размеры</exception>
+            <returns>Углы Эйлера в радианах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetRotationMatrix">
+            <summary>
+            Преобразовать углы Эйлера к матрице поворота
+            </summary>
+            <returns>Матрица поворота 3x3</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ConvertToRadians">
+            <summary>
+            Преобразовать значения углов в радианы
+            </summary>
+            <returns>Углы Эйлера в радианах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ConvertToDegrees">
+            <summary>
+            Преобразовать углы Эйлера в градусы
+            </summary>
+            <returns>Углы Эйлера в градусах</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToString">
+            <summary>
+            Преобразовать объект к строке
+            </summary>
+            <returns>Строка углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.ToString(d1den.MathLibrary.AngleUnits)">
+            <summary>
+            Преобразовать объект к строке в заданных единицах измерения
+            </summary>
+            <param name="angleUnits">Единицы измерения углов</param>
+            <returns>Строка углов Эйлера</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.Equals(System.Object)">
+            <summary>
+            Сравнение углов Эйлера в упаковке
+            </summary>
+            <param name="obj">Сравниваемый объект</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.Equals(d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Сравнение углов Эйлера
+            </summary>
+            <param name="other">Другой объект углов Эйлера</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Explicit(d1den.MathLibrary.EulerAngles)~System.Double[]">
+            <summary>
+            Преобразовать углы Эйлера в массив
+            </summary>
+            <param name="eulerAngles">Массив double</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Equality(d1den.MathLibrary.EulerAngles,d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Проверка на равенство углов Эйлера
+            </summary>
+            <param name="eulers1">Углы Эйлера 1</param>
+            <param name="eulers2">Углы Эйлера 2</param>
+            <returns>Результат проверки</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Inequality(d1den.MathLibrary.EulerAngles,d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Проверка на неравенство углов Эйлера
+            </summary>
+            <param name="eulers1">Углы Эйлера 1</param>
+            <param name="eulers2">Углы Эйлера 2</param>
+            <returns>Результат проверки</returns>
+        </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
             Матрица желаемой размерности
@@ -236,39 +434,45 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Equals(System.Object)">
             <summary>
-            Метод сравнениния массивов по значениям
+            Метод сравнениния матриц по значениям
             </summary>
             <param name="obj">Упакованная матрица</param>
             <returns>Результат сравнения</returns>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.Equals(d1den.MathLibrary.Matrix)">
             <summary>
-            Метод сравнениния массивов по значениям
+            Метод сравнениния матриц по значениям
             </summary>
             <param name="other">Матрица</param>
             <returns>Результат сравнения</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрице
+            Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив double</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрице
+            Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив int</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрице
+            Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив double</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрице
+            Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив int</param>
         </member>
@@ -422,6 +626,26 @@
             </summary>
             <returns>Строка точки</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Point3D.Equals(System.Object)">
+            <summary>
+            Сравнение точек в виде объектов
+            </summary>
+            <param name="obj">Упакованный объект точки</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.Equals(d1den.MathLibrary.Point3D)">
+            <summary>
+            Сравнение точек
+            </summary>
+            <param name="other">Точка для сравнения</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.GetHashCode">
+            <summary>
+            Алгоритм создания хэш-кода
+            </summary>
+            <returns>Хэш-код</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Point3D.op_Implicit(System.Double[])~d1den.MathLibrary.Point3D">
             <summary>
             Преобразовать массив координат к точке
@@ -433,6 +657,22 @@
             Преобразовать точку к массиву координат
             </summary>
             <param name="point">Точка</param>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Equality(d1den.MathLibrary.Point3D,d1den.MathLibrary.Point3D)">
+            <summary>
+            Проверка на равенство точек
+            </summary>
+            <param name="point1">Точка 1</param>
+            <param name="point2">Точка 2</param>
+            <returns>Результат сравнения</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Point3D.op_Inequality(d1den.MathLibrary.Point3D,d1den.MathLibrary.Point3D)">
+            <summary>
+            Проверка на неравенство точек
+            </summary>
+            <param name="point1">Точка 1</param>
+            <param name="point2">Точка 2</param>
+            <returns>Результат сравнения</returns>
         </member>
     </members>
 </doc>

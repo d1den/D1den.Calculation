@@ -5,7 +5,8 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Точка в 3-д пространстве
     /// </summary>
-    public readonly struct Point3D
+    [Serializable]
+    public readonly struct Point3D : IEquatable<Point3D>
     {
         #region Поля и свойства
         private readonly double _x, _y, _z;
@@ -32,6 +33,7 @@ namespace d1den.MathLibrary
             _y = y;
             _z = z;
         }
+
         /// <summary>
         /// Создание точки по массиву её координат
         /// </summary>
@@ -58,6 +60,7 @@ namespace d1den.MathLibrary
         {
             return new double[] { _x, _y, _z };
         }
+
         /// <summary>
         /// Получить расстрояние до другой точки
         /// </summary>
@@ -67,6 +70,7 @@ namespace d1den.MathLibrary
         {
             return Math.Sqrt(Math.Pow(point.X - X, 2.0) + Math.Pow(point.Y - Y, 2.0) + Math.Pow(point.Z - Z, 2.0));
         }
+
         /// <summary>
         /// Получить строковое представление точки
         /// </summary>
@@ -74,6 +78,48 @@ namespace d1den.MathLibrary
         public override string ToString()
         {
             return string.Format("{0:F2}; {1:F2}; {2:F2}", _x, _y, _z);
+        }
+
+        /// <summary>
+        /// Сравнение точек в виде объектов
+        /// </summary>
+        /// <param name="obj">Упакованный объект точки</param>
+        /// <returns>Результат сравнения</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (obj is Point3D point2)
+                return Equals(point2);
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Сравнение точек
+        /// </summary>
+        /// <param name="other">Точка для сравнения</param>
+        /// <returns>Результат сравнения</returns>
+        public bool Equals(Point3D other)
+        {
+            if (other._x == this._x && other._y == this._y && other._z == this._z)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Алгоритм создания хэш-кода
+        /// </summary>
+        /// <returns>Хэш-код</returns>
+        public override int GetHashCode()
+        {
+            double result = _x * 1000.0 + _y * 100 + _z * 10;
+            if (result > int.MaxValue)
+                result /= 1.0E+9;
+            else if (result > -1.0 && result < 1.0)
+                result *= 1.0E+9;
+            return (int)Math.Round(result);
         }
         #endregion
 
@@ -86,6 +132,7 @@ namespace d1den.MathLibrary
         {
             return new Point3D(pointArray);
         }
+
         /// <summary>
         /// Преобразовать точку к массиву координат
         /// </summary>
@@ -93,6 +140,28 @@ namespace d1den.MathLibrary
         public static explicit operator double[](Point3D point)
         {
             return point.ToArray();
+        }
+
+        /// <summary>
+        /// Проверка на равенство точек
+        /// </summary>
+        /// <param name="point1">Точка 1</param>
+        /// <param name="point2">Точка 2</param>
+        /// <returns>Результат сравнения</returns>
+        public static bool operator ==(Point3D point1, Point3D point2)
+        {
+            return point1.Equals(point2);
+        }
+
+        /// <summary>
+        /// Проверка на неравенство точек
+        /// </summary>
+        /// <param name="point1">Точка 1</param>
+        /// <param name="point2">Точка 2</param>
+        /// <returns>Результат сравнения</returns>
+        public static bool operator !=(Point3D point1, Point3D point2)
+        {
+            return !point1.Equals(point2);
         }
         #endregion
     }

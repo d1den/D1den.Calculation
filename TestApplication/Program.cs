@@ -11,9 +11,8 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Matrix matrix1 = new int[] { 1, 2, 3};
-            Matrix matrix2 = new double[] { 1, 2, 3 };
-            Console.WriteLine("Matrices aren`t equal? - {0}", matrix1 != matrix2);
+            EulerAngles euler1 = new EulerAngles(123, -45.23, 123);
+            double[] angles = (double[])euler1;
         }
     }
 }

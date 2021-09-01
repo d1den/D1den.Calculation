@@ -7,6 +7,7 @@ namespace d1den.MathLibrary
     /// <summary>
     /// Матрица желаемой размерности
     /// </summary>
+    [Serializable]
     public readonly struct Matrix : IEquatable<Matrix>
     {
         #region Поля и свойства
@@ -444,20 +445,22 @@ namespace d1den.MathLibrary
         }
         
         /// <summary>
-        /// Метод сравнениния массивов по значениям
+        /// Метод сравнениния матриц по значениям
         /// </summary>
         /// <param name="obj">Упакованная матрица</param>
         /// <returns>Результат сравнения</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Matrix)
-                return Equals((Matrix)obj);
+            if (obj == null)
+                return false;
+            else if (obj is Matrix matrix2)
+                return Equals(matrix2);
             else
                 return false;
         }
 
         /// <summary>
-        /// Метод сравнениния массивов по значениям
+        /// Метод сравнениния матриц по значениям
         /// </summary>
         /// <param name="other">Матрица</param>
         /// <returns>Результат сравнения</returns>
@@ -475,11 +478,34 @@ namespace d1den.MathLibrary
             }
             return true;
         }
+
+        /// <summary>
+        /// Алгоритм создания хэш-кода
+        /// </summary>
+        /// <returns>Хэш-код</returns>
+        public override int GetHashCode()
+        {
+            int countElements = _matrixData.Length;
+            double result = 0;
+            for (int i = 0; i < RowCount; i++)
+            {
+                for (int j = 0; j < ColumnCount; j++)
+                {
+                    result += _matrixData[i, j] * Math.Pow(10.0, countElements--);
+                }
+            }
+            result /= Math.Pow(10.0, _matrixData.Length);
+            if (result > int.MaxValue)
+                result /= 1.0E+9;
+            else if(result > -1.0 && result < 1.0)
+                result *= 1.0E+9;
+            return (int)Math.Round(result);
+        }
         #endregion
 
         #region Операторы
         /// <summary>
-        /// Преобразовать двумерный массив в матрице
+        /// Преобразовать двумерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Двумерный массив double</param>
         public static implicit operator Matrix(double[,] matrixArray)
@@ -488,7 +514,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать двумерный массив в матрице
+        /// Преобразовать двумерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Двумерный массив int</param>
         public static implicit operator Matrix(int[,] matrixArray)
@@ -497,7 +523,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать одномерный массив в матрице
+        /// Преобразовать одномерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Одномерный массив double</param>
         public static implicit operator Matrix(double[] matrixArray)
@@ -511,7 +537,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать одномерный массив в матрице
+        /// Преобразовать одномерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Одномерный массив int</param>
         public static implicit operator Matrix(int[] matrixArray)
