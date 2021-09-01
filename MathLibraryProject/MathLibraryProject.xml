@@ -243,6 +243,9 @@
             <summary>
             Матрица желаемой размерности
             </summary>
+            <remarks>
+            Матрица произвольного размера, над которой можно производить различные математические операции. 
+            НЕ использовать пустой конструктор.</remarks>
         </member>
         <member name="P:d1den.MathLibrary.Matrix.MatrixData">
             <summary>
@@ -293,7 +296,7 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.#ctor(System.Int32,System.Double)">
             <summary>
-            Объект квадратной матрицы
+            Объект квадратной матрицы со значением по диагонали
             </summary>
             <param name="dimension">Размерность квадратной матрицы</param>
             <param name="diagonalValue">Значение по главной диагонали</param>
