@@ -11,6 +11,8 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
+            EulerAngles euler1 = new EulerAngles(123, -45.23, 123);
+            double[] angles = (double[])euler1;
         }
     }
 }

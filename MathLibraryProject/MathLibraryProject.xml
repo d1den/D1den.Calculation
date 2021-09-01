@@ -217,6 +217,28 @@
             </summary>
             <returns>Хэш-код</returns>
         </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Explicit(d1den.MathLibrary.EulerAngles)~System.Double[]">
+            <summary>
+            Преобразовать углы Эйлера в массив
+            </summary>
+            <param name="eulerAngles">Массив double</param>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Equality(d1den.MathLibrary.EulerAngles,d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Проверка на равенство углов Эйлера
+            </summary>
+            <param name="eulers1">Углы Эйлера 1</param>
+            <param name="eulers2">Углы Эйлера 2</param>
+            <returns>Результат проверки</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.EulerAngles.op_Inequality(d1den.MathLibrary.EulerAngles,d1den.MathLibrary.EulerAngles)">
+            <summary>
+            Проверка на неравенство углов Эйлера
+            </summary>
+            <param name="eulers1">Углы Эйлера 1</param>
+            <param name="eulers2">Углы Эйлера 2</param>
+            <returns>Результат проверки</returns>
+        </member>
         <member name="T:d1den.MathLibrary.Matrix">
             <summary>
             Матрица желаемой размерности
@@ -432,25 +454,25 @@
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрице
+            Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив double</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрице
+            Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив int</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрице
+            Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив double</param>
         </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Int32[])~d1den.MathLibrary.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрице
+            Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив int</param>
         </member>

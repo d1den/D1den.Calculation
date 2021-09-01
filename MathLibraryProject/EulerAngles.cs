@@ -434,5 +434,36 @@ namespace d1den.MathLibrary
                 result *= 1.0E+9;
             return (int)Math.Round(result);
         }
+
+        /// <summary>
+        /// Преобразовать углы Эйлера в массив
+        /// </summary>
+        /// <param name="eulerAngles">Массив double</param>
+        public static explicit operator double[](EulerAngles eulerAngles)
+        {
+            return eulerAngles.ToArray();
+        }
+
+        /// <summary>
+        /// Проверка на равенство углов Эйлера
+        /// </summary>
+        /// <param name="eulers1">Углы Эйлера 1</param>
+        /// <param name="eulers2">Углы Эйлера 2</param>
+        /// <returns>Результат проверки</returns>
+        public static bool operator ==(EulerAngles eulers1, EulerAngles eulers2)
+        {
+            return eulers1.Equals(eulers2);
+        }
+
+        /// <summary>
+        /// Проверка на неравенство углов Эйлера
+        /// </summary>
+        /// <param name="eulers1">Углы Эйлера 1</param>
+        /// <param name="eulers2">Углы Эйлера 2</param>
+        /// <returns>Результат проверки</returns>
+        public static bool operator !=(EulerAngles eulers1, EulerAngles eulers2)
+        {
+            return !eulers1.Equals(eulers2);
+        }
     }
 }

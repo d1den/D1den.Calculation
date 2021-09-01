@@ -505,7 +505,7 @@ namespace d1den.MathLibrary
 
         #region Операторы
         /// <summary>
-        /// Преобразовать двумерный массив в матрице
+        /// Преобразовать двумерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Двумерный массив double</param>
         public static implicit operator Matrix(double[,] matrixArray)
@@ -514,7 +514,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать двумерный массив в матрице
+        /// Преобразовать двумерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Двумерный массив int</param>
         public static implicit operator Matrix(int[,] matrixArray)
@@ -523,7 +523,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать одномерный массив в матрице
+        /// Преобразовать одномерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Одномерный массив double</param>
         public static implicit operator Matrix(double[] matrixArray)
@@ -537,7 +537,7 @@ namespace d1den.MathLibrary
         }
 
         /// <summary>
-        /// Преобразовать одномерный массив в матрице
+        /// Преобразовать одномерный массив в матрицу
         /// </summary>
         /// <param name="matrixArray">Одномерный массив int</param>
         public static implicit operator Matrix(int[] matrixArray)
