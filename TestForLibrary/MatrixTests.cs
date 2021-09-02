@@ -35,5 +35,17 @@ namespace TestForLibrary
                 matrix3[0,0] == 1.0 && matrix3[1, 1] == 1.0 && matrix3[0, 1] == 1 && matrix3[1, 0] == 1)
                 Assert.Pass();
         }
+
+        [Test]
+        public void GetMatrixDataTest()
+        {
+            var matrix1 = Matrix.GetEyeMatrix(2);
+            double[,] array1 = (double[,])matrix1;
+            int[,] array2 = matrix1.Int32MatrixData;
+            array1[0, 0] = 2;
+            array2[0, 0] = 2;
+            if (matrix1[0, 0] == 1)
+                Assert.Pass();
+        }
     }
 }

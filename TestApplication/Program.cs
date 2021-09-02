@@ -11,13 +11,13 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Matrix matrix1 = new[,]
+            double[,] array = new double[,]
             {
                 {1, 2 },
                 {3, 4 }
             };
-            double[,] array = matrix1.MatrixData;
-            array[0, 0] = 5;
+            Matrix matrix1 = new Matrix(array);
+            var matrix2 = matrix1.SetAllValues(2.28);
         }
     }
 }

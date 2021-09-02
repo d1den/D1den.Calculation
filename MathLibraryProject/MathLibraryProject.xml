@@ -455,6 +455,12 @@
             </summary>
             <returns>Хэш-код</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.Clone">
+            <summary>
+            Создать копию матрицы
+            </summary>
+            <returns>Копия матрицы привдённая к object</returns>
+        </member>
         <member name="M:d1den.MathLibrary.Matrix.op_Implicit(System.Double[0:,0:])~d1den.MathLibrary.Matrix">
             <summary>
             Преобразовать двумерный массив в матрицу

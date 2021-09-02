@@ -11,7 +11,7 @@ namespace d1den.MathLibrary
     /// Матрица произвольного размера, над которой можно производить различные математические операции. 
     /// НЕ использовать пустой конструктор.</remarks>
     [Serializable]
-    public readonly struct Matrix : IEquatable<Matrix>
+    public class Matrix : IEquatable<Matrix>, ICloneable
     {
         #region Поля и свойства
         private readonly double[,] _matrixData;
@@ -77,7 +77,7 @@ namespace d1den.MathLibrary
         /// <param name="matrixData">Двумерный double массив данных матрицы</param>
         public Matrix(double[,] matrixData)
         {
-            _matrixData = matrixData;
+            _matrixData = (double[,])matrixData.Clone();
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace d1den.MathLibrary
         /// <returns>Матрица</returns>
         public Matrix Negative()
         {
-            var matrixArray = _matrixData;
+            var matrixArray = MatrixData;
             ProcessActionOverData((i, j) => matrixArray[i, j] = -matrixArray[i, j]);
             return new Matrix(matrixArray);
         }
@@ -192,10 +192,10 @@ namespace d1den.MathLibrary
             {
                 var ex = new ArgumentException("Matrices can not be add, because dimensions aren`t same.");
                 ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
+                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
                 throw ex;
             }
-            var result = new double[this.RowCount, this.ColumnCount];
+            var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] + matrix2[i,j]);
@@ -229,10 +229,10 @@ namespace d1den.MathLibrary
             {
                 var ex = new ArgumentException("Matrices cannot be multiplied because the dimensions do not fit.");
                 ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
+                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
                 throw ex;
             }
-            var result = new double[this.RowCount, this.ColumnCount];
+            var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) =>
                 result[i, j] = thisMatrix[i, j] - matrix2[i, j]);
@@ -280,10 +280,10 @@ namespace d1den.MathLibrary
             {
                 var ex = new ArgumentException("Matrixes can not be multiplied, because dimensions aren`t same.");
                 ex.Data.Add("Matrixes dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    this.RowCount, this.ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
+                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
                 throw ex;
             }
-            var result = new double[this.RowCount, this.ColumnCount];
+            var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) => {
                 for (var k = 0; k < thisMatrix.GetLength(1); k++)
@@ -305,7 +305,7 @@ namespace d1den.MathLibrary
             {
                 var ex = new ArgumentException("Matrix isn`t square");
                 ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
-                    this.RowCount, this.ColumnCount));
+                    RowCount, ColumnCount));
                 throw ex;
             }
             else if (_matrixData.Length == 1)
@@ -408,16 +408,16 @@ namespace d1den.MathLibrary
         /// <returns>Строка матрицы</returns>
         public override string ToString()
         {
-            string matrixInString = "";
+            string matrixString = "";
             for (int i = 0; i < RowCount; i++)
             {
                 for (int j = 0; j < ColumnCount; j++)
                 {
-                    matrixInString += string.Format("{0:F2}\t", _matrixData[i, j]);
+                    matrixString += string.Format("{0:F2}\t", _matrixData[i, j]);
                 }
-                matrixInString += "\n";
+                matrixString += "\n";
             }
-            return matrixInString;
+            return matrixString;
         }
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace d1den.MathLibrary
         /// <returns>Матрица</returns>
         public Matrix SetAllValues(double value)
         {
-            var matrixArray = _matrixData;
+            var matrixArray = MatrixData;
             ProcessActionOverData((i, j) => matrixArray[i, j] = value);
             return new Matrix(matrixArray);
         }
@@ -503,6 +503,15 @@ namespace d1den.MathLibrary
             else if(result > -1.0 && result < 1.0)
                 result *= 1.0E+9;
             return (int)Math.Round(result);
+        }
+
+        /// <summary>
+        /// Создать копию матрицы
+        /// </summary>
+        /// <returns>Копия матрицы привдённая к object</returns>
+        public object Clone()
+        {
+            return new Matrix(_matrixData);
         }
         #endregion
 
