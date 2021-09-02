@@ -47,5 +47,34 @@ namespace TestForLibrary
             if (matrix1[0, 0] == 1)
                 Assert.Pass();
         }
+
+        [Test]
+        public void HashCodeTest()
+        {
+            var matrix1 = Matrix.GetEyeMatrix(2);
+            Matrix matrix2 = matrix1.Clone() as Matrix;
+            var matrix3 = new[,]
+            {
+                {1234, -23214, 23.045 },
+                {98.34, 2132, 0.92931 }
+            };
+            if (matrix1.GetHashCode() == matrix1.GetHashCode() && matrix1.GetHashCode() == matrix2.GetHashCode()
+                && matrix1.GetHashCode() != matrix3.GetHashCode())
+                Assert.Pass();
+        }
+        [Test]
+        public void EqualsTest()
+        {
+            var matrix1 = Matrix.GetEyeMatrix(2);
+            Matrix matrix2 = matrix1.Clone() as Matrix;
+            var matrix3 = new[,]
+            {
+                {1234, -23214, 23.045 },
+                {98.34, 2132, 0.92931 }
+            };
+            if (matrix1.Equals(matrix1) && matrix1 == matrix2 && !matrix1.Equals(matrix3)
+                && matrix1 != (matrix3 as object))
+                Assert.Pass();
+        }
     }
 }

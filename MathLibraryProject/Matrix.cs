@@ -161,7 +161,7 @@ namespace d1den.MathLibrary
         {
             var transposeMatrix = new double[ColumnCount, RowCount];
             var thisMatrix = _matrixData;
-            ProcessActionOverData((i, j) => transposeMatrix[i, j] = thisMatrix[j, i]);
+            ProcessActionOverData((i, j) => transposeMatrix[j, i] = thisMatrix[i, j]);
             return new Matrix(transposeMatrix);
         }
 
@@ -309,9 +309,7 @@ namespace d1den.MathLibrary
                 throw ex;
             }
             else if (_matrixData.Length == 1)
-            {
                 return _matrixData[0, 0];
-            }
             else
             {
                 double determinant = 0;
@@ -371,7 +369,7 @@ namespace d1den.MathLibrary
             }
             var algebraiсСomplements = new double[RowCount, ColumnCount];
             if (_matrixData.Length == 1)
-                return this / GetDeterminant();
+                return GetOnesMatrix(1) / GetDeterminant();
             for (int i = 0; i < RowCount; i++)
             {
                 for (int j = 0; j < ColumnCount; j++)
@@ -697,6 +695,48 @@ namespace d1den.MathLibrary
         /// <param name="matrix2">Матрица 2</param>
         /// <returns>Результат</returns>
         public static bool operator !=(Matrix matrix1, Matrix matrix2)
+        {
+            return !matrix1.Equals(matrix2);
+        }
+
+        /// <summary>
+        /// Оператор проверки на равенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator ==(Matrix matrix1, object matrix2)
+        {
+            return matrix1.Equals(matrix2);
+        }
+        /// <summary>
+        /// Оператор проверки на неравенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator !=(Matrix matrix1, object matrix2)
+        {
+            return !matrix1.Equals(matrix2);
+        }
+
+        /// <summary>
+        /// Оператор проверки на равенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator ==(object matrix1, Matrix matrix2)
+        {
+            return matrix1.Equals(matrix2);
+        }
+        /// <summary>
+        /// Оператор проверки на неравенство матриц
+        /// </summary>
+        /// <param name="matrix1">Матрица 1</param>
+        /// <param name="matrix2">Матрица 2</param>
+        /// <returns>Результат</returns>
+        public static bool operator !=(object matrix1, Matrix matrix2)
         {
             return !matrix1.Equals(matrix2);
         }

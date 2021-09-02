@@ -585,6 +585,38 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Equality(d1den.MathLibrary.Matrix,System.Object)">
+            <summary>
+            Оператор проверки на равенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Inequality(d1den.MathLibrary.Matrix,System.Object)">
+            <summary>
+            Оператор проверки на неравенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Equality(System.Object,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на равенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:d1den.MathLibrary.Matrix.op_Inequality(System.Object,d1den.MathLibrary.Matrix)">
+            <summary>
+            Оператор проверки на неравенство матриц
+            </summary>
+            <param name="matrix1">Матрица 1</param>
+            <param name="matrix2">Матрица 2</param>
+            <returns>Результат</returns>
+        </member>
         <member name="T:d1den.MathLibrary.Point3D">
             <summary>
             Точка в 3-д пространстве

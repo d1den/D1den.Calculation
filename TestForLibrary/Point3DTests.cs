@@ -35,9 +35,9 @@ namespace TestForLibrary
         {
             double[] pointArray = { 123, 0.23, -234, 543 };
             TestDelegate testCode = delegate ()
-             {
+            {
                  new Point3D(pointArray);
-             };
+            };
             Assert.Throws<ArgumentException>(testCode);
         }
 
