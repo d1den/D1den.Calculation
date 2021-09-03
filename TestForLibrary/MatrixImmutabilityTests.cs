@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
-using D1den.EngineeringMath;
+using D1den.Calculation;
 
 namespace TestForLibrary
 {

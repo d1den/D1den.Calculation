@@ -4,22 +4,22 @@
         <name>MathLibraryProject</name>
     </assembly>
     <members>
-        <member name="T:D1den.EngineeringMath.AngleUnits">
+        <member name="T:D1den.Calculation.AngleUnits">
             <summary>
             Единицы измерения углов
             </summary>
         </member>
-        <member name="F:D1den.EngineeringMath.AngleUnits.Radians">
+        <member name="F:D1den.Calculation.AngleUnits.Radians">
             <summary>
             Радианы
             </summary>
         </member>
-        <member name="F:D1den.EngineeringMath.AngleUnits.Degrees">
+        <member name="F:D1den.Calculation.AngleUnits.Degrees">
             <summary>
             Градусы
             </summary>
         </member>
-        <member name="T:D1den.EngineeringMath.RotationAxisOrder">
+        <member name="T:D1den.Calculation.RotationAxisOrder">
             <summary>
             Порядок осей поворота
             </summary>
@@ -29,22 +29,22 @@
             <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
             </remarks>
         </member>
-        <member name="F:D1den.EngineeringMath.RotationAxisOrder.XYZ">
+        <member name="F:D1den.Calculation.RotationAxisOrder.XYZ">
             <summary>
             Поворот по осям XYZ. Углы Тейта-Брайна
             </summary>
         </member>
-        <member name="F:D1den.EngineeringMath.RotationAxisOrder.ZXZ">
+        <member name="F:D1den.Calculation.RotationAxisOrder.ZXZ">
             <summary>
             Поворот по осям ZXZ
             </summary>
         </member>
-        <member name="F:D1den.EngineeringMath.RotationAxisOrder.ZYZ">
+        <member name="F:D1den.Calculation.RotationAxisOrder.ZYZ">
             <summary>
             Поворот по осям ZYZ
             </summary>
         </member>
-        <member name="T:D1den.EngineeringMath.EulerAngles">
+        <member name="T:D1den.Calculation.EulerAngles">
             <summary>
             Углы Эйлера 
             </summary>
@@ -56,32 +56,32 @@
             <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
             </remarks>
         </member>
-        <member name="P:D1den.EngineeringMath.EulerAngles.Alpha">
+        <member name="P:D1den.Calculation.EulerAngles.Alpha">
             <summary>
             Угол прецессии
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.EulerAngles.Betta">
+        <member name="P:D1den.Calculation.EulerAngles.Betta">
             <summary>
             Угол нутации
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.EulerAngles.Gamma">
+        <member name="P:D1den.Calculation.EulerAngles.Gamma">
             <summary>
             Угол собственного вращения
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.EulerAngles.AngleUnits">
+        <member name="P:D1den.Calculation.EulerAngles.AngleUnits">
             <summary>
             Единицы измерения углов
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.EulerAngles.RotationAxisOrder">
+        <member name="P:D1den.Calculation.EulerAngles.RotationAxisOrder">
             <summary>
             Порядок осей поворота
             </summary>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
             <summary>
             Объект углов Эйлера в ГРАДУСАХ
             </summary>
@@ -89,7 +89,7 @@
             <param name="betta">Угол нутации</param>
             <param name="gamma">Угол собственного вращения</param>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.#ctor(System.Double,System.Double,System.Double,D1den.EngineeringMath.AngleUnits,D1den.EngineeringMath.RotationAxisOrder)">
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double,D1den.Calculation.AngleUnits,D1den.Calculation.RotationAxisOrder)">
             <summary>
             Объект углов Эйлера с настройкой единиц измерения углов
             </summary>
@@ -99,14 +99,14 @@
             <param name="angleUnits">Единицы измерения угла</param>
             <param name="rotationAxisOrder">Порядок осей поворота</param>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.#ctor(System.Double[])">
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double[])">
             <summary>
             Объект углов Эйлера из массива значений углов в ГРАДУСАХ
             </summary>
             <param name="eulerAnglesArray">Массив значений углов</param>
             <exception cref="T:System.ArgumentException">Если длина массива значений != 3</exception>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.#ctor(System.Double[],D1den.EngineeringMath.AngleUnits,D1den.EngineeringMath.RotationAxisOrder)">
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double[],D1den.Calculation.AngleUnits,D1den.Calculation.RotationAxisOrder)">
             <summary>
             Объект углов Эйлера из массива значений углов
             </summary>
@@ -114,13 +114,13 @@
             <param name="angleUnits">Единицы измерения угла</param>
             <param name="rotationAxisOrder">Порядок осей поворота</param>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.ToArray">
+        <member name="M:D1den.Calculation.EulerAngles.ToArray">
             <summary>
             Поместить углы Эйлера в массив
             </summary>
             <returns>Массив углов Эйлера</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.GetEulersFromRotation(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.RotationAxisOrder)">
+        <member name="M:D1den.Calculation.EulerAngles.GetEulersFromRotation(D1den.Calculation.Matrix,D1den.Calculation.RotationAxisOrder)">
             <summary>
             Преобразовать матрицу поворота в углы Эйлера
             </summary>
@@ -129,64 +129,64 @@
             <exception cref="T:System.ArgumentException">Если матрица поворота имеет неверные размеры</exception>
             <returns>Углы Эйлера в радианах</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.GetRotationMatrix">
+        <member name="M:D1den.Calculation.EulerAngles.GetRotationMatrix">
             <summary>
             Преобразовать углы Эйлера к матрице поворота
             </summary>
             <returns>Матрица поворота 3x3</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.ConvertToRadians">
+        <member name="M:D1den.Calculation.EulerAngles.ConvertToRadians">
             <summary>
             Преобразовать значения углов в радианы
             </summary>
             <returns>Углы Эйлера в радианах</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.ConvertToDegrees">
+        <member name="M:D1den.Calculation.EulerAngles.ConvertToDegrees">
             <summary>
             Преобразовать углы Эйлера в градусы
             </summary>
             <returns>Углы Эйлера в градусах</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.ToString">
+        <member name="M:D1den.Calculation.EulerAngles.ToString">
             <summary>
             Преобразовать объект к строке
             </summary>
             <returns>Строка углов Эйлера</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.ToString(D1den.EngineeringMath.AngleUnits)">
+        <member name="M:D1den.Calculation.EulerAngles.ToString(D1den.Calculation.AngleUnits)">
             <summary>
             Преобразовать объект к строке в заданных единицах измерения
             </summary>
             <param name="angleUnits">Единицы измерения углов</param>
             <returns>Строка углов Эйлера</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.Equals(System.Object)">
+        <member name="M:D1den.Calculation.EulerAngles.Equals(System.Object)">
             <summary>
             Сравнение углов Эйлера в упаковке
             </summary>
             <param name="obj">Сравниваемый объект</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.Equals(D1den.EngineeringMath.EulerAngles)">
+        <member name="M:D1den.Calculation.EulerAngles.Equals(D1den.Calculation.EulerAngles)">
             <summary>
             Сравнение углов Эйлера
             </summary>
             <param name="other">Другой объект углов Эйлера</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.GetHashCode">
+        <member name="M:D1den.Calculation.EulerAngles.GetHashCode">
             <summary>
             Алгоритм создания хэш-кода
             </summary>
             <returns>Хэш-код</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.op_Explicit(D1den.EngineeringMath.EulerAngles)~System.Double[]">
+        <member name="M:D1den.Calculation.EulerAngles.op_Explicit(D1den.Calculation.EulerAngles)~System.Double[]">
             <summary>
             Преобразовать углы Эйлера в массив
             </summary>
             <param name="eulerAngles">Массив double</param>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.op_Equality(D1den.EngineeringMath.EulerAngles,D1den.EngineeringMath.EulerAngles)">
+        <member name="M:D1den.Calculation.EulerAngles.op_Equality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
             <summary>
             Проверка на равенство углов Эйлера
             </summary>
@@ -194,7 +194,7 @@
             <param name="eulers2">Углы Эйлера 2</param>
             <returns>Результат проверки</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.EulerAngles.op_Inequality(D1den.EngineeringMath.EulerAngles,D1den.EngineeringMath.EulerAngles)">
+        <member name="M:D1den.Calculation.EulerAngles.op_Inequality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
             <summary>
             Проверка на неравенство углов Эйлера
             </summary>
@@ -202,12 +202,12 @@
             <param name="eulers2">Углы Эйлера 2</param>
             <returns>Результат проверки</returns>
         </member>
-        <member name="T:D1den.EngineeringMath.MathA">
+        <member name="T:D1den.Calculation.MathA">
             <summary>
             Дополнительные математические функции
             </summary>
         </member>
-        <member name="M:D1den.EngineeringMath.MathA.Clamp(System.Double,System.Double,System.Double)">
+        <member name="M:D1den.Calculation.MathA.Clamp(System.Double,System.Double,System.Double)">
             <summary>
             Выравнивание значения по диапазону
             </summary>
@@ -216,7 +216,7 @@
             <param name="maxValue">Максимально допустимое значение</param>
             <returns>Значение, соответсвующее диапазону</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.MathA.Clamp(System.Int32,System.Int32,System.Int32)">
+        <member name="M:D1den.Calculation.MathA.Clamp(System.Int32,System.Int32,System.Int32)">
             <summary>
             Выравнивание значения по диапазону
             </summary>
@@ -225,21 +225,21 @@
             <param name="maxValue">Максимально допустимое значение</param>
             <returns>Значение, соответсвующее диапазону</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.MathA.DegreeToRadian(System.Double)">
+        <member name="M:D1den.Calculation.MathA.DegreeToRadian(System.Double)">
             <summary>
             Преобразование градусов к радианам
             </summary>
             <param name="degreeAngle">Угол в градусах</param>
             <returns>Радианы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.MathA.RadianToDegree(System.Double)">
+        <member name="M:D1den.Calculation.MathA.RadianToDegree(System.Double)">
             <summary>
             Преобразование радиан к градусам
             </summary>
             <param name="radianAngle">Угол в радианах</param>
             <returns>Градусы</returns>
         </member>
-        <member name="T:D1den.EngineeringMath.Matrix">
+        <member name="T:D1den.Calculation.Matrix">
             <summary>
             Матрица желаемой размерности
             </summary>
@@ -247,27 +247,27 @@
             Матрица произвольного размера, над которой можно производить различные математические операции.
             </remarks>
         </member>
-        <member name="P:D1den.EngineeringMath.Matrix.MatrixData">
+        <member name="P:D1den.Calculation.Matrix.MatrixData">
             <summary>
             Массив значений матрицы
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Matrix.Int32MatrixData">
+        <member name="P:D1den.Calculation.Matrix.Int32MatrixData">
             <summary>
             Массив приведённых к Int32 значений матрицы
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Matrix.RowCount">
+        <member name="P:D1den.Calculation.Matrix.RowCount">
             <summary>
             Количество строк
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Matrix.ColumnCount">
+        <member name="P:D1den.Calculation.Matrix.ColumnCount">
             <summary>
             Количество столбцов
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Matrix.Item(System.Int32,System.Int32)">
+        <member name="P:D1den.Calculation.Matrix.Item(System.Int32,System.Int32)">
             <summary>
             Получить значение матрицы по строке и столбцу
             </summary>
@@ -275,73 +275,73 @@
             <param name="column">Индекс столбца</param>
             <returns>Значение матрицы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.#ctor(System.Int32,System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32,System.Int32)">
             <summary>
             Объект матрицы
             </summary>
             <param name="rowCount">Число строк</param>
             <param name="columnCount">Число столбцов</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.#ctor(System.Double[0:,0:])">
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Double[0:,0:])">
             <summary>
             Объект матрицы
             </summary>
             <param name="matrixData">Двумерный double массив данных матрицы</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.#ctor(System.Int32[0:,0:])">
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32[0:,0:])">
             <summary>
             Объект матрицы
             </summary>
             <param name="matrixData">Двумерный int массив данных матрицы</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.#ctor(System.Int32,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32,System.Double)">
             <summary>
             Объект квадратной матрицы со значением по диагонали
             </summary>
             <param name="dimension">Размерность квадратной матрицы</param>
             <param name="diagonalValue">Значение по главной диагонали</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetZerosMatrix(System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.GetZerosMatrix(System.Int32)">
             <summary>
             Квадратная матрица нулей
             </summary>
             <param name="dimension">Размерность</param>
             <returns>Объект матрицы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetEyeMatrix(System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.GetEyeMatrix(System.Int32)">
             <summary>
             Единичная матрица (E)
             </summary>
             <param name="dimension">Размерность</param>
             <returns>Объект матрицы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetOnesMatrix(System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.GetOnesMatrix(System.Int32)">
             <summary>
             Квадратная матрица единиц
             </summary>
             <param name="dimension">Размерность</param>
             <returns>Объект матрицы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Negative">
+        <member name="M:D1den.Calculation.Matrix.Negative">
             <summary>
             Домножение матрицы на единицу
             </summary>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Transpose">
+        <member name="M:D1den.Calculation.Matrix.Transpose">
             <summary>
             Транспонирование матрицы
             </summary>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Add(System.Double)">
+        <member name="M:D1den.Calculation.Matrix.Add(System.Double)">
             <summary>
             Сложение матрицы и числа
             </summary>
             <param name="value">Число, складываемое с матрицей</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Add(D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.Add(D1den.Calculation.Matrix)">
             <summary>
             Сложение двух матриц
             </summary>
@@ -349,14 +349,14 @@
             <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Subtract(System.Double)">
+        <member name="M:D1den.Calculation.Matrix.Subtract(System.Double)">
             <summary>
             Разность матрицы и числа
             </summary>
             <param name="value">Число, вычитаемое из матрицы</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Subtract(D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.Subtract(D1den.Calculation.Matrix)">
             <summary>
             Разность матриц
             </summary>
@@ -364,14 +364,14 @@
             <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Multiply(System.Double)">
+        <member name="M:D1den.Calculation.Matrix.Multiply(System.Double)">
             <summary>
             Произведение матрицы и числа
             </summary>
             <param name="value">Множитель матрицы</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Divide(System.Double)">
+        <member name="M:D1den.Calculation.Matrix.Divide(System.Double)">
             <summary>
             Деление матрицы на число
             </summary>
@@ -379,7 +379,7 @@
             <exception cref="T:System.DivideByZeroException">При делителе = 0</exception>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Multiply(D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.Multiply(D1den.Calculation.Matrix)">
             <summary>
             Произведение матриц
             </summary>
@@ -387,14 +387,14 @@
             <exception cref="T:System.ArgumentException">При неравнестве стобцов первой матрицы и строк второй</exception>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetDeterminant">
+        <member name="M:D1den.Calculation.Matrix.GetDeterminant">
             <summary>
             Получить определитель матрицы
             </summary>
             <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
             <returns>Определитель</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
             <summary>
             Получить матрицу минора данной матрицы
             </summary>
@@ -403,101 +403,101 @@
             <exception cref="T:System.ArgumentException">Если матрица не квадратная, или состоит из 1-го элемента</exception>
             <returns>Матрица минора</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Invert">
+        <member name="M:D1den.Calculation.Matrix.Invert">
             <summary>
             Вычисление обратной матрицы
             </summary>
             <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
             <returns>Обратная матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetEuclideanNorm">
+        <member name="M:D1den.Calculation.Matrix.GetEuclideanNorm">
             <summary>
             Вычисление Eвклидовой нормы
             <returns>Евклидовая норма</returns>
             </summary>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.ToString">
+        <member name="M:D1den.Calculation.Matrix.ToString">
             <summary>
             Преобразование матрицы к строке
             </summary>
             <returns>Строка матрицы</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.SetAllValues(System.Double)">
+        <member name="M:D1den.Calculation.Matrix.SetAllValues(System.Double)">
             <summary>
             Установить все значения матрицы
             </summary>
             <param name="value">Значение</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.ProcessActionOverData(System.Action{System.Int32,System.Int32})">
+        <member name="M:D1den.Calculation.Matrix.ProcessActionOverData(System.Action{System.Int32,System.Int32})">
             <summary>
             Применить действие ко всем элементам матрицы
             </summary>
             <param name="action"></param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Equals(System.Object)">
+        <member name="M:D1den.Calculation.Matrix.Equals(System.Object)">
             <summary>
             Метод сравнениния матриц по значениям
             </summary>
             <param name="obj">Упакованная матрица</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Equals(D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.Equals(D1den.Calculation.Matrix)">
             <summary>
             Метод сравнениния матриц по значениям
             </summary>
             <param name="other">Матрица</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.GetHashCode">
+        <member name="M:D1den.Calculation.Matrix.GetHashCode">
             <summary>
             Алгоритм создания хэш-кода
             </summary>
             <returns>Хэш-код</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.Clone">
+        <member name="M:D1den.Calculation.Matrix.Clone">
             <summary>
             Создать копию матрицы
             </summary>
             <returns>Копия матрицы привдённая к object</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Implicit(System.Double[0:,0:])~D1den.EngineeringMath.Matrix">
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[0:,0:])~D1den.Calculation.Matrix">
             <summary>
             Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив double</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Implicit(System.Int32[0:,0:])~D1den.EngineeringMath.Matrix">
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[0:,0:])~D1den.Calculation.Matrix">
             <summary>
             Преобразовать двумерный массив в матрицу
             </summary>
             <param name="matrixArray">Двумерный массив int</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Implicit(System.Double[])~D1den.EngineeringMath.Matrix">
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[])~D1den.Calculation.Matrix">
             <summary>
             Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив double</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Implicit(System.Int32[])~D1den.EngineeringMath.Matrix">
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[])~D1den.Calculation.Matrix">
             <summary>
             Преобразовать одномерный массив в матрицу
             </summary>
             <param name="matrixArray">Одномерный массив int</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Explicit(D1den.EngineeringMath.Matrix)~System.Double[0:,0:]">
+        <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Double[0:,0:]">
             <summary>
             Преобразовать матрицу к двумерному массиву double
             </summary>
             <param name="matrix">Матрица</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Explicit(D1den.EngineeringMath.Matrix)~System.Int32[0:,0:]">
+        <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Int32[0:,0:]">
             <summary>
             Преобразовать матрицу к двумерному массиву int
             </summary>
             <param name="matrix">Матрица</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Addition(System.Double,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Addition(System.Double,D1den.Calculation.Matrix)">
             <summary>
             Сложение матрицы и числа
             </summary>
@@ -505,7 +505,7 @@
             <param name="matrix">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Addition(D1den.EngineeringMath.Matrix,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,System.Double)">
             <summary>
             Сложение матрицы и числа
             </summary>
@@ -513,7 +513,7 @@
             <param name="matrix">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Addition(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
             Сложение матриц
             </summary>
@@ -521,7 +521,7 @@
             <param name="matrix2">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Subtraction(D1den.EngineeringMath.Matrix,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,System.Double)">
             <summary>
             Разность матрицы и числа
             </summary>
@@ -529,7 +529,7 @@
             <param name="matrix">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Subtraction(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
             Разность матриц
             </summary>
@@ -537,7 +537,7 @@
             <param name="matrix2">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Multiply(D1den.EngineeringMath.Matrix,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,System.Double)">
             <summary>
             Произведение матрицы и числа
             </summary>
@@ -545,7 +545,7 @@
             <param name="matrix">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Multiply(System.Double,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(System.Double,D1den.Calculation.Matrix)">
             <summary>
             Произведение матрицы и числа
             </summary>
@@ -553,7 +553,7 @@
             <param name="matrix">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Multiply(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
             Произведение матриц
             </summary>
@@ -561,7 +561,7 @@
             <param name="matrix2">Матрица</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Division(D1den.EngineeringMath.Matrix,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.op_Division(D1den.Calculation.Matrix,System.Double)">
             <summary>
             Деление матрицы на число
             </summary>
@@ -569,7 +569,7 @@
             <param name="value">Делитель</param>
             <returns>Матрица</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Equality(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
             Оператор проверки на равенство матриц
             </summary>
@@ -577,7 +577,7 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Inequality(D1den.EngineeringMath.Matrix,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
             Оператор проверки на неравенство матриц
             </summary>
@@ -585,7 +585,7 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Equality(D1den.EngineeringMath.Matrix,System.Object)">
+        <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,System.Object)">
             <summary>
             Оператор проверки на равенство матриц
             </summary>
@@ -593,7 +593,7 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Inequality(D1den.EngineeringMath.Matrix,System.Object)">
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,System.Object)">
             <summary>
             Оператор проверки на неравенство матриц
             </summary>
@@ -601,7 +601,7 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Equality(System.Object,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Equality(System.Object,D1den.Calculation.Matrix)">
             <summary>
             Оператор проверки на равенство матриц
             </summary>
@@ -609,7 +609,7 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Matrix.op_Inequality(System.Object,D1den.EngineeringMath.Matrix)">
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(System.Object,D1den.Calculation.Matrix)">
             <summary>
             Оператор проверки на неравенство матриц
             </summary>
@@ -617,89 +617,89 @@
             <param name="matrix2">Матрица 2</param>
             <returns>Результат</returns>
         </member>
-        <member name="T:D1den.EngineeringMath.Point3D">
+        <member name="T:D1den.Calculation.Point3D">
             <summary>
             Точка в 3-д пространстве
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Point3D.X">
+        <member name="P:D1den.Calculation.Point3D.X">
             <summary>
             X-координата точки
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Point3D.Y">
+        <member name="P:D1den.Calculation.Point3D.Y">
             <summary>
             Y-координата точки
             </summary>
         </member>
-        <member name="P:D1den.EngineeringMath.Point3D.Z">
+        <member name="P:D1den.Calculation.Point3D.Z">
             <summary>
             Z-координата точки
             </summary>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.#ctor(System.Double,System.Double,System.Double)">
+        <member name="M:D1den.Calculation.Point3D.#ctor(System.Double,System.Double,System.Double)">
             <summary>
             Создание точки по координатам
             </summary>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.#ctor(System.Double[])">
+        <member name="M:D1den.Calculation.Point3D.#ctor(System.Double[])">
             <summary>
             Создание точки по массиву её координат
             </summary>
             <param name="pointArray">Массив координат точки</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.ToArray">
+        <member name="M:D1den.Calculation.Point3D.ToArray">
             <summary>
             Преобразовать точку к массиву координат
             </summary>
             <returns>Массив координат</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.GetDistance(D1den.EngineeringMath.Point3D)">
+        <member name="M:D1den.Calculation.Point3D.GetDistance(D1den.Calculation.Point3D)">
             <summary>
             Получить расстрояние до другой точки
             </summary>
             <param name="point">Вторая точка</param>
             <returns>Расстояние</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.ToString">
+        <member name="M:D1den.Calculation.Point3D.ToString">
             <summary>
             Получить строковое представление точки
             </summary>
             <returns>Строка точки</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.Equals(System.Object)">
+        <member name="M:D1den.Calculation.Point3D.Equals(System.Object)">
             <summary>
             Сравнение точек в виде объектов
             </summary>
             <param name="obj">Упакованный объект точки</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.Equals(D1den.EngineeringMath.Point3D)">
+        <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D)">
             <summary>
             Сравнение точек
             </summary>
             <param name="other">Точка для сравнения</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.GetHashCode">
+        <member name="M:D1den.Calculation.Point3D.GetHashCode">
             <summary>
             Алгоритм создания хэш-кода
             </summary>
             <returns>Хэш-код</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.op_Implicit(System.Double[])~D1den.EngineeringMath.Point3D">
+        <member name="M:D1den.Calculation.Point3D.op_Implicit(System.Double[])~D1den.Calculation.Point3D">
             <summary>
             Преобразовать массив координат к точке
             </summary>
             <param name="pointArray">Массив координат</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.op_Explicit(D1den.EngineeringMath.Point3D)~System.Double[]">
+        <member name="M:D1den.Calculation.Point3D.op_Explicit(D1den.Calculation.Point3D)~System.Double[]">
             <summary>
             Преобразовать точку к массиву координат
             </summary>
             <param name="point">Точка</param>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.op_Equality(D1den.EngineeringMath.Point3D,D1den.EngineeringMath.Point3D)">
+        <member name="M:D1den.Calculation.Point3D.op_Equality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
             <summary>
             Проверка на равенство точек
             </summary>
@@ -707,7 +707,7 @@
             <param name="point2">Точка 2</param>
             <returns>Результат сравнения</returns>
         </member>
-        <member name="M:D1den.EngineeringMath.Point3D.op_Inequality(D1den.EngineeringMath.Point3D,D1den.EngineeringMath.Point3D)">
+        <member name="M:D1den.Calculation.Point3D.op_Inequality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
             <summary>
             Проверка на неравенство точек
             </summary>

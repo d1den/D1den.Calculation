@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using D1den.EngineeringMath;
+using D1den.Calculation;
 using System;
 
 namespace TestForLibrary

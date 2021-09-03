@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace D1den.EngineeringMath
+namespace D1den.Calculation
 {
     /// <summary>
     /// Матрица желаемой размерности
