@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace d1den.MathLibrary
+namespace D1den.EngineeringMath
 {
     /// <summary>
     /// Точка в 3-д пространстве

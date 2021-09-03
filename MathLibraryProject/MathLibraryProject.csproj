@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>d1den.MathLibrary</RootNamespace>
+    <RootNamespace>D1den.EngineeringMath</RootNamespace>
     <PackageId>MathLibrary</PackageId>
     <Authors>d1den</Authors>
     <Product>MathLibrary</Product>
     <Description>Advanced math library (Matrices, Euler angles, etc)</Description>
     <RepositoryUrl>https://github.com/d1den/MathLibrary</RepositoryUrl>
     <RepositoryType>public</RepositoryType>
+    <AssemblyName>MathLibraryProject</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

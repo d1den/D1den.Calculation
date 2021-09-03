@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
-using d1den.MathLibrary;
+using D1den.EngineeringMath;
 
 namespace TestForLibrary
 {
@@ -49,9 +49,9 @@ namespace TestForLibrary
             EulerAngles eulersInRadians1 = eulerAngles.ConvertToRadians();
             EulerAngles eulersInRadians2 = eulersInRadians1.ConvertToRadians();
             if (eulersInRadians1.AngleUnits == AngleUnits.Radians &&
-                eulersInRadians1.Alpha == AdvancedMath.DegreeToRadian(eulerAngles.Alpha) &&
-                eulersInRadians1.Betta == AdvancedMath.DegreeToRadian(eulerAngles.Betta) &&
-                eulersInRadians1.Gamma == AdvancedMath.DegreeToRadian(eulerAngles.Gamma) &&
+                eulersInRadians1.Alpha == MathA.DegreeToRadian(eulerAngles.Alpha) &&
+                eulersInRadians1.Betta == MathA.DegreeToRadian(eulerAngles.Betta) &&
+                eulersInRadians1.Gamma == MathA.DegreeToRadian(eulerAngles.Gamma) &&
                 eulersInRadians1 == eulersInRadians2)
                 Assert.Pass();
         }
@@ -62,9 +62,9 @@ namespace TestForLibrary
             EulerAngles eulersInDegrees1 = eulerAngles.ConvertToDegrees();
             EulerAngles eulersInDegrees2 = eulersInDegrees1.ConvertToDegrees();
             if (eulersInDegrees1.AngleUnits == AngleUnits.Degrees &&
-                eulersInDegrees1.Alpha == AdvancedMath.RadianToDegree(eulerAngles.Alpha) &&
-                eulersInDegrees1.Betta == AdvancedMath.RadianToDegree(eulerAngles.Betta) &&
-                eulersInDegrees1.Gamma == AdvancedMath.RadianToDegree(eulerAngles.Gamma) &&
+                eulersInDegrees1.Alpha == MathA.RadianToDegree(eulerAngles.Alpha) &&
+                eulersInDegrees1.Betta == MathA.RadianToDegree(eulerAngles.Betta) &&
+                eulersInDegrees1.Gamma == MathA.RadianToDegree(eulerAngles.Gamma) &&
                 eulersInDegrees1 == eulersInDegrees2)
                 Assert.Pass();
         }
@@ -75,9 +75,9 @@ namespace TestForLibrary
             string expectedString = string.Format("{0}:{1:F2}; {2:F2}; {3:F2}", eulerAngles.RotationAxisOrder,
                 eulerAngles.Alpha, eulerAngles.Betta, eulerAngles.Gamma);
             string expectedStringInDegrees = string.Format("{0}:{1:F2}; {2:F2}; {3:F2}", eulerAngles.RotationAxisOrder,
-                AdvancedMath.RadianToDegree(eulerAngles.Alpha),
-                AdvancedMath.RadianToDegree(eulerAngles.Betta),
-                AdvancedMath.RadianToDegree(eulerAngles.Gamma));
+                MathA.RadianToDegree(eulerAngles.Alpha),
+                MathA.RadianToDegree(eulerAngles.Betta),
+                MathA.RadianToDegree(eulerAngles.Gamma));
             if (eulerAngles.ToString() == expectedString &&
                 eulerAngles.ToString(AngleUnits.Radians) == expectedString &&
                 eulerAngles.ToString(AngleUnits.Degrees) == expectedStringInDegrees)

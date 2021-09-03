@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace d1den.MathLibrary
+namespace D1den.EngineeringMath
 {
     /// <summary>
     /// Матрица желаемой размерности

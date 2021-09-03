@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace d1den.MathLibrary
+namespace D1den.EngineeringMath
 {
     /// <summary>
     /// Дополнительные математические функции
     /// </summary>
-    public static class AdvancedMath
+    public static class MathA
     {
         /// <summary>
         /// Выравнивание значения по диапазону

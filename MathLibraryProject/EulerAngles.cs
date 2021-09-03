@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace d1den.MathLibrary
+namespace D1den.EngineeringMath
 {
     /// <summary>
     /// Единицы измерения углов
@@ -344,9 +342,9 @@ namespace d1den.MathLibrary
         public EulerAngles ConvertToRadians()
         {
             if (_angleUnits == AngleUnits.Degrees)
-                return new EulerAngles(AdvancedMath.DegreeToRadian(_alpha),
-                    AdvancedMath.DegreeToRadian(_betta),
-                    AdvancedMath.DegreeToRadian(_gamma),
+                return new EulerAngles(MathA.DegreeToRadian(_alpha),
+                    MathA.DegreeToRadian(_betta),
+                    MathA.DegreeToRadian(_gamma),
                     AngleUnits.Radians,
                     _rotationAxisOrder);
             else
@@ -360,9 +358,9 @@ namespace d1den.MathLibrary
         public EulerAngles ConvertToDegrees()
         {
             if (_angleUnits == AngleUnits.Radians)
-                return new EulerAngles(AdvancedMath.RadianToDegree(_alpha),
-                    AdvancedMath.RadianToDegree(_betta),
-                    AdvancedMath.RadianToDegree(_gamma),
+                return new EulerAngles(MathA.RadianToDegree(_alpha),
+                    MathA.RadianToDegree(_betta),
+                    MathA.RadianToDegree(_gamma),
                     AngleUnits.Degrees,
                     _rotationAxisOrder);
             else
