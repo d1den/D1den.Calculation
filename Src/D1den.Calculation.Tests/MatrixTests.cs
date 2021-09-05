@@ -27,9 +27,9 @@ namespace Tests
         [Test]
         public void CreateMatrixByMethods()
         {
-            var matrix1 = Matrix.GetEyeMatrix(2);
-            var matrix2 = Matrix.GetZerosMatrix(1);
-            var matrix3 = Matrix.GetOnesMatrix(2);
+            var matrix1 = Matrix.Eye(2);
+            var matrix2 = Matrix.Zeros(1);
+            var matrix3 = Matrix.Ones(2);
             if (matrix1[0,0] == 1.0 && matrix1[1,1] == 1.0 && matrix1[0,1] == 0 && matrix1[1, 0] == 0 &&
                 matrix2[0, 0] == 0 &&
                 matrix3[0,0] == 1.0 && matrix3[1, 1] == 1.0 && matrix3[0, 1] == 1 && matrix3[1, 0] == 1)
@@ -39,7 +39,7 @@ namespace Tests
         [Test]
         public void GetMatrixDataTest()
         {
-            var matrix1 = Matrix.GetEyeMatrix(2);
+            var matrix1 = Matrix.Eye(2);
             double[,] array1 = (double[,])matrix1;
             int[,] array2 = matrix1.Int32MatrixData;
             array1[0, 0] = 2;
@@ -51,7 +51,7 @@ namespace Tests
         [Test]
         public void HashCodeTest()
         {
-            var matrix1 = Matrix.GetEyeMatrix(2);
+            var matrix1 = Matrix.Eye(2);
             Matrix matrix2 = matrix1.Clone() as Matrix;
             var matrix3 = new[,]
             {
@@ -65,7 +65,7 @@ namespace Tests
         [Test]
         public void EqualsTest()
         {
-            var matrix1 = Matrix.GetEyeMatrix(2);
+            var matrix1 = Matrix.Eye(2);
             Matrix matrix2 = matrix1.Clone() as Matrix;
             var matrix3 = new[,]
             {

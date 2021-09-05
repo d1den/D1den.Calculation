@@ -3,25 +3,26 @@
 namespace D1den.Calculation
 {
     /// <summary>
-    /// Матрица желаемой размерности
+    /// Matrix of any size
     /// </summary>
     /// <remarks>
-    /// Матрица произвольного размера, над которой можно производить различные математические операции.
+    /// Matrix of any size, supporting various matrix operations.
     /// </remarks>
     [Serializable]
     public class Matrix : IEquatable<Matrix>, ICloneable
     {
-        #region Поля и свойства
+        #region Fields and properties
         private readonly double[,] _matrixData;
 
         /// <summary>
-        /// Массив значений матрицы
+        /// Array of matrix values
         /// </summary>
-        public double[,] MatrixData { get { return (double[,])_matrixData.Clone(); } }
+        public double[,] MatrixData => (double[,])_matrixData.Clone();
 
         /// <summary>
-        /// Массив приведённых к Int32 значений матрицы
+        /// An array of matrix values converted to Int32
         /// </summary>
+        /// <remarks>Used <see cref="System.Math.Round(double)"/> to convert</remarks>
         public int[,] Int32MatrixData
         {
             get
@@ -39,49 +40,57 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Количество строк
+        /// Matrix row count
         /// </summary>
-        public int RowCount { get { return _matrixData.GetLength(0); } }
+        public int RowCount => _matrixData.GetLength(0);
 
         /// <summary>
-        /// Количество столбцов
+        /// Matrix column count
         /// </summary>
-        public int ColumnCount { get { return _matrixData.GetLength(1); } }
+        public int ColumnCount => _matrixData.GetLength(1);
 
         /// <summary>
-        /// Получить значение матрицы по строке и столбцу
+        /// Get matrix value by row and column
         /// </summary>
-        /// <param name="row">Индекс строки</param>
-        /// <param name="column">Индекс столбца</param>
-        /// <returns>Значение матрицы</returns>
-        public double this[int row, int column]
-        { get { return _matrixData[row, column]; } }
+        /// <param name="row">Row index</param>
+        /// <param name="column">Column index</param>
+        /// <exception cref="IndexOutOfRangeException">If index or indexes wrong</exception>
+        /// <returns>Matrix value</returns>
+        public double this[int row, int column] => _matrixData[row, column];
         #endregion
 
-        #region Конструкторы и методы создания объектов
+        #region Constructors and create methods
         /// <summary>
-        /// Объект матрицы
+        /// Create matrix by size
         /// </summary>
-        /// <param name="rowCount">Число строк</param>
-        /// <param name="columnCount">Число столбцов</param>
+        /// <param name="rowCount">Matrix row count</param>
+        /// <param name="columnCount">Matrix column count</param>
+        /// <exception cref="ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
         public Matrix(int rowCount, int columnCount)
         {
+            if(rowCount <= 0 || columnCount <= 0)
+            {
+                var ex = new ArgumentOutOfRangeException("Matrix dimensions must be greater than 0");
+                ex.Data.Add("Matrix dimension", string.Format("Matrix: ({0},{1})",
+                    rowCount, columnCount));
+                throw ex;
+            }
             _matrixData = new double[rowCount, columnCount];
         }
 
         /// <summary>
-        /// Объект матрицы
+        /// Create a matrix from the values of a two-dimensional array
         /// </summary>
-        /// <param name="matrixData">Двумерный double массив данных матрицы</param>
+        /// <param name="matrixData">Array of matrix values</param>
         public Matrix(double[,] matrixData)
         {
             _matrixData = (double[,])matrixData.Clone();
         }
 
         /// <summary>
-        /// Объект матрицы
+        /// Create a matrix from the values of a two-dimensional Int32 array
         /// </summary>
-        /// <param name="matrixData">Двумерный int массив данных матрицы</param>
+        /// <param name="matrixData">Int32 array of matrix values</param>
         public Matrix(int[,] matrixData)
         {
             _matrixData = new double[matrixData.GetLength(0), matrixData.GetLength(1)];
@@ -95,55 +104,49 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Объект квадратной матрицы со значением по диагонали
+        /// Create a zeros matrix of any size
         /// </summary>
-        /// <param name="dimension">Размерность квадратной матрицы</param>
-        /// <param name="diagonalValue">Значение по главной диагонали</param>
-        public Matrix(int dimension, double diagonalValue)
-        {
-            _matrixData = new double[dimension, dimension];
-            for (int i = 0; i < dimension; i++)
-            {
-                _matrixData[i, i] = diagonalValue;
-            }
-        }
-
-        /// <summary>
-        /// Квадратная матрица нулей
-        /// </summary>
-        /// <param name="dimension">Размерность</param>
-        /// <returns>Объект матрицы</returns>
-        public static Matrix GetZerosMatrix(int dimension)
+        /// <param name="dimension">Matrix dimension. Must be greater then 0</param>
+        /// <returns>Zeros matrix</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        public static Matrix Zeros(int dimension)
         {
             return new Matrix(dimension, dimension);
         }
 
         /// <summary>
-        /// Единичная матрица (E)
+        /// Create a identity matrix (E)
         /// </summary>
-        /// <param name="dimension">Размерность</param>
-        /// <returns>Объект матрицы</returns>
-        public static Matrix GetEyeMatrix(int dimension)
+        /// <param name="dimension">Matrix dimension. Must be greater then 0</param>
+        /// <returns>Identity matrix (E)</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        public static Matrix Eye(int dimension)
         {
-            return new Matrix(dimension, 1.0);
+            double[,] _matrixData = new double[dimension, dimension];
+            for (int i = 0; i < dimension; i++)
+            {
+                _matrixData[i, i] = 1.0;
+            }
+            return new Matrix(_matrixData);
         }
 
         /// <summary>
-        /// Квадратная матрица единиц
+        /// Create an ones matrix
         /// </summary>
-        /// <param name="dimension">Размерность</param>
-        /// <returns>Объект матрицы</returns>
-        public static Matrix GetOnesMatrix(int dimension)
+        /// <param name="dimension">Matrix dimension. Must be greater then 0</param>
+        /// <returns>Matrix of 1.0</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        public static Matrix Ones(int dimension)
         {
-            return new Matrix(dimension, dimension).SetAllValues(1.0);
+            return Zeros(dimension).SetAllValues(1.0);
         }
         #endregion
 
-        #region Методы матричных операций
+        #region Matrix operations methods
         /// <summary>
-        /// Домножение матрицы на единицу
+        /// Negative matrix
         /// </summary>
-        /// <returns>Матрица</returns>
+        /// <returns>Result matrix</returns>
         public Matrix Negative()
         {
             var matrixArray = MatrixData;
@@ -152,9 +155,9 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Транспонирование матрицы
+        /// Matrix transpose
         /// </summary>
-        /// <returns>Матрица</returns>
+        /// <returns>Result matrix</returns>
         public Matrix Transpose()
         {
             var transposeMatrix = new double[ColumnCount, RowCount];
@@ -164,10 +167,10 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Сложение матрицы и числа
+        /// Adding a matrix and a number
         /// </summary>
-        /// <param name="value">Число, складываемое с матрицей</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public Matrix Add(double value)
         {
             var result = new double[RowCount, ColumnCount];
@@ -178,21 +181,14 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Сложение двух матриц
+        /// Adding two matrices
         /// </summary>
-        /// <param name="matrix2">Матрица, складываемая с матрицей</param>
-        /// <exception cref="ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If the dimensions of the matrices are not the same.</exception>
+        /// <returns>Result matrix</returns>
         public Matrix Add(Matrix matrix2)
         {
-            if (RowCount != matrix2.RowCount &&
-                ColumnCount != matrix2.ColumnCount)
-            {
-                var ex = new ArgumentException("Matrices can not be add, because dimensions aren`t same.");
-                ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
-                throw ex;
-            }
+            ValidateMatricesSize(matrix2);
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) =>
@@ -201,10 +197,10 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Разность матрицы и числа
+        /// Subtracting a number from a matrix
         /// </summary>
-        /// <param name="value">Число, вычитаемое из матрицы</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public Matrix Subtract(double value)
         {
             var result = new double[RowCount, ColumnCount];
@@ -215,21 +211,14 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Разность матриц
+        /// Subtracting two matrices
         /// </summary>
-        /// <param name="matrix2">Матрица, вычитаемая из матрицы</param>
-        /// <exception cref="ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If the dimensions of the matrices are not the same.</exception>
+        /// <returns>Result matrix</returns>
         public Matrix Subtract(Matrix matrix2)
         {
-            if (RowCount != matrix2.RowCount &&
-                ColumnCount != matrix2.ColumnCount)
-            {
-                var ex = new ArgumentException("Matrices cannot be multiplied because the dimensions do not fit.");
-                ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
-                throw ex;
-            }
+            ValidateMatricesSize(matrix2);
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) =>
@@ -238,10 +227,10 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Произведение матрицы и числа
+        /// Multiplying a matrix by a number
         /// </summary>
-        /// <param name="value">Множитель матрицы</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public Matrix Multiply(double value)
         {
             var result = new double[RowCount, ColumnCount];
@@ -252,11 +241,11 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Деление матрицы на число
+        /// Dividing a matrix by a number
         /// </summary>
-        /// <param name="value">Делитель матрицы</param>
-        /// <exception cref="DivideByZeroException">При делителе = 0</exception>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <exception cref="DivideByZeroException">If number is zero</exception>
+        /// <returns>Result matrix</returns>
         public Matrix Divide(double value)
         {
             var result = new double[RowCount, ColumnCount];
@@ -267,20 +256,14 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Произведение матриц
+        /// Matrix multiplication
         /// </summary>
-        /// <param name="matrix2">Матрица, умножаемая на исходную</param>
-        /// <exception cref="ArgumentException">При неравнестве стобцов первой матрицы и строк второй</exception>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+        /// <returns>Result matrix</returns>
         public Matrix Multiply(Matrix matrix2)
         {
-            if (this.ColumnCount != matrix2.RowCount)
-            {
-                var ex = new ArgumentException("Matrixes can not be multiplied, because dimensions aren`t same.");
-                ex.Data.Add("Matrixes dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
-                    RowCount, ColumnCount, matrix2.RowCount, matrix2.ColumnCount));
-                throw ex;
-            }
+            ValidateMatricesMultiply(matrix2);
             var result = new double[RowCount, ColumnCount];
             var thisMatrix = _matrixData;
             ProcessActionOverData((i, j) => {
@@ -293,46 +276,40 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Получить определитель матрицы
+        /// Get determinant of matrix
         /// </summary>
-        /// <exception cref="ArgumentException">Если матрица не квадратная</exception>
-        /// <returns>Определитель</returns>
+        /// <exception cref="ArithmeticException">If matrix isn`t square</exception>
+        /// <returns>Determinant</returns>
         public double GetDeterminant()
         {
-            if (RowCount != ColumnCount)
-            {
-                var ex = new ArgumentException("Matrix isn`t square");
-                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
-                    RowCount, ColumnCount));
-                throw ex;
-            }
-            else if (_matrixData.Length == 1)
+            ValidateSquareMatrix();
+            if (_matrixData.Length == 1)
                 return _matrixData[0, 0];
             else
             {
                 double determinant = 0;
                 for (int i = 0; i < RowCount; i++)
                 {
-                    determinant += Math.Pow(-1.0, i + 0) * _matrixData[i, 0] * this.GetMinorMatrix(i, 0).GetDeterminant();
+                    determinant += Math.Pow(-1.0, i + 0) * _matrixData[i, 0] * GetMinorMatrix(i, 0).GetDeterminant();
                 }
                 return determinant;
             }
         }
 
         /// <summary>
-        /// Получить матрицу минора данной матрицы
+        /// Get minor matrix
         /// </summary>
-        /// <param name="rowIndex">Индекс строки минора</param>
-        /// <param name="columnIndex">Индекс столбца минора</param>
-        /// <exception cref="ArgumentException">Если матрица не квадратная, или состоит из 1-го элемента</exception>
+        /// <param name="rowIndex">Minor row index</param>
+        /// <param name="columnIndex">Minor column index</param>
+        /// <exception cref="ArithmeticException">If matrix isn`t square or matrix.Length == 1</exception>
         /// <returns>Матрица минора</returns>
         public Matrix GetMinorMatrix(int rowIndex, int columnIndex)
         {
             if ((RowCount != ColumnCount) || _matrixData.Length == 1)
             {
-                var ex = new ArgumentException("This minor does not exist");
+                var ex = new ArithmeticException("This minor does not exist");
                 ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
-                    this.RowCount, this.ColumnCount));
+                    RowCount, ColumnCount));
                 throw ex;
             }
             double[,] newMatrix = new double[RowCount - 1, ColumnCount - 1];
@@ -352,36 +329,30 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Вычисление обратной матрицы
+        /// Get invert matrix
         /// </summary>
-        /// <exception cref="ArgumentException">Если матрица не квадратная</exception>
-        /// <returns>Обратная матрица</returns>
+        /// <exception cref="ArithmeticException">If matrix isn`t square</exception>
+        /// <returns>Result matrix</returns>
         public Matrix Invert()
         {
-            if (RowCount != ColumnCount)
-            {
-                var ex = new ArgumentException("Matrix isn`t square");
-                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
-                    this.RowCount, this.ColumnCount));
-                throw ex;
-            }
+            ValidateSquareMatrix();
             var algebraiсСomplements = new double[RowCount, ColumnCount];
             if (_matrixData.Length == 1)
-                return GetOnesMatrix(1) / GetDeterminant();
+                return Ones(1) / GetDeterminant();
             for (int i = 0; i < RowCount; i++)
             {
                 for (int j = 0; j < ColumnCount; j++)
                 {
-                    algebraiсСomplements[i, j] = Math.Pow(-1.0, i + j) * this.GetMinorMatrix(i, j).GetDeterminant();
+                    algebraiсСomplements[i, j] = Math.Pow(-1.0, i + j) * GetMinorMatrix(i, j).GetDeterminant();
                 }
             }
-            return new Matrix(algebraiсСomplements).Transpose().Divide(this.GetDeterminant());
+            return new Matrix(algebraiсСomplements).Transpose().Divide(GetDeterminant());
         }
 
         /// <summary>
-        /// Вычисление Eвклидовой нормы
-        /// <returns>Евклидовая норма</returns>
+        /// Get euclidean norm of matrix
         /// </summary>
+        /// <returns>Euclidean norm</returns>
         public double GetEuclideanNorm()
         {
             double norm = 0.0;
@@ -397,11 +368,43 @@ namespace D1den.Calculation
         }
         #endregion
 
-        #region Методы
+        #region Methods
+        private void ValidateSquareMatrix()
+        {
+            if (RowCount != ColumnCount)
+            {
+                var ex = new ArithmeticException("Matrix isn`t square");
+                ex.Data.Add("Matrix size", string.Format("Matrix: ({0},{1})",
+                    RowCount, ColumnCount));
+                throw ex;
+            }
+        }
+        private void ValidateMatricesMultiply(Matrix other)
+        {
+            if (ColumnCount != other.RowCount)
+            {
+                var ex = new ArgumentException("Matrixes can not be multiplied, because dimensions aren`t same.");
+                ex.Data.Add("Matrixes dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
+                    RowCount, ColumnCount, other.RowCount, other.ColumnCount));
+                throw ex;
+            }
+        }
+        private void ValidateMatricesSize(Matrix other)
+        {
+            if (RowCount != other.RowCount &&
+                ColumnCount != other.ColumnCount)
+            {
+                var ex = new ArgumentException("Matrices size aren`t same.");
+                ex.Data.Add("Matrices dimensions", string.Format("Matrix1: ({0},{1}), Matrix2: ({2},{3})",
+                    RowCount, ColumnCount, other.RowCount, other.ColumnCount));
+                throw ex;
+            }
+        }
+
         /// <summary>
-        /// Преобразование матрицы к строке
+        /// Get matrix as string
         /// </summary>
-        /// <returns>Строка матрицы</returns>
+        /// <returns>Matrix as string</returns>
         public override string ToString()
         {
             string matrixString = "";
@@ -417,10 +420,10 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Установить все значения матрицы
+        /// Set all matrix values
         /// </summary>
-        /// <param name="value">Значение</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Value</param>
+        /// <returns>Result matrix</returns>
         public Matrix SetAllValues(double value)
         {
             var matrixArray = MatrixData;
@@ -429,9 +432,9 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Применить действие ко всем элементам матрицы
+        /// Apply action to all elements of the matrix
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Action for all elements</param>
         private void ProcessActionOverData(Action<int, int> action)
         {
             for (var i = 0; i < RowCount; i++)
@@ -442,12 +445,12 @@ namespace D1den.Calculation
                 }
             }
         }
-        
+
         /// <summary>
-        /// Метод сравнениния матриц по значениям
+        /// Checking for equality of matrix with accuracy 1.0E-6
         /// </summary>
-        /// <param name="obj">Упакованная матрица</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="obj">Matrix like <see cref="object"/></param>
+        /// <returns>Result of checking</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -459,11 +462,22 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Метод сравнениния матриц по значениям
+        /// Checking for equality of matrix with accuracy 1.0E-6
         /// </summary>
-        /// <param name="other">Матрица</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="other">Matrix</param>
+        /// <returns>Result of checking</returns>
         public bool Equals(Matrix other)
+        {
+            return Equals(other, 1.0E-6);
+        }
+
+        /// <summary>
+        /// Checking with some accuracy the equality of matrix
+        /// </summary>
+        /// <param name="other">Matrix</param>
+        /// <param name="delta">Accuracy</param>
+        /// <returns>Result of checking</returns>
+        public bool Equals(Matrix other, double delta)
         {
             if (RowCount != other.RowCount || ColumnCount != other.ColumnCount)
                 return false;
@@ -471,7 +485,7 @@ namespace D1den.Calculation
             {
                 for (int j = 0; j < ColumnCount; j++)
                 {
-                    if (this[i, j] != other[i, j])
+                    if (!MathA.CompareAlmostEqual(this[i, j], other[i, j], delta))
                         return false;
                 }
             }
@@ -479,9 +493,9 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Алгоритм создания хэш-кода
+        /// Hash code generation algorithm
         /// </summary>
-        /// <returns>Хэш-код</returns>
+        /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             int countElements = _matrixData.Length;
@@ -502,38 +516,36 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Создать копию матрицы
+        /// Duplicate Matrix
         /// </summary>
-        /// <returns>Копия матрицы привдённая к object</returns>
+        /// <returns>Matrix clone like <see cref="object"/></returns>
         public object Clone()
         {
             return new Matrix(_matrixData);
         }
         #endregion
 
-        #region Операторы
+        #region Operators
         /// <summary>
-        /// Преобразовать двумерный массив в матрицу
+        /// Convert 2D array to matrix
         /// </summary>
-        /// <param name="matrixArray">Двумерный массив double</param>
+        /// <param name="matrixArray">2D array</param>
         public static implicit operator Matrix(double[,] matrixArray)
         {
             return new Matrix(matrixArray);
         }
-
         /// <summary>
-        /// Преобразовать двумерный массив в матрицу
+        /// Convert 2D array to matrix
         /// </summary>
-        /// <param name="matrixArray">Двумерный массив int</param>
+        /// <param name="matrixArray">2D array</param>
         public static implicit operator Matrix(int[,] matrixArray)
         {
             return new Matrix(matrixArray);
         }
-
         /// <summary>
-        /// Преобразовать одномерный массив в матрицу
+        /// Convert 1D array to matrix-row
         /// </summary>
-        /// <param name="matrixArray">Одномерный массив double</param>
+        /// <param name="matrixArray">1D array</param>
         public static implicit operator Matrix(double[] matrixArray)
         {
             var doubleMatrixArray = new double[1, matrixArray.Length];
@@ -543,11 +555,10 @@ namespace D1den.Calculation
             }
             return new Matrix(doubleMatrixArray);
         }
-
         /// <summary>
-        /// Преобразовать одномерный массив в матрицу
+        /// Convert 1D array to matrix-row
         /// </summary>
-        /// <param name="matrixArray">Одномерный массив int</param>
+        /// <param name="matrixArray">1D array</param>
         public static implicit operator Matrix(int[] matrixArray)
         {
             var intMatrixArray = new double[1, matrixArray.Length];
@@ -557,183 +568,172 @@ namespace D1den.Calculation
             }
             return new Matrix(intMatrixArray);
         }
-
         /// <summary>
-        /// Преобразовать матрицу к двумерному массиву double
+        /// Convert matrix to 2D array
         /// </summary>
-        /// <param name="matrix">Матрица</param>
+        /// <param name="matrix">Matrix</param>
         public static explicit operator double[,](Matrix matrix)
         {
             return matrix.MatrixData;
         }
-
         /// <summary>
-        /// Преобразовать матрицу к двумерному массиву int
+        /// Convert matrix to 2D array
         /// </summary>
-        /// <param name="matrix">Матрица</param>
+        /// <param name="matrix">Matrix</param>
         public static explicit operator int[,](Matrix matrix)
         {
             return matrix.Int32MatrixData;
         }
-
         /// <summary>
-        /// Сложение матрицы и числа
+        /// Adding a matrix and a number
         /// </summary>
-        /// <param name="value">Число, складываемое с матрицей</param>
-        /// <param name="matrix">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <param name="matrix">Matrix</param>
+        /// <returns>Result matrix</returns>
         public static Matrix operator +(double value, Matrix matrix)
         {
             return matrix.Add(value);
         }
-
         /// <summary>
-        /// Сложение матрицы и числа
+        /// Adding a matrix and a number
         /// </summary>
-        /// <param name="value">Число, складываемое с матрицей</param>
-        /// <param name="matrix">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="value">Number</param>
+        /// <param name="matrix">Matrix</param>
+        /// <returns>Result matrix</returns>
         public static Matrix operator +(Matrix matrix, double value)
         {
             return matrix.Add(value);
         }
-
         /// <summary>
-        /// Сложение матриц
+        /// Adding two matrices
         /// </summary>
-        /// <param name="matrix1">Матрица</param>
-        /// <param name="matrix2">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If the dimensions of the matrices are not the same.</exception>
+        /// <returns>Result matrix</returns>
         public static Matrix operator +(Matrix matrix1, Matrix matrix2)
         {
             return matrix1.Add(matrix2);
         }
-
         /// <summary>
-        /// Разность матрицы и числа
+        /// Subtracting a number from a matrix
         /// </summary>
-        /// <param name="value">Число, вычитаемое из матрицы</param>
-        /// <param name="matrix">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix">Matrix</param>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public static Matrix operator -(Matrix matrix, double value)
         {
             return matrix.Subtract(value);
         }
-
         /// <summary>
-        /// Разность матриц
+        /// Subtracting two matrices
         /// </summary>
-        /// <param name="matrix1">Матрица</param>
-        /// <param name="matrix2">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If the dimensions of the matrices are not the same.</exception>
+        /// <returns>Result matrix</returns>
         public static Matrix operator -(Matrix matrix1, Matrix matrix2)
         {
             return matrix1.Subtract(matrix2);
         }
-
         /// <summary>
-        /// Произведение матрицы и числа
+        /// Multiplying a matrix by a number
         /// </summary>
-        /// <param name="value">Множитель</param>
-        /// <param name="matrix">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix">Matrix</param>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public static Matrix operator *(Matrix matrix, double value)
         {
             return matrix.Multiply(value);
         }
-
         /// <summary>
-        /// Произведение матрицы и числа
+        /// Multiplying a matrix by a number
         /// </summary>
-        /// <param name="value">Множитель</param>
-        /// <param name="matrix">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix">Matrix</param>
+        /// <param name="value">Number</param>
+        /// <returns>Result matrix</returns>
         public static Matrix operator *(double value, Matrix matrix)
         {
             return matrix.Multiply(value);
         }
-
         /// <summary>
-        /// Произведение матриц
+        /// Matrix multiplication
         /// </summary>
-        /// <param name="matrix1">Матрица</param>
-        /// <param name="matrix2">Матрица</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <exception cref="ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+        /// <returns>Result matrix</returns>
         public static Matrix operator *(Matrix matrix1, Matrix matrix2)
         {
             return matrix1.Multiply(matrix2);
         }
-
         /// <summary>
-        /// Деление матрицы на число
+        /// Dividing a matrix by a number
         /// </summary>
-        /// <param name="matrix">Матрица</param>
-        /// <param name="value">Делитель</param>
-        /// <returns>Матрица</returns>
+        /// <param name="matrix">Matrix</param>
+        /// <param name="value">Number</param>
+        /// <exception cref="DivideByZeroException">If number is zero</exception>
+        /// <returns>Result matrix</returns>
         public static Matrix operator /(Matrix matrix, double value)
         {
             return matrix.Divide(value);
         }
-
         /// <summary>
-        /// Оператор проверки на равенство матриц
+        /// Checking for equality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator ==(Matrix matrix1, Matrix matrix2)
         {
             return matrix1.Equals(matrix2);
         }
-
         /// <summary>
-        /// Оператор проверки на неравенство матриц
+        /// Checking for inequality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator !=(Matrix matrix1, Matrix matrix2)
         {
             return !matrix1.Equals(matrix2);
         }
-
         /// <summary>
-        /// Оператор проверки на равенство матриц
+        /// Checking for equality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator ==(Matrix matrix1, object matrix2)
         {
             return matrix1.Equals(matrix2);
         }
         /// <summary>
-        /// Оператор проверки на неравенство матриц
+        /// Checking for inequality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator !=(Matrix matrix1, object matrix2)
         {
             return !matrix1.Equals(matrix2);
         }
-
         /// <summary>
-        /// Оператор проверки на равенство матриц
+        /// Checking for equality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator ==(object matrix1, Matrix matrix2)
         {
             return matrix1.Equals(matrix2);
         }
         /// <summary>
-        /// Оператор проверки на неравенство матриц
+        /// Checking for inequality of matrix
         /// </summary>
-        /// <param name="matrix1">Матрица 1</param>
-        /// <param name="matrix2">Матрица 2</param>
-        /// <returns>Результат</returns>
+        /// <param name="matrix1">First matrix</param>
+        /// <param name="matrix2">Second matrix</param>
+        /// <returns>Result of checking</returns>
         public static bool operator !=(object matrix1, Matrix matrix2)
         {
             return !matrix1.Equals(matrix2);

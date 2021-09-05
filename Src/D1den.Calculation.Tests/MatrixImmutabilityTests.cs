@@ -16,7 +16,7 @@ namespace Tests
         [Test]
         public void Negative()
         {
-            var matrix = Matrix.GetOnesMatrix(2);
+            var matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Negative();
             if (matrix[0, 0] == 1 && matrix[0, 1] == 1 && matrix[1, 0] == 1 && matrix[1, 1] == 1)
                 Assert.Pass();
@@ -37,7 +37,7 @@ namespace Tests
         [Test]
         public void AddMatrixAndValue()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Add(2.34);
             if (matrix[0, 0] == 1 && matrix[0, 1] == 1 &&
                 matrix[1, 0] == 1 && matrix[1, 1] == 1)
@@ -46,7 +46,7 @@ namespace Tests
         [Test]
         public void AddMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -60,7 +60,7 @@ namespace Tests
         [Test]
         public void SubtractMatrixAndValue()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Subtract(2.34);
             if (matrix[0, 0] == 1 && matrix[0, 1] == 1
                 && matrix[1, 0] == 1 && matrix[1, 1] == 1)
@@ -69,7 +69,7 @@ namespace Tests
         [Test]
         public void SubtractMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -144,7 +144,7 @@ namespace Tests
                 {1,2 },
                 {3,4 }
             };
-            Matrix matrix2 = Matrix.GetEyeMatrix(2);
+            Matrix matrix2 = Matrix.Eye(2);
             Matrix matrix3 = matrix.Multiply(matrix2);
             if (matrix[0, 0] == 1 && matrix[0, 1] == 2 &&
                 matrix[1, 0] == 3 && matrix[1, 1] == 4)

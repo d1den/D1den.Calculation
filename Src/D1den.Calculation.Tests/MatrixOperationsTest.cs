@@ -16,7 +16,7 @@ namespace Tests
         [Test]
         public void Negative()
         {
-            var matrix = Matrix.GetOnesMatrix(2);
+            var matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Negative();
             if (matrix2[0, 0] == -1 && matrix2[0, 1] == -1 && matrix2[1, 0] == -1 && matrix2[1, 1] == -1)
                 Assert.Pass();
@@ -37,7 +37,7 @@ namespace Tests
         [Test]
         public void TransposeOneElementMatrix()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(1);
+            Matrix matrix = Matrix.Ones(1);
             Matrix matrix2 = matrix.Transpose();
             if (matrix2[0, 0] == 1)
                 Assert.Pass();
@@ -45,7 +45,7 @@ namespace Tests
         [Test]
         public void AddMatrixAndValue()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Add(2.34);
             Matrix matrix3 = matrix + 2.34;
             Matrix matrix4 = 2.34 + matrix;
@@ -56,7 +56,7 @@ namespace Tests
         [Test]
         public void AddMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -72,7 +72,7 @@ namespace Tests
         [Test]
         public void AddWrongMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(3);
+            Matrix matrix = Matrix.Ones(3);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -87,7 +87,7 @@ namespace Tests
         [Test]
         public void SubtractMatrixAndValue()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Subtract(2.34);
             Matrix matrix3 = matrix - 2.34;
             if (matrix2[0, 0] == -1.34 && matrix2[0, 1] == -1.34 && matrix2[1, 0] == -1.34 && matrix2[1, 1] == -1.34 &&
@@ -97,7 +97,7 @@ namespace Tests
         [Test]
         public void SubtractMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(2);
+            Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -113,7 +113,7 @@ namespace Tests
         [Test]
         public void SubtractWrongMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(3);
+            Matrix matrix = Matrix.Ones(3);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
@@ -243,7 +243,7 @@ namespace Tests
                 {1,2 },
                 {3,4 }
             };
-            Matrix matrix2 = Matrix.GetEyeMatrix(2);
+            Matrix matrix2 = Matrix.Eye(2);
             Matrix matrix3 = matrix.Multiply(matrix2);
             Matrix matrix4 = matrix * matrix2;
             Matrix matrix5 = matrix2 * matrix;
@@ -270,7 +270,7 @@ namespace Tests
         [Test]
         public void MultiplytWrongMatrices()
         {
-            Matrix matrix = Matrix.GetOnesMatrix(3);
+            Matrix matrix = Matrix.Ones(3);
             Matrix matrix2 = new[,]
             {
                 {1, 2 },
