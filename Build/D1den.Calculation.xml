@@ -1,0 +1,746 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>D1den.Calculation</name>
+    </assembly>
+    <members>
+        <member name="T:D1den.Calculation.RotationAxisOrder">
+            <summary>
+            The order of the rotation axes. Specifies the type of Euler angles
+            </summary>
+            <remarks>The type of Euler angles directly depends
+            on the order of the rotation axes, since the resulting rotation matrix
+            is obtained by sequentially multiplying the rotation matrices around each axis.
+            <see href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles</see>
+            </remarks>
+        </member>
+        <member name="F:D1den.Calculation.RotationAxisOrder.XYZ">
+            <summary>
+            XYZ rotation. Tait–Bryan angles
+            </summary>
+        </member>
+        <member name="F:D1den.Calculation.RotationAxisOrder.ZXZ">
+            <summary>
+            ZXZ rotation. Standart Euler angles
+            </summary>
+        </member>
+        <member name="F:D1den.Calculation.RotationAxisOrder.ZYZ">
+            <summary>
+            ZYZ rotation
+            </summary>
+        </member>
+        <member name="T:D1den.Calculation.EulerAngles">
+            <summary>
+            Various Euler angles and operations with them
+            </summary>
+            <remarks>
+            Defines Euler angles for use, which can be set either manually
+            or from a rigid body rotation matrix.
+            Euler angles describe the orientation of a rigid body in space
+            in the most understandable way for a person,
+            since they have only three angles. 
+            <see href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles</see>
+            </remarks>
+        </member>
+        <member name="P:D1den.Calculation.EulerAngles.Alpha">
+            <summary>
+            Precession angle in radians
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.EulerAngles.Beta">
+            <summary>
+            Nutation angle in radians
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.EulerAngles.Gamma">
+            <summary>
+            Intrinsic rotation angle in radians
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.EulerAngles.RotationAxisOrder">
+            <summary>
+            Rotation axis order
+            </summary>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create Euler angles from parameters
+            </summary>
+            <param name="alpha">Precession angle</param>
+            <param name="beta">Nutation angle</param>
+            <param name="gamma">Intrinsic rotation angle</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.ValidateArrayLength(System.Double[])">
+            <summary>
+            Check that the length of the array is 3
+            </summary>
+            <param name="array">Array of angles</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="array"/>.Length != 3</exception>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromDegrees(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from degrees
+            </summary>
+            <param name="alpha">Precession angle in degrees</param>
+            <param name="beta">Nutation angle in degrees</param>
+            <param name="gamma">Intrinsic rotation angle in degrees</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromRadians(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from radians
+            </summary>
+            <param name="alpha">Precession angle</param>
+            <param name="beta">Nutation angle</param>
+            <param name="gamma">Intrinsic rotation angle</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromDegreesArray(System.Double[],D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from degrees array
+            </summary>
+            <param name="eulerAnglesArray">Angle array in degrees [alpha, beta, gamma]</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="eulerAnglesArray"/>.Length != 3</exception>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromRadiansArray(System.Double[],D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from radians array
+            </summary>
+            <param name="eulerAnglesArray">Angle array in radians [alpha, beta, gamma]</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="eulerAnglesArray"/>.Length != 3</exception>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromRotationMatrix(D1den.Calculation.Matrix,D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Get Euler angles from rotation matrix
+            </summary>
+            <param name="rotationMatrix">Rotation matrix 3x3</param>
+            <param name="rotationAxisOrder">The order of the rotation axes. Specifies the type of Euler angles</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="rotationMatrix"/> doesn`t 3x3</exception>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.ToArray">
+            <summary>
+            Convert Euler angles to array
+            </summary>
+            <returns>Euler angles array</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.GetRotationMatrix">
+            <summary>
+            Convert Euler angles to rotation matrix
+            </summary>
+            <returns>Rotation matrix 3x3</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.ToString">
+            <summary>
+            Get Euler angles as string
+            </summary>
+            <returns>Euler angles as string</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.ToStringInDegrees">
+            <summary>
+            Get Euler angles as string in degrees
+            </summary>
+            <returns>Euler angles as string in degrees</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.Equals(System.Object)">
+            <summary>
+            Checking for equality of Euler angles
+            </summary>
+            <param name="obj">Packed Euler angles object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.Equals(D1den.Calculation.EulerAngles)">
+            <summary>
+            Checking for equality of Euler angles
+            </summary>
+            <param name="other">Euler angles object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.Equals(D1den.Calculation.EulerAngles,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of the Euler angles
+            </summary>
+            <param name="other">Euler angles object</param>
+            <param name="delta">Accuracy</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.GetHashCode">
+            <summary>
+            Hash code generation algorithm
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.op_Explicit(D1den.Calculation.EulerAngles)~System.Double[]">
+            <summary>
+            Convert Euler angles to array
+            </summary>
+            <param name="eulerAngles">Euler angles array</param>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.op_Equality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
+            <summary>
+            Checking for equality of points
+            </summary>
+            <param name="eulers1">Euler angles 1</param>
+            <param name="eulers2">Euler angles 2</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.op_Inequality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
+            <summary>
+            Checking for inequality of points
+            </summary>
+            <param name="eulers1">Euler angles 1</param>
+            <param name="eulers2">Euler angles 2</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="T:D1den.Calculation.MathA">
+            <summary>
+            Additional math functions
+            </summary>
+        </member>
+        <member name="M:D1den.Calculation.MathA.Clamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Aligning a value to a range
+            </summary>
+            <param name="value">Value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+            <returns>Value in range</returns>
+        </member>
+        <member name="M:D1den.Calculation.MathA.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Aligning a value to a range
+            </summary>
+            <param name="value">Value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+            <returns>Value in range</returns>
+        </member>
+        <member name="M:D1den.Calculation.MathA.DegreeToRadian(System.Double)">
+            <summary>
+            Convert degree to radian
+            </summary>
+            <param name="degreeAngle">Angle in degrees</param>
+            <returns>Angle in radians</returns>
+        </member>
+        <member name="M:D1den.Calculation.MathA.RadianToDegree(System.Double)">
+            <summary>
+            Convert radian to degree
+            </summary>
+            <param name="radianAngle">Angle in radians</param>
+            <returns>Angle in degrees</returns>
+        </member>
+        <member name="M:D1den.Calculation.MathA.CompareAlmostEqual(System.Double,System.Double,System.Double)">
+            <summary>
+            Compare numbers with some margin of error
+            </summary>
+            <param name="x">First number</param>
+            <param name="y">Second number</param>
+            <param name="delta">Comparison error</param>
+            <returns>Result of сomparison</returns>
+        </member>
+        <member name="T:D1den.Calculation.Matrix">
+            <summary>
+            Matrix of any size
+            </summary>
+            <remarks>
+            Matrix of any size, supporting various matrix operations.
+            </remarks>
+        </member>
+        <member name="P:D1den.Calculation.Matrix.MatrixData">
+            <summary>
+            Array of matrix values
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Matrix.Int32MatrixData">
+            <summary>
+            An array of matrix values converted to Int32
+            </summary>
+            <remarks>Used <see cref="M:System.Math.Round(System.Double)"/> to convert</remarks>
+        </member>
+        <member name="P:D1den.Calculation.Matrix.RowCount">
+            <summary>
+            Matrix row count
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Matrix.ColumnCount">
+            <summary>
+            Matrix column count
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Get matrix value by row and column
+            </summary>
+            <param name="row">Row index</param>
+            <param name="column">Column index</param>
+            <exception cref="T:System.IndexOutOfRangeException">If index or indexes wrong</exception>
+            <returns>Matrix value</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Create matrix by size
+            </summary>
+            <param name="rowCount">Matrix row count</param>
+            <param name="columnCount">Matrix column count</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Double[0:,0:])">
+            <summary>
+            Create a matrix from the values of a two-dimensional array
+            </summary>
+            <param name="matrixData">Array of matrix values</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32[0:,0:])">
+            <summary>
+            Create a matrix from the values of a two-dimensional Int32 array
+            </summary>
+            <param name="matrixData">Int32 array of matrix values</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Zeros(System.Int32)">
+            <summary>
+            Create a zeros matrix of any size
+            </summary>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Zeros matrix</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Eye(System.Int32)">
+            <summary>
+            Create a identity matrix (E)
+            </summary>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Identity matrix (E)</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Ones(System.Int32)">
+            <summary>
+            Create an ones matrix
+            </summary>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Matrix of 1.0</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Negative">
+            <summary>
+            Negative matrix
+            </summary>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Transpose">
+            <summary>
+            Matrix transpose
+            </summary>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Add(System.Double)">
+            <summary>
+            Adding a matrix and a number
+            </summary>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Add(D1den.Calculation.Matrix)">
+            <summary>
+            Adding two matrices
+            </summary>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Subtract(System.Double)">
+            <summary>
+            Subtracting a number from a matrix
+            </summary>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Subtract(D1den.Calculation.Matrix)">
+            <summary>
+            Subtracting two matrices
+            </summary>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Multiply(System.Double)">
+            <summary>
+            Multiplying a matrix by a number
+            </summary>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Divide(System.Double)">
+            <summary>
+            Dividing a matrix by a number
+            </summary>
+            <param name="value">Number</param>
+            <exception cref="T:System.DivideByZeroException">If number is zero</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Multiply(D1den.Calculation.Matrix)">
+            <summary>
+            Matrix multiplication
+            </summary>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.GetDeterminant">
+            <summary>
+            Get determinant of matrix
+            </summary>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square</exception>
+            <returns>Determinant</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
+            <summary>
+            Get minor matrix
+            </summary>
+            <param name="rowIndex">Minor row index</param>
+            <param name="columnIndex">Minor column index</param>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square or matrix.Length == 1</exception>
+            <returns>Матрица минора</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Invert">
+            <summary>
+            Get invert matrix
+            </summary>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.GetEuclideanNorm">
+            <summary>
+            Get euclidean norm of matrix
+            </summary>
+            <returns>Euclidean norm</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.ToString">
+            <summary>
+            Get matrix as string
+            </summary>
+            <returns>Matrix as string</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.SetAllValues(System.Double)">
+            <summary>
+            Set all matrix values
+            </summary>
+            <param name="value">Value</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.ProcessActionOverData(System.Action{System.Int32,System.Int32})">
+            <summary>
+            Apply action to all elements of the matrix
+            </summary>
+            <param name="action">Action for all elements</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Equals(System.Object)">
+            <summary>
+            Checking for equality of matrix with accuracy 1.0E-6
+            </summary>
+            <param name="obj">Matrix like <see cref="T:System.Object"/></param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Equals(D1den.Calculation.Matrix)">
+            <summary>
+            Checking for equality of matrix with accuracy 1.0E-6
+            </summary>
+            <param name="other">Matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Equals(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of matrix
+            </summary>
+            <param name="other">Matrix</param>
+            <param name="delta">Accuracy</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.GetHashCode">
+            <summary>
+            Hash code generation algorithm
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Clone">
+            <summary>
+            Duplicate Matrix
+            </summary>
+            <returns>Matrix clone like <see cref="T:System.Object"/></returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[0:,0:])~D1den.Calculation.Matrix">
+            <summary>
+            Convert 2D array to matrix
+            </summary>
+            <param name="matrixArray">2D array</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[0:,0:])~D1den.Calculation.Matrix">
+            <summary>
+            Convert 2D array to matrix
+            </summary>
+            <param name="matrixArray">2D array</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[])~D1den.Calculation.Matrix">
+            <summary>
+            Convert 1D array to matrix-row
+            </summary>
+            <param name="matrixArray">1D array</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[])~D1den.Calculation.Matrix">
+            <summary>
+            Convert 1D array to matrix-row
+            </summary>
+            <param name="matrixArray">1D array</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Double[0:,0:]">
+            <summary>
+            Convert matrix to 2D array
+            </summary>
+            <param name="matrix">Matrix</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Int32[0:,0:]">
+            <summary>
+            Convert matrix to 2D array
+            </summary>
+            <param name="matrix">Matrix</param>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Addition(System.Double,D1den.Calculation.Matrix)">
+            <summary>
+            Adding a matrix and a number
+            </summary>
+            <param name="value">Number</param>
+            <param name="matrix">Matrix</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Adding a matrix and a number
+            </summary>
+            <param name="value">Number</param>
+            <param name="matrix">Matrix</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
+            <summary>
+            Adding two matrices
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Subtracting a number from a matrix
+            </summary>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
+            <summary>
+            Subtracting two matrices
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Multiplying a matrix by a number
+            </summary>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(System.Double,D1den.Calculation.Matrix)">
+            <summary>
+            Multiplying a matrix by a number
+            </summary>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
+            <summary>
+            Matrix multiplication
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Division(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Dividing a matrix by a number
+            </summary>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <exception cref="T:System.DivideByZeroException">If number is zero</exception>
+            <returns>Result matrix</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
+            <summary>
+            Checking for equality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
+            <summary>
+            Checking for inequality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,System.Object)">
+            <summary>
+            Checking for equality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,System.Object)">
+            <summary>
+            Checking for inequality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Equality(System.Object,D1den.Calculation.Matrix)">
+            <summary>
+            Checking for equality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.op_Inequality(System.Object,D1den.Calculation.Matrix)">
+            <summary>
+            Checking for inequality of matrix
+            </summary>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="T:D1den.Calculation.Point3D">
+            <summary>
+            Point in 3-d space
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Point3D.X">
+            <summary>
+            X coordinate
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Point3D.Y">
+            <summary>
+            Y coordinate
+            </summary>
+        </member>
+        <member name="P:D1den.Calculation.Point3D.Z">
+            <summary>
+            Z coordinate
+            </summary>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Creating a point by coordinates
+            </summary>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.#ctor(System.Double[])">
+            <summary>
+            Creating a point from an array of its coordinates
+            </summary>
+            <param name="pointArray">Array of coordinates [x, y, z]</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.ToArray">
+            <summary>
+            Convert point to array of coordinates
+            </summary>
+            <returns>Array of coordinatesт</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.GetDistance(D1den.Calculation.Point3D)">
+            <summary>
+            Get distance to other point
+            </summary>
+            <param name="point">Other point</param>
+            <returns>Distance</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.ToString">
+            <summary>
+            Get point as string
+            </summary>
+            <returns>Point as string</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.Equals(System.Object)">
+            <summary>
+            Checking for equality of points with acceracy 1.0E-6
+            </summary>
+            <param name="obj">Packed point object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D)">
+            <summary>
+            Checking for equality of points with acceracy 1.0E-6
+            </summary>
+            <param name="other">Point object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of points
+            </summary>
+            <param name="other">Point object</param>
+            <param name="delta">Accuracy</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.GetHashCode">
+            <summary>
+            Hash code generation algorithm
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.op_Implicit(System.Double[])~D1den.Calculation.Point3D">
+            <summary>
+            Convert an array of coordinates to a point
+            </summary>
+            <param name="pointArray">Array of coordinates [x, y, z]</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.op_Explicit(D1den.Calculation.Point3D)~System.Double[]">
+            <summary>
+            Convert point to array of coordinates
+            </summary>
+            <param name="point">Point</param>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.op_Equality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
+            <summary>
+            Checking for equality of points
+            </summary>
+            <param name="point1">Point 1</param>
+            <param name="point2">Point 2</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.op_Inequality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
+            <summary>
+            Checking for inequality of points
+            </summary>
+            <param name="point1">Point 1</param>
+            <param name="point2">Point 2</param>
+            <returns>Result of checking</returns>>
+        </member>
+    </members>
+</doc>
