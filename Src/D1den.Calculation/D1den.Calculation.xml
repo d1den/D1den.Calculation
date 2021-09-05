@@ -4,203 +4,200 @@
         <name>D1den.Calculation</name>
     </assembly>
     <members>
-        <member name="T:D1den.Calculation.AngleUnits">
-            <summary>
-            Единицы измерения углов
-            </summary>
-        </member>
-        <member name="F:D1den.Calculation.AngleUnits.Radians">
-            <summary>
-            Радианы
-            </summary>
-        </member>
-        <member name="F:D1den.Calculation.AngleUnits.Degrees">
-            <summary>
-            Градусы
-            </summary>
-        </member>
         <member name="T:D1den.Calculation.RotationAxisOrder">
             <summary>
-            Порядок осей поворота
+            The order of the rotation axes. Specifies the type of Euler angles
             </summary>
-            <remarks>Тип углов Эйлера напрямую зависит от порядка осей поворота,
-            так как итоговая матрица поворота получается
-            за счёт последовательного перемножения матриц поворота вокруг каждой оси.
-            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            <remarks>The type of Euler angles directly depends
+            on the order of the rotation axes, since the resulting rotation matrix
+            is obtained by sequentially multiplying the rotation matrices around each axis.
+            <see href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles</see>
             </remarks>
         </member>
         <member name="F:D1den.Calculation.RotationAxisOrder.XYZ">
             <summary>
-            Поворот по осям XYZ. Углы Тейта-Брайна
+            XYZ rotation. Tait–Bryan angles
             </summary>
         </member>
         <member name="F:D1den.Calculation.RotationAxisOrder.ZXZ">
             <summary>
-            Поворот по осям ZXZ
+            ZXZ rotation. Standart Euler angles
             </summary>
         </member>
         <member name="F:D1den.Calculation.RotationAxisOrder.ZYZ">
             <summary>
-            Поворот по осям ZYZ
+            ZYZ rotation
             </summary>
         </member>
         <member name="T:D1den.Calculation.EulerAngles">
             <summary>
-            Углы Эйлера 
+            Various Euler angles and operations with them
             </summary>
             <remarks>
-            Определяет для использования углы Эйлера, которые можно задавать как в ручную, 
-            так и из матрицы поворота твёрдого тела.
-            Углы Эйлера описывают ориентацию твёрдого тела в пространстве наиболее понятным человеку образом, так как 
-            имеют всего три угла. 
-            <see href="https://wiki2.wiki/wiki/euler_angles">Углы Эйлера</see>
+            Defines Euler angles for use, which can be set either manually
+            or from a rigid body rotation matrix.
+            Euler angles describe the orientation of a rigid body in space
+            in the most understandable way for a person,
+            since they have only three angles. 
+            <see href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles</see>
             </remarks>
         </member>
         <member name="P:D1den.Calculation.EulerAngles.Alpha">
             <summary>
-            Угол прецессии
+            Precession angle in radians
             </summary>
         </member>
-        <member name="P:D1den.Calculation.EulerAngles.Betta">
+        <member name="P:D1den.Calculation.EulerAngles.Beta">
             <summary>
-            Угол нутации
+            Nutation angle in radians
             </summary>
         </member>
         <member name="P:D1den.Calculation.EulerAngles.Gamma">
             <summary>
-            Угол собственного вращения
-            </summary>
-        </member>
-        <member name="P:D1den.Calculation.EulerAngles.AngleUnits">
-            <summary>
-            Единицы измерения углов
+            Intrinsic rotation angle in radians
             </summary>
         </member>
         <member name="P:D1den.Calculation.EulerAngles.RotationAxisOrder">
             <summary>
-            Порядок осей поворота
+            Rotation axis order
             </summary>
         </member>
-        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double)">
+        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
             <summary>
-            Объект углов Эйлера в ГРАДУСАХ
+            Create Euler angles from parameters
             </summary>
-            <param name="alpha">Угол прецессии</param>
-            <param name="betta">Угол нутации</param>
-            <param name="gamma">Угол собственного вращения</param>
+            <param name="alpha">Precession angle</param>
+            <param name="beta">Nutation angle</param>
+            <param name="gamma">Intrinsic rotation angle</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
         </member>
-        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double,System.Double,System.Double,D1den.Calculation.AngleUnits,D1den.Calculation.RotationAxisOrder)">
+        <member name="M:D1den.Calculation.EulerAngles.ValidateArrayLength(System.Double[])">
             <summary>
-            Объект углов Эйлера с настройкой единиц измерения углов
+            Check that the length of the array is 3
             </summary>
-            <param name="alpha">Угол прецессии</param>
-            <param name="betta">Угол нутации</param>
-            <param name="gamma">Угол собственного вращения</param>
-            <param name="angleUnits">Единицы измерения угла</param>
-            <param name="rotationAxisOrder">Порядок осей поворота</param>
+            <param name="array">Array of angles</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="array"/>.Length != 3</exception>
         </member>
-        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double[])">
+        <member name="M:D1den.Calculation.EulerAngles.FromDegrees(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
             <summary>
-            Объект углов Эйлера из массива значений углов в ГРАДУСАХ
+            Create EulerAngles from degrees
             </summary>
-            <param name="eulerAnglesArray">Массив значений углов</param>
-            <exception cref="T:System.ArgumentException">Если длина массива значений != 3</exception>
+            <param name="alpha">Precession angle in degrees</param>
+            <param name="beta">Nutation angle in degrees</param>
+            <param name="gamma">Intrinsic rotation angle in degrees</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <returns>Euler angles</returns>
         </member>
-        <member name="M:D1den.Calculation.EulerAngles.#ctor(System.Double[],D1den.Calculation.AngleUnits,D1den.Calculation.RotationAxisOrder)">
+        <member name="M:D1den.Calculation.EulerAngles.FromRadians(System.Double,System.Double,System.Double,D1den.Calculation.RotationAxisOrder)">
             <summary>
-            Объект углов Эйлера из массива значений углов
+            Create EulerAngles from radians
             </summary>
-            <param name="eulerAnglesArray">Массив значений углов</param>
-            <param name="angleUnits">Единицы измерения угла</param>
-            <param name="rotationAxisOrder">Порядок осей поворота</param>
+            <param name="alpha">Precession angle</param>
+            <param name="beta">Nutation angle</param>
+            <param name="gamma">Intrinsic rotation angle</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromDegreesArray(System.Double[],D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from degrees array
+            </summary>
+            <param name="eulerAnglesArray">Angle array in degrees [alpha, beta, gamma]</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="eulerAnglesArray"/>.Length != 3</exception>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromRadiansArray(System.Double[],D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Create EulerAngles from radians array
+            </summary>
+            <param name="eulerAnglesArray">Angle array in radians [alpha, beta, gamma]</param>
+            <param name="rotationAxisOrder">Rotation axis order</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="eulerAnglesArray"/>.Length != 3</exception>
+            <returns>Euler angles</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.FromRotationMatrix(D1den.Calculation.Matrix,D1den.Calculation.RotationAxisOrder)">
+            <summary>
+            Get Euler angles from rotation matrix
+            </summary>
+            <param name="rotationMatrix">Rotation matrix 3x3</param>
+            <param name="rotationAxisOrder">The order of the rotation axes. Specifies the type of Euler angles</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="rotationMatrix"/> doesn`t 3x3</exception>
+            <returns>Euler angles</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.ToArray">
             <summary>
-            Поместить углы Эйлера в массив
+            Convert Euler angles to array
             </summary>
-            <returns>Массив углов Эйлера</returns>
-        </member>
-        <member name="M:D1den.Calculation.EulerAngles.GetEulersFromRotation(D1den.Calculation.Matrix,D1den.Calculation.RotationAxisOrder)">
-            <summary>
-            Преобразовать матрицу поворота в углы Эйлера
-            </summary>
-            <param name="rotationMatrix">Матрица поворота 3x3</param>
-            <param name="rotationAxisOrder">Порядок осей поворота. Определяет тип углов Эйлера</param>
-            <exception cref="T:System.ArgumentException">Если матрица поворота имеет неверные размеры</exception>
-            <returns>Углы Эйлера в радианах</returns>
+            <returns>Euler angles array</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.GetRotationMatrix">
             <summary>
-            Преобразовать углы Эйлера к матрице поворота
+            Convert Euler angles to rotation matrix
             </summary>
-            <returns>Матрица поворота 3x3</returns>
-        </member>
-        <member name="M:D1den.Calculation.EulerAngles.ConvertToRadians">
-            <summary>
-            Преобразовать значения углов в радианы
-            </summary>
-            <returns>Углы Эйлера в радианах</returns>
-        </member>
-        <member name="M:D1den.Calculation.EulerAngles.ConvertToDegrees">
-            <summary>
-            Преобразовать углы Эйлера в градусы
-            </summary>
-            <returns>Углы Эйлера в градусах</returns>
+            <returns>Rotation matrix 3x3</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.ToString">
             <summary>
-            Преобразовать объект к строке
+            Get Euler angles as string
             </summary>
-            <returns>Строка углов Эйлера</returns>
+            <returns>Euler angles as string</returns>
         </member>
-        <member name="M:D1den.Calculation.EulerAngles.ToString(D1den.Calculation.AngleUnits)">
+        <member name="M:D1den.Calculation.EulerAngles.ToStringInDegrees">
             <summary>
-            Преобразовать объект к строке в заданных единицах измерения
+            Get Euler angles as string in degrees
             </summary>
-            <param name="angleUnits">Единицы измерения углов</param>
-            <returns>Строка углов Эйлера</returns>
+            <returns>Euler angles as string in degrees</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.Equals(System.Object)">
             <summary>
-            Сравнение углов Эйлера в упаковке
+            Checking for equality of Euler angles
             </summary>
-            <param name="obj">Сравниваемый объект</param>
-            <returns>Результат сравнения</returns>
+            <param name="obj">Packed Euler angles object</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.Equals(D1den.Calculation.EulerAngles)">
             <summary>
-            Сравнение углов Эйлера
+            Checking for equality of Euler angles
             </summary>
-            <param name="other">Другой объект углов Эйлера</param>
-            <returns>Результат сравнения</returns>
+            <param name="other">Euler angles object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.EulerAngles.Equals(D1den.Calculation.EulerAngles,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of the Euler angles
+            </summary>
+            <param name="other">Euler angles object</param>
+            <param name="delta">Accuracy</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.GetHashCode">
             <summary>
-            Алгоритм создания хэш-кода
+            Hash code generation algorithm
             </summary>
-            <returns>Хэш-код</returns>
+            <returns>Hash code</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.op_Explicit(D1den.Calculation.EulerAngles)~System.Double[]">
             <summary>
-            Преобразовать углы Эйлера в массив
+            Convert Euler angles to array
             </summary>
-            <param name="eulerAngles">Массив double</param>
+            <param name="eulerAngles">Euler angles array</param>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.op_Equality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
             <summary>
-            Проверка на равенство углов Эйлера
+            Checking for equality of points
             </summary>
-            <param name="eulers1">Углы Эйлера 1</param>
-            <param name="eulers2">Углы Эйлера 2</param>
-            <returns>Результат проверки</returns>
+            <param name="eulers1">Euler angles 1</param>
+            <param name="eulers2">Euler angles 2</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.EulerAngles.op_Inequality(D1den.Calculation.EulerAngles,D1den.Calculation.EulerAngles)">
             <summary>
-            Проверка на неравенство углов Эйлера
+            Checking for inequality of points
             </summary>
-            <param name="eulers1">Углы Эйлера 1</param>
-            <param name="eulers2">Углы Эйлера 2</param>
-            <returns>Результат проверки</returns>
+            <param name="eulers1">Euler angles 1</param>
+            <param name="eulers2">Euler angles 2</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="T:D1den.Calculation.MathA">
             <summary>
@@ -238,6 +235,15 @@
             </summary>
             <param name="radianAngle">Angle in radians</param>
             <returns>Angle in degrees</returns>
+        </member>
+        <member name="M:D1den.Calculation.MathA.CompareAlmostEqual(System.Double,System.Double,System.Double)">
+            <summary>
+            Compare numbers with some margin of error
+            </summary>
+            <param name="x">First number</param>
+            <param name="y">Second number</param>
+            <param name="delta">Comparison error</param>
+            <returns>Result of сomparison</returns>
         </member>
         <member name="T:D1den.Calculation.Matrix">
             <summary>

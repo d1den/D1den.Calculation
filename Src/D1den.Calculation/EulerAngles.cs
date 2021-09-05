@@ -154,7 +154,7 @@ namespace D1den.Calculation
         /// <param name="rotationAxisOrder">The order of the rotation axes. Specifies the type of Euler angles</param>
         /// <exception cref="ArgumentException">If <paramref name="rotationMatrix"/> doesn`t 3x3</exception>
         /// <returns>Euler angles</returns>
-        public static EulerAngles GetEulersFromRotation(Matrix rotationMatrix, RotationAxisOrder rotationAxisOrder)
+        public static EulerAngles FromRotationMatrix(Matrix rotationMatrix, RotationAxisOrder rotationAxisOrder)
         {
             if (rotationMatrix.RowCount != 3 && rotationMatrix.ColumnCount != 3)
             {
@@ -270,16 +270,16 @@ namespace D1den.Calculation
 
         private Matrix GetRotationFromZXZ()
         {
-            double r11 = Math.Cos(_alpha) * Math.Sin(_gamma) - Math.Cos(_beta) * Math.Sin(_alpha) * Math.Sin(_gamma);
-            double r12 = -Math.Cos(_gamma)*Math.Sin(_alpha) -  Math.Cos(_alpha) * Math.Cos(_beta) * Math.Sin(_gamma);
-            double r13 = Math.Sin(_beta) * Math.Sin(_gamma);
+            double r11 = Math.Cos(_alpha) * Math.Cos(_gamma) - Math.Cos(_beta) * Math.Sin(_alpha) * Math.Sin(_gamma);
+            double r12 = -Math.Cos(_alpha)*Math.Sin(_gamma) -  Math.Cos(_beta) * Math.Cos(_gamma) * Math.Sin(_alpha);
+            double r13 = Math.Sin(_alpha) * Math.Sin(_beta);
 
-            double r21 = Math.Cos(_beta) * Math.Cos(_gamma) * Math.Sin(_alpha) + Math.Cos(_alpha) * Math.Sin(_gamma);
+            double r21 = Math.Cos(_gamma) * Math.Sin(_alpha) + Math.Cos(_alpha) * Math.Cos(_beta) * Math.Sin(_gamma);
             double r22 = Math.Cos(_alpha) * Math.Cos(_beta) * Math.Cos(_gamma) - Math.Sin(_alpha) * Math.Sin(_gamma);
-            double r23 = -Math.Cos(_gamma) * Math.Sin(_beta);
+            double r23 = -Math.Cos(_alpha) * Math.Sin(_beta);
 
-            double r31 = Math.Sin(_alpha) * Math.Sin(_beta);
-            double r32 = Math.Cos(_alpha) * Math.Sin(_beta);
+            double r31 = Math.Sin(_beta) * Math.Sin(_gamma);
+            double r32 = Math.Cos(_gamma) * Math.Sin(_beta);
             double r33 = Math.Cos(_beta);
             return new Matrix(new[,]
             {

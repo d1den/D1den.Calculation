@@ -11,12 +11,17 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            Point3D point1 = new Point3D(2, -1, 3.14);
-            Point3D point2 = point1;
-            Point3D point3 = new Point3D(2, -1, 3.14);
-            Console.WriteLine(point1.Equals(point1));
-            Console.WriteLine(point1 == point2);
-            Console.WriteLine(point2 == point3);
+            Matrix r = new[,]
+            {
+                {-0.6823, -0.0085, 0.7305},
+                {0.4174, -0.8252, 0.3806 },
+                {0.5996, 0.5648, 0.5670 }
+            };
+            EulerAngles eulers = EulerAngles.FromRotationMatrix(r, RotationAxisOrder.ZXZ);
+            Matrix rNew = eulers.GetRotationMatrix();
+            EulerAngles eulersNew = EulerAngles.FromRotationMatrix(rNew, RotationAxisOrder.ZXZ);
+            Console.WriteLine(eulers.ToString() + " =? " + eulersNew.ToString());
+            Console.WriteLine(r.ToString() + " =? " + rNew.ToString());
         }
     }
 }
