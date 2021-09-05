@@ -247,381 +247,392 @@
         </member>
         <member name="T:D1den.Calculation.Matrix">
             <summary>
-            Матрица желаемой размерности
+            Matrix of any size
             </summary>
             <remarks>
-            Матрица произвольного размера, над которой можно производить различные математические операции.
+            Matrix of any size, supporting various matrix operations.
             </remarks>
         </member>
         <member name="P:D1den.Calculation.Matrix.MatrixData">
             <summary>
-            Массив значений матрицы
+            Array of matrix values
             </summary>
         </member>
         <member name="P:D1den.Calculation.Matrix.Int32MatrixData">
             <summary>
-            Массив приведённых к Int32 значений матрицы
+            An array of matrix values converted to Int32
             </summary>
+            <remarks>Used <see cref="M:System.Math.Round(System.Double)"/> to convert</remarks>
         </member>
         <member name="P:D1den.Calculation.Matrix.RowCount">
             <summary>
-            Количество строк
+            Matrix row count
             </summary>
         </member>
         <member name="P:D1den.Calculation.Matrix.ColumnCount">
             <summary>
-            Количество столбцов
+            Matrix column count
             </summary>
         </member>
         <member name="P:D1den.Calculation.Matrix.Item(System.Int32,System.Int32)">
             <summary>
-            Получить значение матрицы по строке и столбцу
+            Get matrix value by row and column
             </summary>
-            <param name="row">Индекс строки</param>
-            <param name="column">Индекс столбца</param>
-            <returns>Значение матрицы</returns>
+            <param name="row">Row index</param>
+            <param name="column">Column index</param>
+            <exception cref="T:System.IndexOutOfRangeException">If index or indexes wrong</exception>
+            <returns>Matrix value</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32,System.Int32)">
             <summary>
-            Объект матрицы
+            Create matrix by size
             </summary>
-            <param name="rowCount">Число строк</param>
-            <param name="columnCount">Число столбцов</param>
+            <param name="rowCount">Matrix row count</param>
+            <param name="columnCount">Matrix column count</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
         </member>
         <member name="M:D1den.Calculation.Matrix.#ctor(System.Double[0:,0:])">
             <summary>
-            Объект матрицы
+            Create a matrix from the values of a two-dimensional array
             </summary>
-            <param name="matrixData">Двумерный double массив данных матрицы</param>
+            <param name="matrixData">Array of matrix values</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32[0:,0:])">
             <summary>
-            Объект матрицы
+            Create a matrix from the values of a two-dimensional Int32 array
             </summary>
-            <param name="matrixData">Двумерный int массив данных матрицы</param>
+            <param name="matrixData">Int32 array of matrix values</param>
         </member>
-        <member name="M:D1den.Calculation.Matrix.#ctor(System.Int32,System.Double)">
+        <member name="M:D1den.Calculation.Matrix.Zeros(System.Int32)">
             <summary>
-            Объект квадратной матрицы со значением по диагонали
+            Create a zeros matrix of any size
             </summary>
-            <param name="dimension">Размерность квадратной матрицы</param>
-            <param name="diagonalValue">Значение по главной диагонали</param>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Zeros matrix</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
         </member>
-        <member name="M:D1den.Calculation.Matrix.GetZerosMatrix(System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.Eye(System.Int32)">
             <summary>
-            Квадратная матрица нулей
+            Create a identity matrix (E)
             </summary>
-            <param name="dimension">Размерность</param>
-            <returns>Объект матрицы</returns>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Identity matrix (E)</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
         </member>
-        <member name="M:D1den.Calculation.Matrix.GetEyeMatrix(System.Int32)">
+        <member name="M:D1den.Calculation.Matrix.Ones(System.Int32)">
             <summary>
-            Единичная матрица (E)
+            Create an ones matrix
             </summary>
-            <param name="dimension">Размерность</param>
-            <returns>Объект матрицы</returns>
-        </member>
-        <member name="M:D1den.Calculation.Matrix.GetOnesMatrix(System.Int32)">
-            <summary>
-            Квадратная матрица единиц
-            </summary>
-            <param name="dimension">Размерность</param>
-            <returns>Объект матрицы</returns>
+            <param name="dimension">Matrix dimension. Must be greater then 0</param>
+            <returns>Matrix of 1.0</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If matrix dimensions not be greater than 0</exception>
         </member>
         <member name="M:D1den.Calculation.Matrix.Negative">
             <summary>
-            Домножение матрицы на единицу
+            Negative matrix
             </summary>
-            <returns>Матрица</returns>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Transpose">
             <summary>
-            Транспонирование матрицы
+            Matrix transpose
             </summary>
-            <returns>Матрица</returns>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Add(System.Double)">
             <summary>
-            Сложение матрицы и числа
+            Adding a matrix and a number
             </summary>
-            <param name="value">Число, складываемое с матрицей</param>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Add(D1den.Calculation.Matrix)">
             <summary>
-            Сложение двух матриц
+            Adding two matrices
             </summary>
-            <param name="matrix2">Матрица, складываемая с матрицей</param>
-            <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
-            <returns>Матрица</returns>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Subtract(System.Double)">
             <summary>
-            Разность матрицы и числа
+            Subtracting a number from a matrix
             </summary>
-            <param name="value">Число, вычитаемое из матрицы</param>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Subtract(D1den.Calculation.Matrix)">
             <summary>
-            Разность матриц
+            Subtracting two matrices
             </summary>
-            <param name="matrix2">Матрица, вычитаемая из матрицы</param>
-            <exception cref="T:System.ArgumentException">При несоответсвии размерностей будет вызвано исключение</exception>
-            <returns>Матрица</returns>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Multiply(System.Double)">
             <summary>
-            Произведение матрицы и числа
+            Multiplying a matrix by a number
             </summary>
-            <param name="value">Множитель матрицы</param>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Divide(System.Double)">
             <summary>
-            Деление матрицы на число
+            Dividing a matrix by a number
             </summary>
-            <param name="value">Делитель матрицы</param>
-            <exception cref="T:System.DivideByZeroException">При делителе = 0</exception>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <exception cref="T:System.DivideByZeroException">If number is zero</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Multiply(D1den.Calculation.Matrix)">
             <summary>
-            Произведение матриц
+            Matrix multiplication
             </summary>
-            <param name="matrix2">Матрица, умножаемая на исходную</param>
-            <exception cref="T:System.ArgumentException">При неравнестве стобцов первой матрицы и строк второй</exception>
-            <returns>Матрица</returns>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.GetDeterminant">
             <summary>
-            Получить определитель матрицы
+            Get determinant of matrix
             </summary>
-            <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
-            <returns>Определитель</returns>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square</exception>
+            <returns>Determinant</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.GetMinorMatrix(System.Int32,System.Int32)">
             <summary>
-            Получить матрицу минора данной матрицы
+            Get minor matrix
             </summary>
-            <param name="rowIndex">Индекс строки минора</param>
-            <param name="columnIndex">Индекс столбца минора</param>
-            <exception cref="T:System.ArgumentException">Если матрица не квадратная, или состоит из 1-го элемента</exception>
+            <param name="rowIndex">Minor row index</param>
+            <param name="columnIndex">Minor column index</param>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square or matrix.Length == 1</exception>
             <returns>Матрица минора</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Invert">
             <summary>
-            Вычисление обратной матрицы
+            Get invert matrix
             </summary>
-            <exception cref="T:System.ArgumentException">Если матрица не квадратная</exception>
-            <returns>Обратная матрица</returns>
+            <exception cref="T:System.ArithmeticException">If matrix isn`t square</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.GetEuclideanNorm">
             <summary>
-            Вычисление Eвклидовой нормы
-            <returns>Евклидовая норма</returns>
+            Get euclidean norm of matrix
             </summary>
+            <returns>Euclidean norm</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.ToString">
             <summary>
-            Преобразование матрицы к строке
+            Get matrix as string
             </summary>
-            <returns>Строка матрицы</returns>
+            <returns>Matrix as string</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.SetAllValues(System.Double)">
             <summary>
-            Установить все значения матрицы
+            Set all matrix values
             </summary>
-            <param name="value">Значение</param>
-            <returns>Матрица</returns>
+            <param name="value">Value</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.ProcessActionOverData(System.Action{System.Int32,System.Int32})">
             <summary>
-            Применить действие ко всем элементам матрицы
+            Apply action to all elements of the matrix
             </summary>
-            <param name="action"></param>
+            <param name="action">Action for all elements</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.Equals(System.Object)">
             <summary>
-            Метод сравнениния матриц по значениям
+            Checking for equality of matrix with accuracy 1.0E-6
             </summary>
-            <param name="obj">Упакованная матрица</param>
-            <returns>Результат сравнения</returns>
+            <param name="obj">Matrix like <see cref="T:System.Object"/></param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Equals(D1den.Calculation.Matrix)">
             <summary>
-            Метод сравнениния матриц по значениям
+            Checking for equality of matrix with accuracy 1.0E-6
             </summary>
-            <param name="other">Матрица</param>
-            <returns>Результат сравнения</returns>
+            <param name="other">Matrix</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Matrix.Equals(D1den.Calculation.Matrix,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of matrix
+            </summary>
+            <param name="other">Matrix</param>
+            <param name="delta">Accuracy</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.GetHashCode">
             <summary>
-            Алгоритм создания хэш-кода
+            Hash code generation algorithm
             </summary>
-            <returns>Хэш-код</returns>
+            <returns>Hash code</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.Clone">
             <summary>
-            Создать копию матрицы
+            Duplicate Matrix
             </summary>
-            <returns>Копия матрицы привдённая к object</returns>
+            <returns>Matrix clone like <see cref="T:System.Object"/></returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[0:,0:])~D1den.Calculation.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрицу
+            Convert 2D array to matrix
             </summary>
-            <param name="matrixArray">Двумерный массив double</param>
+            <param name="matrixArray">2D array</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[0:,0:])~D1den.Calculation.Matrix">
             <summary>
-            Преобразовать двумерный массив в матрицу
+            Convert 2D array to matrix
             </summary>
-            <param name="matrixArray">Двумерный массив int</param>
+            <param name="matrixArray">2D array</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Double[])~D1den.Calculation.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрицу
+            Convert 1D array to matrix-row
             </summary>
-            <param name="matrixArray">Одномерный массив double</param>
+            <param name="matrixArray">1D array</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Implicit(System.Int32[])~D1den.Calculation.Matrix">
             <summary>
-            Преобразовать одномерный массив в матрицу
+            Convert 1D array to matrix-row
             </summary>
-            <param name="matrixArray">Одномерный массив int</param>
+            <param name="matrixArray">1D array</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Double[0:,0:]">
             <summary>
-            Преобразовать матрицу к двумерному массиву double
+            Convert matrix to 2D array
             </summary>
-            <param name="matrix">Матрица</param>
+            <param name="matrix">Matrix</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Explicit(D1den.Calculation.Matrix)~System.Int32[0:,0:]">
             <summary>
-            Преобразовать матрицу к двумерному массиву int
+            Convert matrix to 2D array
             </summary>
-            <param name="matrix">Матрица</param>
+            <param name="matrix">Matrix</param>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Addition(System.Double,D1den.Calculation.Matrix)">
             <summary>
-            Сложение матрицы и числа
+            Adding a matrix and a number
             </summary>
-            <param name="value">Число, складываемое с матрицей</param>
-            <param name="matrix">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <param name="matrix">Matrix</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,System.Double)">
             <summary>
-            Сложение матрицы и числа
+            Adding a matrix and a number
             </summary>
-            <param name="value">Число, складываемое с матрицей</param>
-            <param name="matrix">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="value">Number</param>
+            <param name="matrix">Matrix</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Addition(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
-            Сложение матриц
+            Adding two matrices
             </summary>
-            <param name="matrix1">Матрица</param>
-            <param name="matrix2">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,System.Double)">
             <summary>
-            Разность матрицы и числа
+            Subtracting a number from a matrix
             </summary>
-            <param name="value">Число, вычитаемое из матрицы</param>
-            <param name="matrix">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Subtraction(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
-            Разность матриц
+            Subtracting two matrices
             </summary>
-            <param name="matrix1">Матрица</param>
-            <param name="matrix2">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If the dimensions of the matrices are not the same.</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,System.Double)">
             <summary>
-            Произведение матрицы и числа
+            Multiplying a matrix by a number
             </summary>
-            <param name="value">Множитель</param>
-            <param name="matrix">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Multiply(System.Double,D1den.Calculation.Matrix)">
             <summary>
-            Произведение матрицы и числа
+            Multiplying a matrix by a number
             </summary>
-            <param name="value">Множитель</param>
-            <param name="matrix">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Multiply(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
-            Произведение матриц
+            Matrix multiplication
             </summary>
-            <param name="matrix1">Матрица</param>
-            <param name="matrix2">Матрица</param>
-            <returns>Матрица</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <exception cref="T:System.ArgumentException">If matrix1.ColumnCount != matrix2.RowCount</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Division(D1den.Calculation.Matrix,System.Double)">
             <summary>
-            Деление матрицы на число
+            Dividing a matrix by a number
             </summary>
-            <param name="matrix">Матрица</param>
-            <param name="value">Делитель</param>
-            <returns>Матрица</returns>
+            <param name="matrix">Matrix</param>
+            <param name="value">Number</param>
+            <exception cref="T:System.DivideByZeroException">If number is zero</exception>
+            <returns>Result matrix</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
-            Оператор проверки на равенство матриц
+            Checking for equality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,D1den.Calculation.Matrix)">
             <summary>
-            Оператор проверки на неравенство матриц
+            Checking for inequality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Equality(D1den.Calculation.Matrix,System.Object)">
             <summary>
-            Оператор проверки на равенство матриц
+            Checking for equality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Inequality(D1den.Calculation.Matrix,System.Object)">
             <summary>
-            Оператор проверки на неравенство матриц
+            Checking for inequality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Equality(System.Object,D1den.Calculation.Matrix)">
             <summary>
-            Оператор проверки на равенство матриц
+            Checking for equality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Matrix.op_Inequality(System.Object,D1den.Calculation.Matrix)">
             <summary>
-            Оператор проверки на неравенство матриц
+            Checking for inequality of matrix
             </summary>
-            <param name="matrix1">Матрица 1</param>
-            <param name="matrix2">Матрица 2</param>
-            <returns>Результат</returns>
+            <param name="matrix1">First matrix</param>
+            <param name="matrix2">Second matrix</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="T:D1den.Calculation.Point3D">
             <summary>

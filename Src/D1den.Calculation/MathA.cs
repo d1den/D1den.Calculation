@@ -59,7 +59,7 @@ namespace D1den.Calculation
         }
         static double CompareRelativeError(double x, double y)
         {
-            return Math.Abs(x - y) / Math.Max(Math.Abs(x), Math.Abs(y));
+            return Math.Abs(x - y);
         }
         /// <summary>
         /// Compare numbers with some margin of error

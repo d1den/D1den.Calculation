@@ -11,7 +11,13 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-
+            Matrix matrix = new[,]
+            {
+                {1,2 },
+                {3,4 }
+            };
+            Matrix matrix2 = Matrix.Eye(2);
+            Matrix matrix3 = matrix.Multiply(matrix2);
         }
     }
 }

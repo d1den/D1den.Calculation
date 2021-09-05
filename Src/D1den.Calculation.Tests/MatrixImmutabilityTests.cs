@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using D1den.Calculation;
 
 namespace Tests
 {
     class MatrixImmutabilityTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Negative()
         {
             var matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Negative();
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 1 && matrix[1, 0] == 1 && matrix[1, 1] == 1)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 1);
+            Assert.AreEqual(matrix[1, 0], 1);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void Transpose()
@@ -30,9 +24,12 @@ namespace Tests
                 {4, 5, 6 }
             };
             Matrix matrix2 = matrix.Transpose();
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 2 && matrix[0, 2] == 3 && matrix2[1, 0] == 4 &&
-                matrix2[1, 1] == 5 && matrix2[1, 2] == 6)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[0, 2], 3);
+            Assert.AreEqual(matrix[1, 0], 4);
+            Assert.AreEqual(matrix[1, 1], 5);
+            Assert.AreEqual(matrix[1, 2], 6);
         }
         [Test]
         public void AddMatrixAndValue()
@@ -53,18 +50,20 @@ namespace Tests
                 {3, 4 }
             };
             Matrix matrix3 = matrix.Add(matrix2);
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 1 &&
-                matrix[1, 0] == 1 && matrix[1, 1] == 1)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 1);
+            Assert.AreEqual(matrix[1, 0], 1);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void SubtractMatrixAndValue()
         {
             Matrix matrix = Matrix.Ones(2);
             Matrix matrix2 = matrix.Subtract(2.34);
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 1
-                && matrix[1, 0] == 1 && matrix[1, 1] == 1)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 1);
+            Assert.AreEqual(matrix[1, 0], 1);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void SubtractMatrices()
@@ -76,9 +75,10 @@ namespace Tests
                 {3, 4 }
             };
             Matrix matrix3 = matrix.Subtract(matrix2);
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 1
-                && matrix[1, 0] == 1 && matrix[1, 1] == 1)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 1);
+            Assert.AreEqual(matrix[1, 0], 1);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void GetDeterminant()
@@ -88,9 +88,11 @@ namespace Tests
                 {1, 2 },
                 {3, 4 }
             };
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 2
-                && matrix[1, 0] == 3 && matrix[1, 1] == 4)
-                Assert.Pass();
+            matrix.GetDeterminant();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[1, 0], 3);
+            Assert.AreEqual(matrix[1, 1], 4);
         }
         [Test]
         public void GetMinorMatrix()
@@ -101,9 +103,10 @@ namespace Tests
                 {3, 4 }
             };
             Matrix minor00 = matrix.GetMinorMatrix(0, 0);
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 2
-                && matrix[1, 0] == 3 && matrix[1, 1] == 4)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[1, 0], 3);
+            Assert.AreEqual(matrix[1, 1], 4);
         }
         [Test]
         public void GetEuclideanNorm()
@@ -114,27 +117,30 @@ namespace Tests
                 {3, 4 }
             };
             matrix.GetEuclideanNorm();
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 2
-                && matrix[1, 0] == 3 && matrix[1, 1] == 4)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[1, 0], 3);
+            Assert.AreEqual(matrix[1, 1], 4);
         }
         [Test]
         public void MultiplyMatrixAndValue()
         {
-            Matrix matrix = new Matrix(dimension: 2, diagonalValue: 2);
+            Matrix matrix = Matrix.Eye(2);
             Matrix matrix2 = matrix.Multiply(2.5);
-            if (matrix[0, 0] == 2 && matrix[0, 1] == 0 &&
-                matrix[1, 0] == 0 && matrix[1, 1] == 2)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 0);
+            Assert.AreEqual(matrix[1, 0], 0);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void DivideyMatrixAndValue()
         {
-            Matrix matrix = new Matrix(dimension: 2, diagonalValue: 5);
+            Matrix matrix = Matrix.Eye(2);
             Matrix matrix2 = matrix.Divide(2.5);
-            if (matrix[0, 0] == 5 && matrix[0, 1] == 0 &&
-                matrix[1, 0] == 0 && matrix[1, 1] == 5)
-                Assert.Pass();
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 0);
+            Assert.AreEqual(matrix[1, 0], 0);
+            Assert.AreEqual(matrix[1, 1], 1);
         }
         [Test]
         public void MultiplyMatriсes()
@@ -146,9 +152,11 @@ namespace Tests
             };
             Matrix matrix2 = Matrix.Eye(2);
             Matrix matrix3 = matrix.Multiply(matrix2);
-            if (matrix[0, 0] == 1 && matrix[0, 1] == 2 &&
-                matrix[1, 0] == 3 && matrix[1, 1] == 4)
-                Assert.Pass();
+
+            Assert.AreEqual(matrix[0, 0], 1);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[1, 0], 3);
+            Assert.AreEqual(matrix[1, 1], 4);
         }
         [Test]
         public void Invert()
@@ -159,9 +167,11 @@ namespace Tests
                 {7,6 }
             };
             Matrix matrixInvert = matrix.Invert();
-            if (matrix[0, 0] == 2 && matrix[0, 1] == 2 &&
-                matrix[1, 0] == 7 && matrix[1, 1] == 6)
-                Assert.Pass();
+
+            Assert.AreEqual(matrix[0, 0], 2);
+            Assert.AreEqual(matrix[0, 1], 2);
+            Assert.AreEqual(matrix[1, 0], 7);
+            Assert.AreEqual(matrix[1, 1], 6);
         }
         [Test]
         public void CreateMatrixAndChangeBaseArray()
@@ -172,8 +182,8 @@ namespace Tests
             var array2 = new double[,] { { 1.1, 2.2 }, { 3.3, 4.4 } };
             var matrix2 = new Matrix(array2);
             array2[0, 0] = -10;
-            if (matrix1[0,0] != -10 && matrix2[0,0] != -10)
-                Assert.Pass();
+            Assert.AreNotEqual(matrix1[0, 0], -10);
+            Assert.AreNotEqual(matrix2[0, 0], -10);
         }
         [Test]
         public void ChangeMatrixData()
@@ -184,8 +194,7 @@ namespace Tests
             matrixDataDouble[0, 0] = -10;
             int[,] matrixDataInt = matrix1.Int32MatrixData;
             matrixDataInt[0, 0] = -10;
-            if (matrix1[0,0] != -10)
-                Assert.Pass();
+            Assert.AreNotEqual(matrix1[0, 0], -10);
         }
         [Test]
         public void SetAllValues()
@@ -193,8 +202,7 @@ namespace Tests
             var array1 = new int[,] { { 1, 2 }, { 3, 4 } };
             var matrix1 = new Matrix(array1);
             Matrix matrix2 = matrix1.SetAllValues(-10);
-            if (matrix1[0, 0] != -10)
-                Assert.Pass();
+            Assert.AreNotEqual(matrix1[0, 0], -10);
         }
         [Test]
         public void CopyAndCloneChange()
@@ -205,8 +213,7 @@ namespace Tests
             matrix2.MatrixData[0, 0] = -10;
             Matrix matrix3 = matrix1.Clone() as Matrix;
             matrix3.MatrixData[0, 0] = -10;
-            if (matrix1[0, 0] != -10)
-                Assert.Pass();
+            Assert.AreNotEqual(matrix1[0, 0], -10);
         }
     }
 }
