@@ -3,29 +3,29 @@
 namespace D1den.Calculation
 {
     /// <summary>
-    /// Точка в 3-д пространстве
+    /// Point in 3-d space
     /// </summary>
     [Serializable]
     public readonly struct Point3D : IEquatable<Point3D>
     {
-        #region Поля и свойства
+        #region Fields and properties
         private readonly double _x, _y, _z;
         /// <summary>
-        /// X-координата точки
+        /// X coordinate
         /// </summary>
-        public double X { get { return _x; } }
+        public double X => _x;
         /// <summary>
-        /// Y-координата точки
+        /// Y coordinate
         /// </summary>
-        public double Y { get { return _y; } }
+        public double Y => _y;
         /// <summary>
-        /// Z-координата точки
+        /// Z coordinate
         /// </summary>
-        public double Z { get { return _z; } }
+        public double Z => _z;
         #endregion
 
         /// <summary>
-        /// Создание точки по координатам
+        /// Creating a point by coordinates
         /// </summary>
         public Point3D(double x, double y, double z)
         {
@@ -35,9 +35,10 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Создание точки по массиву её координат
+        /// Creating a point from an array of its coordinates
         /// </summary>
-        /// <param name="pointArray">Массив координат точки</param>
+        /// <param name="pointArray">Array of coordinates [x, y, z]</param>
+        /// <exception cref="ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
         public Point3D(double[] pointArray)
         {
             if (pointArray.Length != 3)
@@ -51,40 +52,40 @@ namespace D1den.Calculation
             _z = pointArray[2];
         }
 
-        #region Методы
+        #region Methods
         /// <summary>
-        /// Преобразовать точку к массиву координат
+        /// Convert point to array of coordinates
         /// </summary>
-        /// <returns>Массив координат</returns>
+        /// <returns>Array of coordinatesт</returns>
         public double[] ToArray()
         {
             return new double[] { _x, _y, _z };
         }
 
         /// <summary>
-        /// Получить расстрояние до другой точки
+        /// Get distance to other point
         /// </summary>
-        /// <param name="point">Вторая точка</param>
-        /// <returns>Расстояние</returns>
+        /// <param name="point">Other point</param>
+        /// <returns>Distance</returns>
         public double GetDistance(Point3D point)
         {
             return Math.Sqrt(Math.Pow(point.X - X, 2.0) + Math.Pow(point.Y - Y, 2.0) + Math.Pow(point.Z - Z, 2.0));
         }
 
         /// <summary>
-        /// Получить строковое представление точки
+        /// Get point as string
         /// </summary>
-        /// <returns>Строка точки</returns>
+        /// <returns>Point as string</returns>
         public override string ToString()
         {
             return string.Format("{0:F2}; {1:F2}; {2:F2}", _x, _y, _z);
         }
 
         /// <summary>
-        /// Сравнение точек в виде объектов
+        /// Checking for equality of points
         /// </summary>
-        /// <param name="obj">Упакованный объект точки</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="obj">Packed point object</param>
+        /// <returns>Result of checking</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -96,22 +97,22 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Сравнение точек
+        /// Checking for equality of points
         /// </summary>
-        /// <param name="other">Точка для сравнения</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="other">Point object</param>
+        /// <returns>Result of checking</returns>
         public bool Equals(Point3D other)
         {
-            if (other._x == this._x && other._y == this._y && other._z == this._z)
+            if (other.X == X && other.Y == Y && other.Z == Z)
                 return true;
             else
                 return false;
         }
 
         /// <summary>
-        /// Алгоритм создания хэш-кода
+        /// Hash code generation algorithm
         /// </summary>
-        /// <returns>Хэш-код</returns>
+        /// <returns>Hash code</returns>
         public override int GetHashCode()
         {
             double result = _x * 1000.0 + _y * 100 + _z * 10;
@@ -123,42 +124,43 @@ namespace D1den.Calculation
         }
         #endregion
 
-        #region Операторы
+        #region Operators
         /// <summary>
-        /// Преобразовать массив координат к точке
+        /// Convert an array of coordinates to a point
         /// </summary>
-        /// <param name="pointArray">Массив координат</param>
+        /// <param name="pointArray">Array of coordinates [x, y, z]</param>
+        /// <exception cref="ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
         public static implicit operator Point3D(double[] pointArray)
         {
             return new Point3D(pointArray);
         }
 
         /// <summary>
-        /// Преобразовать точку к массиву координат
+        /// Convert point to array of coordinates
         /// </summary>
-        /// <param name="point">Точка</param>
+        /// <param name="point">Point</param>
         public static explicit operator double[](Point3D point)
         {
             return point.ToArray();
         }
 
         /// <summary>
-        /// Проверка на равенство точек
+        /// Checking for equality of points
         /// </summary>
-        /// <param name="point1">Точка 1</param>
-        /// <param name="point2">Точка 2</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="point1">Point 1</param>
+        /// <param name="point2">Point 2</param>
+        /// <returns>Result of checking</returns>
         public static bool operator ==(Point3D point1, Point3D point2)
         {
             return point1.Equals(point2);
         }
 
         /// <summary>
-        /// Проверка на неравенство точек
+        /// Checking for inequality of points
         /// </summary>
-        /// <param name="point1">Точка 1</param>
-        /// <param name="point2">Точка 2</param>
-        /// <returns>Результат сравнения</returns>
+        /// <param name="point1">Point 1</param>
+        /// <param name="point2">Point 2</param>
+        /// <returns>Result of checking</returns>>
         public static bool operator !=(Point3D point1, Point3D point2)
         {
             return !point1.Equals(point2);

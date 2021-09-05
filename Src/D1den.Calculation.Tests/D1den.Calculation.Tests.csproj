@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>Tests</AssemblyName>
+
+    <RootNamespace>Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MathLibraryProject\MathLibraryProject.csproj" />
+    <ProjectReference Include="..\D1den.Calculation\D1den.Calculation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>MathLibraryProject</name>
+        <name>D1den.Calculation</name>
     </assembly>
     <members>
         <member name="T:D1den.Calculation.AngleUnits">
@@ -204,40 +204,40 @@
         </member>
         <member name="T:D1den.Calculation.MathA">
             <summary>
-            Дополнительные математические функции
+            Additional math functions
             </summary>
         </member>
         <member name="M:D1den.Calculation.MathA.Clamp(System.Double,System.Double,System.Double)">
             <summary>
-            Выравнивание значения по диапазону
+            Aligning a value to a range
             </summary>
-            <param name="value">Значение</param>
-            <param name="minValue">Минимально допустимое значение</param>
-            <param name="maxValue">Максимально допустимое значение</param>
-            <returns>Значение, соответсвующее диапазону</returns>
+            <param name="value">Value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+            <returns>Value in range</returns>
         </member>
         <member name="M:D1den.Calculation.MathA.Clamp(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Выравнивание значения по диапазону
+            Aligning a value to a range
             </summary>
-            <param name="value">Значение</param>
-            <param name="minValue">Минимально допустимое значение</param>
-            <param name="maxValue">Максимально допустимое значение</param>
-            <returns>Значение, соответсвующее диапазону</returns>
+            <param name="value">Value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+            <returns>Value in range</returns>
         </member>
         <member name="M:D1den.Calculation.MathA.DegreeToRadian(System.Double)">
             <summary>
-            Преобразование градусов к радианам
+            Convert degree to radian
             </summary>
-            <param name="degreeAngle">Угол в градусах</param>
-            <returns>Радианы</returns>
+            <param name="degreeAngle">Angle in degrees</param>
+            <returns>Angle in radians</returns>
         </member>
         <member name="M:D1den.Calculation.MathA.RadianToDegree(System.Double)">
             <summary>
-            Преобразование радиан к градусам
+            Convert radian to degree
             </summary>
-            <param name="radianAngle">Угол в радианах</param>
-            <returns>Градусы</returns>
+            <param name="radianAngle">Angle in radians</param>
+            <returns>Angle in degrees</returns>
         </member>
         <member name="T:D1den.Calculation.Matrix">
             <summary>
@@ -619,101 +619,103 @@
         </member>
         <member name="T:D1den.Calculation.Point3D">
             <summary>
-            Точка в 3-д пространстве
+            Point in 3-d space
             </summary>
         </member>
         <member name="P:D1den.Calculation.Point3D.X">
             <summary>
-            X-координата точки
+            X coordinate
             </summary>
         </member>
         <member name="P:D1den.Calculation.Point3D.Y">
             <summary>
-            Y-координата точки
+            Y coordinate
             </summary>
         </member>
         <member name="P:D1den.Calculation.Point3D.Z">
             <summary>
-            Z-координата точки
+            Z coordinate
             </summary>
         </member>
         <member name="M:D1den.Calculation.Point3D.#ctor(System.Double,System.Double,System.Double)">
             <summary>
-            Создание точки по координатам
+            Creating a point by coordinates
             </summary>
         </member>
         <member name="M:D1den.Calculation.Point3D.#ctor(System.Double[])">
             <summary>
-            Создание точки по массиву её координат
+            Creating a point from an array of its coordinates
             </summary>
-            <param name="pointArray">Массив координат точки</param>
+            <param name="pointArray">Array of coordinates [x, y, z]</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
         </member>
         <member name="M:D1den.Calculation.Point3D.ToArray">
             <summary>
-            Преобразовать точку к массиву координат
+            Convert point to array of coordinates
             </summary>
-            <returns>Массив координат</returns>
+            <returns>Array of coordinatesт</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.GetDistance(D1den.Calculation.Point3D)">
             <summary>
-            Получить расстрояние до другой точки
+            Get distance to other point
             </summary>
-            <param name="point">Вторая точка</param>
-            <returns>Расстояние</returns>
+            <param name="point">Other point</param>
+            <returns>Distance</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.ToString">
             <summary>
-            Получить строковое представление точки
+            Get point as string
             </summary>
-            <returns>Строка точки</returns>
+            <returns>Point as string</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.Equals(System.Object)">
             <summary>
-            Сравнение точек в виде объектов
+            Checking for equality of points
             </summary>
-            <param name="obj">Упакованный объект точки</param>
-            <returns>Результат сравнения</returns>
+            <param name="obj">Packed point object</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D)">
             <summary>
-            Сравнение точек
+            Checking for equality of points
             </summary>
-            <param name="other">Точка для сравнения</param>
-            <returns>Результат сравнения</returns>
+            <param name="other">Point object</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.GetHashCode">
             <summary>
-            Алгоритм создания хэш-кода
+            Hash code generation algorithm
             </summary>
-            <returns>Хэш-код</returns>
+            <returns>Hash code</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.op_Implicit(System.Double[])~D1den.Calculation.Point3D">
             <summary>
-            Преобразовать массив координат к точке
+            Convert an array of coordinates to a point
             </summary>
-            <param name="pointArray">Массив координат</param>
+            <param name="pointArray">Array of coordinates [x, y, z]</param>
+            <exception cref="T:System.ArgumentException">If <paramref name="pointArray"/>.Length != 3</exception>
         </member>
         <member name="M:D1den.Calculation.Point3D.op_Explicit(D1den.Calculation.Point3D)~System.Double[]">
             <summary>
-            Преобразовать точку к массиву координат
+            Convert point to array of coordinates
             </summary>
-            <param name="point">Точка</param>
+            <param name="point">Point</param>
         </member>
         <member name="M:D1den.Calculation.Point3D.op_Equality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
             <summary>
-            Проверка на равенство точек
+            Checking for equality of points
             </summary>
-            <param name="point1">Точка 1</param>
-            <param name="point2">Точка 2</param>
-            <returns>Результат сравнения</returns>
+            <param name="point1">Point 1</param>
+            <param name="point2">Point 2</param>
+            <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.op_Inequality(D1den.Calculation.Point3D,D1den.Calculation.Point3D)">
             <summary>
-            Проверка на неравенство точек
+            Checking for inequality of points
             </summary>
-            <param name="point1">Точка 1</param>
-            <param name="point2">Точка 2</param>
-            <returns>Результат сравнения</returns>
+            <param name="point1">Point 1</param>
+            <param name="point2">Point 2</param>
+            <returns>Result of checking</returns>>
         </member>
     </members>
 </doc>

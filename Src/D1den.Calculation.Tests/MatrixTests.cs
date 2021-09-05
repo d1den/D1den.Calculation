@@ -4,7 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using D1den.Calculation;
 
-namespace TestForLibrary
+namespace Tests
 {
     class MatrixTests
     {

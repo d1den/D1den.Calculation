@@ -11,7 +11,7 @@ Matrix are better than the standard System.Numerics.Matrix in that they can be c
 Euler angles allow you to convert rotation matrices to Euler angles and vice versa.</Description>
     <RepositoryUrl>https://github.com/d1den/MathLibrary</RepositoryUrl>
     <RepositoryType></RepositoryType>
-    <AssemblyName>MathLibraryProject</AssemblyName>
+    <AssemblyName>D1den.Calculation</AssemblyName>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Company />
     <PackageTags>Calculation, Calculations, Math, Mathematics, Engineering, Matrix, Matrices, Euler, Eulers, EulerAngles, Angle, Angles, Point, Point3D</PackageTags>
@@ -19,11 +19,11 @@ Euler angles allow you to convert rotation matrices to Euler angles and vice ver
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\GitRepositories\MathLibrary\MathLibraryProject\MathLibraryProject.xml</DocumentationFile>
+    <DocumentationFile>D:\GitRepositories\MathLibrary\Src\D1den.Calculation\D1den.Calculation.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
+    <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
