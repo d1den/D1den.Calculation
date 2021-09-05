@@ -23,6 +23,7 @@ namespace D1den.Calculation
             else
                 return maxValue;
         }
+
         /// <summary>
         /// Aligning a value to a range
         /// </summary>
@@ -39,6 +40,7 @@ namespace D1den.Calculation
             else
                 return maxValue;
         }
+
         /// <summary>
         /// Convert degree to radian
         /// </summary>
@@ -48,6 +50,7 @@ namespace D1den.Calculation
         {
             return degreeAngle * Math.PI / 180.0;
         }
+
         /// <summary>
         /// Convert radian to degree
         /// </summary>
@@ -57,10 +60,12 @@ namespace D1den.Calculation
         {
             return radianAngle * 180.0 / Math.PI; ;
         }
+
         static double CompareRelativeError(double x, double y)
         {
             return Math.Abs(x - y);
         }
+
         /// <summary>
         /// Compare numbers with some margin of error
         /// </summary>

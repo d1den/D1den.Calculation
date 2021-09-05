@@ -82,7 +82,7 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Checking for equality of points
+        /// Checking for equality of points with acceracy 1.0E-6
         /// </summary>
         /// <param name="obj">Packed point object</param>
         /// <returns>Result of checking</returns>
@@ -97,13 +97,26 @@ namespace D1den.Calculation
         }
 
         /// <summary>
-        /// Checking for equality of points
+        /// Checking for equality of points with acceracy 1.0E-6
         /// </summary>
         /// <param name="other">Point object</param>
         /// <returns>Result of checking</returns>
         public bool Equals(Point3D other)
         {
-            if (other.X == X && other.Y == Y && other.Z == Z)
+            return Equals(other, 1.0E-6);
+        }
+
+        /// <summary>
+        /// Checking with some accuracy the equality of points
+        /// </summary>
+        /// <param name="other">Point object</param>
+        /// <param name="delta">Accuracy</param>
+        /// <returns>Result of checking</returns>
+        public bool Equals(Point3D other, double delta)
+        {
+            if (MathA.CompareAlmostEqual(other.X, X, delta) &&
+                MathA.CompareAlmostEqual(other.Y, Y, delta) &&
+                MathA.CompareAlmostEqual(other.Z, Z, delta))
                 return true;
             else
                 return false;

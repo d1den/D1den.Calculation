@@ -687,16 +687,24 @@
         </member>
         <member name="M:D1den.Calculation.Point3D.Equals(System.Object)">
             <summary>
-            Checking for equality of points
+            Checking for equality of points with acceracy 1.0E-6
             </summary>
             <param name="obj">Packed point object</param>
             <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D)">
             <summary>
-            Checking for equality of points
+            Checking for equality of points with acceracy 1.0E-6
             </summary>
             <param name="other">Point object</param>
+            <returns>Result of checking</returns>
+        </member>
+        <member name="M:D1den.Calculation.Point3D.Equals(D1den.Calculation.Point3D,System.Double)">
+            <summary>
+            Checking with some accuracy the equality of points
+            </summary>
+            <param name="other">Point object</param>
+            <param name="delta">Accuracy</param>
             <returns>Result of checking</returns>
         </member>
         <member name="M:D1den.Calculation.Point3D.GetHashCode">
